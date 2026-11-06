@@ -136,12 +136,17 @@ class BuildError(Exception):
     pass
 
 
+MATH_RE = re.compile(r'(\\\[.*?\\\]|\\\(.*?\\\))', re.S)
+
+
 def protect_math(s):
-    def fix(m):
-        return m.group(0).replace('<', '&lt;').replace('>', '&gt;')
-    s = re.sub(r'\\\[.*?\\\]', fix, s, flags=re.S)
-    s = re.sub(r'\\\(.*?\\\)', fix, s, flags=re.S)
-    return s
+    parts = MATH_RE.split(s)
+    for i, p in enumerate(parts):
+        if i % 2:   # math: escape markup characters
+            parts[i] = p.replace('<', '&lt;').replace('>', '&gt;')
+        else:       # prose (RTL): implication arrow points in reading direction
+            parts[i] = p.replace('⇒', '⇐')
+    return ''.join(parts)
 
 
 def expand(body, route, code, svgs):
@@ -169,12 +174,12 @@ def expand(body, route, code, svgs):
             svgs[name] = ck.to_svg(ck.REG[name](), float(a.get('s', 1.3)))
         cap = a.get('cap', '')
         return '<figure class="ckt"><div class="cv">%s</div>%s</figure>' % (svgs[name], '<figcaption>%s</figcaption>' % cap if cap else '')
-    body = re.sub(r'<fig\s([^>]*?)/?>', fig, body)
+    body = re.sub(r'<fig\s((?:[^>"]|"[^"]*")*?)\s*/?>', fig, body)
     body = re.sub(r'<widget\s+w="([\w-]+)"\s*/?>', r'<div class="widget" data-w="\1"></div>', body)
 
     # balanced-tag check
     for t in list(BOX) + ['ex', 'sol', 'hw', 'ans', 'eq', 'steps']:
-        o = len(re.findall(r'<%s(?:\s[^>]*)?>' % t, body))
+        o = len(re.findall(r'<%s(?:\s(?:[^>"]|"[^"]*")*)?>' % t, body))
         c = len(re.findall(r'</%s>' % t, body))
         if o != c:
             raise BuildError('%s: <%s> opened %d times, closed %d times' % (route, t, o, c))
@@ -186,7 +191,7 @@ def expand(body, route, code, svgs):
             lab = a.get('l', label)
             return '<div class="box %s"><div class="box-h"><span class="tag">%s</span>%s</div><div class="box-b">' % (
                 cls, lab, '<span class="bt">%s</span>' % title if title else '')
-        body = re.sub(r'<%s(\s[^>]*)?>' % t, box, body)
+        body = re.sub(r'<%s(\s(?:[^>"]|"[^"]*")*)?>' % t, box, body)
         body = body.replace('</%s>' % t, '</div></div>')
 
     cnt = {'ex': 0, 'hw': 0}
@@ -197,7 +202,7 @@ def expand(body, route, code, svgs):
         l = a.get('lvl', '1')
         return ('<div class="ex" id="%s-ex%d"><div class="ex-h"><span class="ex-n">مثال %s.%d</span><span class="ex-t">%s</span>%s</div><div class="ex-b">'
                 % (route, cnt['ex'], code, cnt['ex'], a.get('t', ''), lvl_html(l)))
-    body = re.sub(r'<ex(\s[^>]*)?>', ex, body)
+    body = re.sub(r'<ex(\s(?:[^>"]|"[^"]*")*)?>', ex, body)
     body = body.replace('</ex>', '</div></div>')
     body = re.sub(r'<sol(\s[^>]*)?>', lambda m: '<div class="sol"><div class="sol-h">%s</div>' % attrs(m.group(1)).get('t', 'حل گام‌به‌گام'), body)
     body = body.replace('</sol>', '</div>')

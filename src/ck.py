@@ -51,3 +51,60 @@ def to_svg(d, scale=1.3):
 
 # short aliases used in circuit modules
 E = elm
+
+
+def box(d, x1, y1, x2, y2, text='', color=None):
+    """A labelled rectangle (e.g. 'rest of the circuit')."""
+    for a, b in (((x1, y1), (x2, y1)), ((x2, y1), (x2, y2)), ((x2, y2), (x1, y2)), ((x1, y2), (x1, y1))):
+        ln = E.Line().at(a).to(b)
+        if color:
+            ln = ln.color(color)
+        d += ln
+    if text:
+        d += E.Label().at(((x1 + x2) / 2, (y1 + y2) / 2)).label(text)
+    return d
+
+
+def text(d, x, y, s, **kw):
+    d += E.Label().at((x, y)).label(s, **kw)
+    return d
+
+
+def el(d, kind, p1, p2, lab=None, loc=None, color=None, **kw):
+    """Place a two-terminal element between two points."""
+    e = kind(**kw).endpoints(p1, p2)
+    if lab is not None:
+        e = e.label(lab, loc=loc) if loc else e.label(lab)
+    if color:
+        e = e.color(color)
+    d += e
+    return e
+
+
+def wire(d, *pts, color=None):
+    for a, b in zip(pts, pts[1:]):
+        ln = E.Line().at(a).to(b)
+        if color:
+            ln = ln.color(color)
+        d += ln
+
+
+def dot(d, *pts, open=False, lab=None, loc='top'):
+    for p in pts:
+        x = E.Dot(open=open).at(p)
+        if lab:
+            x = x.label(lab, loc=loc)
+        d += x
+
+
+def gnd(d, p):
+    d += E.Ground().at(p)
+
+
+def arrow(d, p1, p2, lab=None, color=None):
+    a = E.Arrow().at(p1).to(p2)
+    if lab:
+        a = a.label(lab)
+    if color:
+        a = a.color(color)
+    d += a
