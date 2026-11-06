@@ -117,9 +117,9 @@ def nfet(d, at, color=None, lab=None):
     q = E.NFet(bulk=False).at(at).anchor('source').right().reverse()
     if color:
         q = q.color(color)
-    if lab:
-        q = q.label(lab, loc='bottom')
     d += q
+    if lab:
+        d += E.Label().at((q.drain[0] + 0.75, (q.drain[1] + q.source[1]) / 2)).label(lab, color=color or INK)
     return q
 
 
@@ -128,7 +128,41 @@ def pfet(d, at, color=None, lab=None):
     q = E.PFet(bulk=False).at(at).anchor('source').right().reverse()
     if color:
         q = q.color(color)
-    if lab:
-        q = q.label(lab, loc='bottom')
     d += q
+    if lab:
+        d += E.Label().at((q.drain[0] + 0.75, (q.drain[1] + q.source[1]) / 2)).label(lab, color=color or INK)
     return q
+
+
+def npass(d, left, color=None, gate=''):
+    """Horizontal NMOS pass transistor from `left` to left+(1.5,0); gate on top."""
+    q = E.NFet(bulk=False).at((left[0] + 1.5, left[1])).anchor('source').up()
+    if color:
+        q = q.color(color)
+    d += q
+    if gate:
+        d += E.Label().at((q.gate[0], q.gate[1] + 0.35)).label(gate, color=color or INK)
+    return q
+
+
+def ppass(d, left, color=None, gate=''):
+    """Horizontal PMOS pass transistor from `left` to left+(1.5,0); gate at bottom."""
+    q = E.PFet(bulk=False).at(left).anchor('source').up().reverse()
+    if color:
+        q = q.color(color)
+    d += q
+    if gate:
+        d += E.Label().at((q.gate[0], q.gate[1] - 0.35)).label(gate, color=color or INK)
+    return q
+
+
+def tg(d, left, sig='S', color=None):
+    """Transmission gate between left and left+(2.5,0): NMOS on top (gate sig), PMOS below (gate sig̅)."""
+    x, y = left
+    wire(d, (x, y), (x + 0.5, y))
+    wire(d, (x + 0.5, y + 0.7), (x + 0.5, y - 0.7))
+    wire(d, (x + 2.0, y + 0.7), (x + 2.0, y - 0.7))
+    wire(d, (x + 2.0, y), (x + 2.5, y))
+    npass(d, (x + 0.5, y + 0.7), color=color, gate=sig)
+    ppass(d, (x + 0.5, y - 0.7), color=color, gate=sig[:-1] if sig.endswith('̅') else sig + '̅')
+    return (x + 2.5, y)
