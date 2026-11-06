@@ -1,0 +1,1024 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>جزوه مدار و الکترونیک دیجیتال</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="جزوه کامل و قدم‌به‌قدم مدارهای الکتریکی و الکترونیک دیجیتال (پاییز ۱۴۰۵) با پایه‌های ریاضی، اثبات‌ها، شهود و مثال‌های حل‌شده">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap">
+<style>
+/* Layout: lab notebook — tab index on the right (RTL), one reading column on engineering-grid paper.
+   Color: paper + ink, copper (PCB trace) as the accent, solder-mask green as the second voice,
+   and one hue per kind of box so the reader knows what a block is before reading it. */
+:root{
+  --paper:#f2f4ef; --sheet:#fbfcf9; --ink:#16202a; --ink-2:#4b5761; --ink-3:#78838c;
+  --rule:#d4dbd3; --grid:rgba(18,99,79,.075);
+  --copper:#b04f1b; --mask:#12634f;
+  --c-def:#1c5ea5; --c-int:#9c5900; --c-prf:#6141ab; --c-note:#0b6e7a; --c-trap:#ad2337;
+  --c-ex:#21734a; --c-hw:#83501f; --c-sum:#12634f; --c-phys:#3b5bb5;
+  --c1:#b04f1b; --c2:#1c5ea5; --c3:#21734a; --c4:#6141ab; --c5:#ad2337; --c6:#78838c;
+  --f-body:"Vazirmatn","Noto Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --f-disp:"Lalezar","Vazirmatn",Tahoma,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  --side-w:300px; --col:47rem; --r:10px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c1310; --sheet:#121b17; --ink:#e1e8e3; --ink-2:#a3b0a8; --ink-3:#76847c;
+    --rule:#26332c; --grid:rgba(110,220,170,.055);
+    --copper:#ee8b51; --mask:#47c49b;
+    --c-def:#6ea8ee; --c-int:#e6a43e; --c-prf:#ab90f2; --c-note:#4fc4d0; --c-trap:#f2788a;
+    --c-ex:#5fcb8d; --c-hw:#d79b63; --c-sum:#47c49b; --c-phys:#8ea6f5;
+    --c1:#ee8b51; --c2:#6ea8ee; --c3:#5fcb8d; --c4:#ab90f2; --c5:#f2788a; --c6:#8a9890;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c1310; --sheet:#121b17; --ink:#e1e8e3; --ink-2:#a3b0a8; --ink-3:#76847c;
+  --rule:#26332c; --grid:rgba(110,220,170,.055);
+  --copper:#ee8b51; --mask:#47c49b;
+  --c-def:#6ea8ee; --c-int:#e6a43e; --c-prf:#ab90f2; --c-note:#4fc4d0; --c-trap:#f2788a;
+  --c-ex:#5fcb8d; --c-hw:#d79b63; --c-sum:#47c49b; --c-phys:#8ea6f5;
+  --c1:#ee8b51; --c2:#6ea8ee; --c3:#5fcb8d; --c4:#ab90f2; --c5:#f2788a; --c6:#8a9890;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f-body); font-size:17px; line-height:1.95;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--sheet)}
+a{color:var(--c-def);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--copper)}
+:focus-visible{outline:2px solid var(--copper);outline-offset:2px;border-radius:4px}
+b,strong{font-weight:700}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+code,.mono{font-family:var(--f-mono);font-size:.86em;direction:ltr;unicode-bidi:isolate}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+  display:flex; align-items:center; gap:12px;
+  padding-block:10px;
+  padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px));
+  background:color-mix(in srgb, var(--sheet) 92%, transparent);
+  backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule);
+}
+.brand{display:flex;align-items:center;gap:10px;min-width:0;text-decoration:none;color:var(--ink)}
+.brand svg{flex:none}
+.brand .bt{font-family:var(--f-disp);font-size:1.25rem;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand .bs{font-size:.78rem;color:var(--ink-3);white-space:nowrap}
+.topbar .sp{flex:1}
+.iconbtn{
+  appearance:none;border:1px solid var(--rule);background:var(--sheet);color:var(--ink);
+  border-radius:8px;height:38px;min-width:38px;padding:0 10px;display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  font:inherit;font-size:.85rem;cursor:pointer
+}
+.iconbtn:hover{border-color:var(--copper);color:var(--copper)}
+#navbtn{display:none}
+
+/* ---------- shell ---------- */
+.shell{display:grid;grid-template-columns:var(--side-w) minmax(0,1fr);align-items:start}
+.side{
+  position:sticky; top:calc(env(safe-area-inset-top,0px) + 59px);
+  height:calc(100vh - 59px - env(safe-area-inset-top,0px)); overflow:auto;
+  border-inline-end:1px solid var(--rule); background:var(--sheet);
+  padding:14px 14px 40px; font-size:.92rem; line-height:1.6;
+  scrollbar-width:thin;
+}
+.side .search{width:100%;font:inherit;font-size:.9rem;padding:8px 10px;border-radius:8px;border:1px solid var(--rule);background:var(--paper);color:var(--ink)}
+.side .search::placeholder{color:var(--ink-3)}
+.nav-part{margin-top:18px}
+.nav-part>.ph{display:flex;align-items:baseline;gap:8px;font-weight:800;color:var(--ink);font-size:.86rem;letter-spacing:.01em;padding:0 6px 6px;border-bottom:1px dashed var(--rule);margin-bottom:6px}
+.nav-part>.ph .pc{font-family:var(--f-mono);color:var(--copper);font-size:.8rem}
+.nav-ch{display:flex;gap:8px;align-items:baseline;padding:6px 8px;border-radius:7px;color:var(--ink-2);text-decoration:none}
+.nav-ch .cc{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-3);min-width:2.3em;direction:ltr;text-align:right}
+.nav-ch:hover{background:var(--paper);color:var(--ink)}
+.nav-ch.on{background:color-mix(in srgb,var(--copper) 12%, var(--sheet));color:var(--ink);font-weight:700}
+.nav-ch.on .cc{color:var(--copper)}
+.nav-secs{margin:2px 0 8px;padding-inline-start:22px;border-inline-start:2px solid color-mix(in srgb,var(--copper) 45%, transparent);margin-inline-start:20px}
+.nav-secs a{display:block;padding:3px 8px;color:var(--ink-2);text-decoration:none;font-size:.84rem;border-radius:6px}
+.nav-secs a:hover{color:var(--copper)}
+.nav-secs .sn{font-family:var(--f-mono);font-size:.72rem;color:var(--ink-3);margin-inline-end:4px}
+
+main{min-width:0;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left,0px));padding-right:max(16px, env(safe-area-inset-right,0px))}
+.page{max-width:var(--col);margin-inline:auto}
+
+/* ---------- home ---------- */
+.cover{
+  position:relative;overflow:hidden;border-radius:16px;
+  background:var(--sheet);border:1px solid var(--rule);
+  padding:clamp(22px,4vw,44px);
+}
+.cover .eyebrow{font-family:var(--f-mono);font-size:.78rem;color:var(--copper);letter-spacing:.06em;direction:ltr;display:inline-block}
+.cover h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(2rem,5.4vw,3.3rem);line-height:1.35;margin:.25em 0 .2em;text-wrap:balance}
+.cover h1 em{font-style:normal;color:var(--copper)}
+.cover p.lead{font-size:1.06rem;color:var(--ink-2);max-width:38rem;margin:.4em 0 0}
+.cover .trace{position:absolute;inset:auto 0 0 0;height:70px;opacity:.9;pointer-events:none}
+.cover .facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;margin-bottom:46px;font-size:.88rem;color:var(--ink-2)}
+.cover .facts b{font-family:var(--f-mono);color:var(--ink);font-size:1.02rem}
+.howto{margin-top:26px}
+.howto h2,.roadmap h2{font-size:1.25rem;margin:0 0 10px}
+.legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.legend .lg{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--k) 35%, var(--rule));background:color-mix(in srgb,var(--k) 7%, var(--sheet));font-size:.88rem;line-height:1.7}
+.legend .lg b{color:var(--k);white-space:nowrap}
+.roadmap{margin-top:30px}
+.part-block{margin-top:22px}
+.part-block .ph{display:flex;align-items:baseline;gap:10px;margin-bottom:10px}
+.part-block .ph .pc{font-family:var(--f-mono);color:var(--copper);font-weight:600}
+.part-block .ph h3{margin:0;font-size:1.1rem}
+.part-block .ph p{margin:0;color:var(--ink-3);font-size:.86rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.card{display:flex;flex-direction:column;gap:2px;padding:12px 14px;border-radius:10px;border:1px solid var(--rule);background:var(--sheet);text-decoration:none;color:var(--ink);min-width:0}
+.card:hover{border-color:var(--copper)}
+.card .cc{font-family:var(--f-mono);font-size:.76rem;color:var(--copper);direction:ltr;text-align:right}
+.card .ct{font-weight:700;line-height:1.6}
+.card .cd{font-size:.82rem;color:var(--ink-3);line-height:1.6}
+
+/* ---------- chapter hero ---------- */
+.ch-hero{padding:6px 0 14px;border-bottom:1px solid var(--rule);margin-bottom:22px}
+.ch-hero .code{font-family:var(--f-mono);font-size:.82rem;color:var(--copper);letter-spacing:.05em;direction:ltr;display:inline-block}
+.ch-hero h1{font-family:var(--f-disp);font-weight:400;font-size:clamp(1.9rem,4.6vw,2.7rem);line-height:1.4;margin:.15em 0 .1em;text-wrap:balance}
+.ch-hero .sub{color:var(--ink-2);margin:0 0 12px;font-size:1.02rem}
+.ch-hero svg.trace{display:block;width:100%;height:18px;margin:6px 0 10px}
+.goals{display:grid;grid-template-columns:1fr;gap:12px;margin-top:10px}
+@media (min-width:760px){.goals{grid-template-columns:1.5fr 1fr}}
+.goals .gbox{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:12px 16px;font-size:.92rem;line-height:1.85;min-width:0}
+.goals .gbox h4{margin:0 0 4px;font-size:.84rem;color:var(--ink-3);font-weight:700;letter-spacing:.01em}
+.goals ul{margin:0;padding-inline-start:20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips a{font-size:.82rem;text-decoration:none;padding:2px 10px;border-radius:99px;border:1px solid var(--rule);color:var(--ink-2);background:var(--paper)}
+.chips a:hover{border-color:var(--copper);color:var(--copper)}
+.toc{margin:18px 0 6px;padding:12px 16px;border-radius:var(--r);border:1px dashed var(--rule);font-size:.9rem;line-height:1.8}
+.toc b{display:block;font-size:.8rem;color:var(--ink-3)}
+.toc ol{margin:4px 0 0;padding:0;list-style:none;columns:2 15rem;column-gap:24px}
+.toc li{break-inside:avoid}
+.toc a{text-decoration:none;color:var(--ink-2)}
+.toc a:hover{color:var(--copper)}
+.toc .sn{font-family:var(--f-mono);font-size:.74rem;color:var(--copper);margin-inline-end:6px}
+
+/* ---------- prose ---------- */
+.prose h2{font-size:1.5rem;line-height:1.5;margin:2.1em 0 .5em;padding-top:.5em;border-top:2px solid var(--ink);text-wrap:balance;scroll-margin-top:80px}
+.prose h2 .sn{font-family:var(--f-mono);font-size:.95rem;color:var(--copper);margin-inline-end:10px;font-weight:600}
+.prose h3{font-size:1.16rem;margin:1.6em 0 .35em;color:var(--ink);scroll-margin-top:80px}
+.prose h3::before{content:"";display:inline-block;width:.55em;height:.55em;background:var(--copper);border-radius:2px;margin-inline-end:.5em;transform:translateY(-.08em) rotate(45deg)}
+.prose h4{font-size:1rem;margin:1.2em 0 .2em;color:var(--ink-2)}
+.prose p{margin:.55em 0}
+.prose ul,.prose ol{padding-inline-start:1.4em;margin:.4em 0}
+.prose li{margin:.15em 0}
+.prose li::marker{color:var(--copper)}
+.prose hr{border:0;border-top:1px dashed var(--rule);margin:1.6em 0}
+.hl{background:color-mix(in srgb,var(--copper) 16%, transparent);padding:0 .2em;border-radius:3px}
+.mut{color:var(--ink-3)}
+.small{font-size:.88rem}
+
+/* math */
+mjx-container{direction:ltr;unicode-bidi:isolate}
+mjx-container[display="true"]{display:block;overflow-x:auto;overflow-y:hidden;max-width:100%;padding:2px 0;margin:.4em 0!important}
+mjx-container svg{max-width:none}
+mjx-assistive-mml{max-width:100%!important}
+main{overflow-x:clip}
+.eq{margin:.8em 0;padding:6px 14px;border-radius:8px;background:color-mix(in srgb,var(--ink) 4%, var(--sheet));border:1px solid var(--rule);overflow-x:auto}
+.eq.k{border:1.5px solid color-mix(in srgb,var(--copper) 70%, transparent);background:color-mix(in srgb,var(--copper) 6%, var(--sheet));position:relative;padding-top:18px}
+.eq .eq-l{position:absolute;top:-11px;inset-inline-start:12px;background:var(--copper);color:var(--sheet);font-size:.72rem;font-weight:700;padding:1px 9px;border-radius:99px;line-height:1.8}
+
+/* tables */
+.tbl{overflow-x:auto;margin:.9em 0;border:1px solid var(--rule);border-radius:var(--r);background:var(--sheet)}
+.tbl table{border-collapse:collapse;width:100%;font-size:.92rem;line-height:1.7}
+.tbl th{background:color-mix(in srgb,var(--mask) 14%, var(--sheet));color:var(--ink);font-weight:700;text-align:start;padding:8px 12px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.tbl td{padding:7px 12px;border-bottom:1px solid var(--rule);vertical-align:top;font-variant-numeric:tabular-nums}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.n,.tbl th.n{direction:ltr;text-align:center}
+
+/* ---------- boxes ---------- */
+.box{--k:var(--c-note);margin:1.1em 0;border-radius:var(--r);border:1px solid color-mix(in srgb,var(--k) 38%, var(--rule));background:color-mix(in srgb,var(--k) 6.5%, var(--sheet));padding:10px 16px 12px;min-width:0}
+.box-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:2px}
+.box .tag{font-size:.74rem;font-weight:800;color:var(--sheet);background:var(--k);padding:0 10px;border-radius:99px;line-height:1.9;letter-spacing:.01em}
+.box .bt{font-weight:700;color:var(--ink)}
+.box-b>:first-child{margin-top:.2em}
+.box-b>:last-child{margin-bottom:0}
+.box.def{--k:var(--c-def)}
+.box.int{--k:var(--c-int)}
+.box.prf{--k:var(--c-prf);background:color-mix(in srgb,var(--k) 4.5%, var(--sheet))}
+.box.note{--k:var(--c-note)}
+.box.trap{--k:var(--c-trap)}
+.box.sum{--k:var(--c-sum)}
+.box.phys{--k:var(--c-phys)}
+.box.key{--k:var(--copper);border-width:1.5px}
+.box.prf .box-b{counter-reset:pstep}
+
+/* steps: numbered chain like vias on a trace */
+ol.steps{list-style:none;padding:0;margin:.7em 0;counter-reset:st}
+ol.steps>li{position:relative;padding-inline-start:44px;margin:0;padding-bottom:10px;counter-increment:st}
+ol.steps>li::before{content:counter(st, persian);position:absolute;inset-inline-start:0;top:.25em;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-size:.85rem;font-weight:800;background:var(--sheet);border:2px solid var(--copper);color:var(--copper);line-height:1}
+ol.steps>li::after{content:"";position:absolute;inset-inline-start:13px;top:calc(.25em + 30px);bottom:0;width:2px;background:color-mix(in srgb,var(--copper) 35%, transparent)}
+ol.steps>li:last-child::after{display:none}
+ol.steps>li:last-child{padding-bottom:0}
+
+/* ---------- examples ---------- */
+.ex{margin:1.4em 0;border-radius:12px;border:1px solid color-mix(in srgb,var(--c-ex) 40%, var(--rule));background:var(--sheet);overflow:hidden;scroll-margin-top:80px}
+.ex-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 16px;background:color-mix(in srgb,var(--c-ex) 10%, var(--sheet));border-bottom:1px solid color-mix(in srgb,var(--c-ex) 25%, var(--rule))}
+.ex-n{font-weight:800;color:var(--c-ex);white-space:nowrap}
+.ex-t{font-weight:700;flex:1 1 12rem;min-width:0}
+.lvl{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;color:var(--ink-2);white-space:nowrap}
+.lvl i{display:inline-block;width:7px;height:12px;border-radius:2px;background:color-mix(in srgb,var(--ink) 14%, transparent)}
+.lvl[data-l="1"] i:nth-child(-n+1),.lvl[data-l="2"] i:nth-child(-n+2),.lvl[data-l="3"] i:nth-child(-n+3),.lvl[data-l="4"] i:nth-child(-n+4){background:var(--lc)}
+.lvl[data-l="1"]{--lc:var(--c-ex)} .lvl[data-l="2"]{--lc:var(--c-int)} .lvl[data-l="3"]{--lc:var(--c-trap)} .lvl[data-l="4"]{--lc:var(--c-prf)}
+.lvl .lt{margin-inline-start:2px}
+.ex-b{padding:10px 16px 14px}
+.ex-b>:first-child{margin-top:.2em}
+.sol{margin-top:12px;padding-top:10px;border-top:1.5px dashed color-mix(in srgb,var(--c-ex) 40%, var(--rule))}
+.sol-h{font-size:.8rem;font-weight:800;color:var(--c-ex);letter-spacing:.01em;margin-bottom:2px}
+.ans-line{margin-top:10px;padding:6px 12px;border-radius:8px;background:color-mix(in srgb,var(--c-ex) 10%, var(--sheet));font-weight:700}
+
+/* ---------- exercises ---------- */
+.hw{margin:1em 0;border-radius:10px;border:1px solid color-mix(in srgb,var(--c-hw) 35%, var(--rule));background:var(--sheet);padding:10px 16px}
+.hw-h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hw-n{font-weight:800;color:var(--c-hw)}
+.hw-b>:first-child{margin-top:.2em}
+details.ans{margin-top:8px;border-top:1px dashed var(--rule);padding-top:6px}
+details.ans summary{cursor:pointer;font-size:.86rem;font-weight:700;color:var(--c-hw);list-style:none;display:inline-flex;align-items:center;gap:6px}
+details.ans summary::-webkit-details-marker{display:none}
+details.ans summary::before{content:"";width:0;height:0;border-block:5px solid transparent;border-inline-end:7px solid currentColor;transition:transform .15s}
+details.ans[open] summary::before{transform:rotate(-90deg)}
+details.ans>div{padding-top:4px}
+
+/* ---------- figures ---------- */
+figure{margin:1.1em 0}
+figure.ckt,figure.plot,.widget{background:var(--sheet);border:1px solid var(--rule);border-radius:var(--r);padding:12px;overflow-x:auto}
+figure.ckt .cv{direction:ltr;display:flex;justify-content:center}
+figure.ckt svg{height:auto;max-width:100%;overflow:visible}
+figure.ckt svg text{font-family:var(--f-mono)!important}
+figcaption{font-size:.84rem;color:var(--ink-3);text-align:center;margin-top:6px;line-height:1.7}
+figcaption b{color:var(--ink-2)}
+figure.plot .pv{direction:ltr}
+figure.plot svg,.widget svg{display:block;width:100%;height:auto}
+svg .ax{stroke:var(--ink-2);stroke-width:1.2}
+svg .gr{stroke:var(--rule);stroke-width:1}
+svg .tk{fill:var(--ink-3);font:11px var(--f-mono)}
+svg .al{fill:var(--ink-2);font:12px var(--f-mono)}
+svg .an{fill:var(--ink);font:12px var(--f-mono)}
+svg .guide{stroke:var(--ink-3);stroke-dasharray:4 4;stroke-width:1}
+.plot-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;font-size:.82rem;color:var(--ink-2);direction:ltr}
+.plot-legend span{unicode-bidi:plaintext}
+.plot-legend span::before{content:"";display:inline-block;width:16px;height:3px;border-radius:2px;background:var(--lc);margin-inline-end:6px;vertical-align:middle}
+
+/* ---------- widgets ---------- */
+.widget{padding:14px}
+.widget .wt{font-weight:800;font-size:.92rem;color:var(--mask);margin-bottom:2px}
+.widget .wd{font-size:.86rem;color:var(--ink-2);margin:0 0 8px;line-height:1.8}
+.widget .ctrls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:6px 18px;margin:8px 0}
+.widget label{display:flex;flex-direction:column;font-size:.84rem;color:var(--ink-2);gap:2px}
+.widget label .v{font-family:var(--f-mono);color:var(--ink);direction:ltr;unicode-bidi:isolate}
+.widget input[type=range]{width:100%;accent-color:var(--copper)}
+.widget .read{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.86rem;padding:8px 12px;border-radius:8px;background:var(--paper);border:1px solid var(--rule);line-height:1.8}
+.widget .read b{font-family:var(--f-mono);direction:ltr;unicode-bidi:isolate}
+.widget .badge{display:inline-block;padding:0 10px;border-radius:99px;font-weight:800;font-size:.8rem;color:var(--sheet);background:var(--copper)}
+.widget .btns{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0}
+.widget .sv{direction:ltr}
+
+/* ---------- chapter footer ---------- */
+.pn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:48px}
+.pn a{display:flex;flex-direction:column;padding:12px 16px;border:1px solid var(--rule);border-radius:10px;text-decoration:none;color:var(--ink);background:var(--sheet);min-width:0}
+.pn a:hover{border-color:var(--copper)}
+.pn a .k{font-size:.78rem;color:var(--ink-3)}
+.pn a .t{font-weight:700}
+.pn a.next{text-align:end;grid-column:2}
+.foot{margin-top:40px;font-size:.82rem;color:var(--ink-3);text-align:center}
+
+/* ---------- responsive ---------- */
+@media (max-width: 1000px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  #navbtn{display:inline-flex}
+  .side{position:fixed;top:0;bottom:0;inset-inline-start:0;height:auto;width:min(86vw,340px);z-index:50;transform:translateX(105%);transition:transform .2s ease;
+        padding-top:calc(14px + env(safe-area-inset-top,0px));padding-bottom:calc(40px + env(safe-area-inset-bottom,0px));padding-right:max(14px, env(safe-area-inset-right,0px));box-shadow:0 0 40px rgba(0,0,0,.25)}
+  body.nav-open .side{transform:none}
+  .scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:45}
+  .brand .bs{display:none}
+}
+@media (max-width: 520px){
+  body{font-size:16px}
+  #themebtn span{display:none}
+  mjx-container:not([display="true"]){display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
+  .box,.hw{padding-inline:12px}
+  .ex-b{padding-inline:12px}
+  .pn{grid-template-columns:1fr}
+  .pn a.next{grid-column:1}
+}
+
+</style>
+</head>
+<body>
+<div id="app" dir="rtl" lang="fa"><header class="topbar"><button class="iconbtn" id="navbtn" type="button" aria-label="باز کردن فهرست فصل‌ها"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round"/></svg>فهرست</button><a class="brand" href="#home"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" style="fill:var(--mask)"/><path d="M5 15 H12.5 M12.5 8 V22 M17.5 8 V22 M17.5 15 H25" style="fill:none;stroke:var(--sheet);stroke-width:2.2;stroke-linecap:round"/></svg><span style="display:flex;flex-direction:column;min-width:0"><span class="bt">جزوه مدار و الکترونیک دیجیتال</span><span class="bs">پاییز ۱۴۰۵ · از پایه تا شاقول</span></span></a><span class="sp"></span><button class="iconbtn" id="themebtn" type="button" aria-label="تغییر حالت روشن و تیره"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:currentColor;stroke-width:1.6"/><path d="M8 1.5 A6.5 6.5 0 0 1 8 14.5 Z" style="fill:currentColor"/></svg><span>روشن/تیره</span></button></header><div class="shell"><aside class="side" id="side" aria-label="فهرست فصل‌ها"><input class="search" id="search" type="search" placeholder="جستجو در فصل‌ها و بخش‌ها…" aria-label="جستجو در فصل‌ها و بخش‌ها"><div class="nav-part"><a class="nav-ch" href="#home"><span class="cc">00</span><span>صفحه اول، برنامه درس و راهنما</span></a></div><div class="nav-part"><div class="ph"><span class="pc">A</span>پایه‌ها: ریاضی و فیزیکِ لازم</div><div class="nav-item"><a class="nav-ch" href="#math-functions"><span class="cc">A1</span><span>تابع، شیب، نمایی و لگاریتم</span></a><div class="nav-secs" hidden><a href="#math-functions-s1"><span class="sn">A1.1</span>تابع: ماشینی که ورودی می‌گیرد و خروجی می‌دهد</a><a href="#math-functions-s2"><span class="sn">A1.2</span>خط راست و شیب: آهنگ تغییر</a><a href="#math-functions-s3"><span class="sn">A1.3</span>توان‌ها و پیشوندهای علمی</a><a href="#math-functions-s4"><span class="sn">A1.4</span>رشد و افت نمایی</a><a href="#math-functions-s5"><span class="sn">A1.5</span>لگاریتم: وارون نمایی</a><a href="#math-functions-s6"><span class="sn">A1.6</span>جابه‌جایی، کشیدن و قرینه کردن نمودار</a><a href="#math-functions-s7"><span class="sn">A1.7</span>جمع‌بندی فصل</a><a href="#math-functions-s8"><span class="sn">A1.8</span>تمرین‌ها</a></div></div></div></aside><main id="main"><article class="page" data-route="home" data-title="">
+<section class="cover">
+  <span class="eyebrow">EEC · FALL 1405 · COMPLETE NOTES</span>
+  <h1>مدارهای الکتریکی و الکترونیک دیجیتال<br><em>از پایه تا شاقول</em></h1>
+  <p class="lead">جزوه‌ای که هیچ چیزی را بدیهی فرض نمی‌کند: از «شیب یک خط» و «بار الکتریکی» شروع می‌کند، هر رابطه را قدم‌به‌قدم استخراج می‌کند، اول شهودش را می‌گوید و بعد ریاضی‌اش را، و برای هر مبحث مثال تازه از پایه تا سخت حل می‌کند.</p>
+  <div class="facts"><span><b>۱</b> فصل</span><span><b>۷</b> مثال حل‌شده</span><span><b>۶</b> تمرین با جواب</span><span><b>۰</b> شکل مدار</span><span>منبع: جزوه‌های کلاس و برنامه ترم</span></div>
+  <svg class="trace" viewBox="0 0 800 70" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 52 H120 L140 32 H300 L318 50 H420 L440 30 H520 L540 50 H800" style="fill:none;stroke:var(--copper);stroke-width:2.2"/>
+    <path d="M0 62 H210 L226 46 H600 L616 62 H800" style="fill:none;stroke:var(--mask);stroke-width:1.6;opacity:.7"/>
+    <circle cx="120" cy="52" r="5" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2.2"/><circle cx="420" cy="50" r="5" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2.2"/>
+    <circle cx="226" cy="46" r="4" style="fill:var(--sheet);stroke:var(--mask);stroke-width:1.6"/><circle cx="616" cy="62" r="4" style="fill:var(--sheet);stroke:var(--mask);stroke-width:1.6"/>
+  </svg>
+</section>
+
+<section class="howto">
+  <h2>این جزوه را چطور بخوانیم</h2>
+  <p>هر نوع مطلب رنگ خودش را دارد تا قبل از خواندن بدانید با چه چیزی روبه‌رو هستید. اگر عجله دارید، فقط جعبه‌های «شهود» و «نتیجه کلیدی» را بخوانید؛ اگر می‌خواهید واقعاً بفهمید، «اثبات قدم‌به‌قدم» را با مداد و کاغذ دنبال کنید.</p>
+  <div class="legend">
+    <div class="lg" style="--k:var(--c-def)"><b>تعریف</b><span>معنی دقیق یک کلمه؛ همه‌چیز بعداً روی همین ساخته می‌شود.</span></div>
+    <div class="lg" style="--k:var(--c-int)"><b>شهود</b><span>تصویر ذهنی: چرا این رابطه منطقی است، بدون فرمول.</span></div>
+    <div class="lg" style="--k:var(--c-prf)"><b>اثبات</b><span>استخراج رابطه، یک قدم در هر خط، بدون پرش.</span></div>
+    <div class="lg" style="--k:var(--copper)"><b>نتیجه کلیدی</b><span>چیزی که باید بفهمید (نه حفظ کنید) و همه‌جا به کار می‌آید.</span></div>
+    <div class="lg" style="--k:var(--c-trap)"><b>دام رایج</b><span>اشتباهی که بیشتر دانشجوها در امتحان می‌کنند.</span></div>
+    <div class="lg" style="--k:var(--c-ex)"><b>مثال</b><span>با نوار سطح: ▮ پایه، ▮▮ متوسط، ▮▮▮ سخت، ▮▮▮▮ چالشی.</span></div>
+    <div class="lg" style="--k:var(--c-hw)"><b>تمرین</b><span>اول خودتان حل کنید، بعد جواب را باز کنید.</span></div>
+    <div class="lg" style="--k:var(--c-phys)"><b>فیزیکش چیست؟</b><span>آنچه واقعاً درون قطعه اتفاق می‌افتد.</span></div>
+  </div>
+  <p class="small mut" style="margin-top:10px">قراردادهای ثابت کل جزوه: جهت مرجع جریان از سر + ولتاژ وارد المان می‌شود (قرارداد علامت غیرفعال)؛ ولتاژ هر گره نسبت به گره زمین سنجیده می‌شود؛ 0⁻ و 0⁺ یعنی درست قبل و درست بعد از کلیدزنی در t = 0؛ u(t) پله واحد و δ(t) ضربه واحد است.</p>
+</section>
+
+<section class="roadmap">
+  <h2>برنامه ترم و نقشه مطالعه</h2>
+  <p>جدول زیر از برنامه رسمی درس آمده است. ستون سوم فصل‌های این جزوه را نشان می‌دهد که آن جلسه را پوشش می‌دهند. نمره از ۲۰: میان‌ترم ۵، پایان‌ترم ۷، کوییزها ۴، تمرین‌ها ۴. میان‌ترم فصل‌های ۱ تا ۳ درس (بخش B) و پایان‌ترم فصل‌های ۴ تا ۶ (بخش C) را می‌پوشاند.</p>
+  <div class="tbl"><table><thead><tr><th>جلسه</th><th>مبحث</th><th>فصل جزوه</th><th class="n">کوییز</th></tr></thead><tbody><tr><td style="white-space:nowrap">مهر ۵</td><td>المان‌های الکتریکی، قانون ولتاژ و جریان کیرشهف</td><td>—</td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۷</td><td>تحلیل مدار، اتصالات سری و موازی المان‌های مقاومتی</td><td>—</td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۲</td><td>روش‌های تحلیل مدار: آنالیز گره و مش</td><td>—</td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۴</td><td>خطی بودن و اصل برهم‌نهی</td><td>—</td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۹ تا ۲۶</td><td>مدارهای معادل تونن و نورتن</td><td>—</td><td class="n">Quiz II</td></tr><tr><td style="white-space:nowrap">مهر ۲۸</td><td>معرفی عناصر ذخیره‌کننده انرژی</td><td>—</td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۳</td><td>شکل موج‌ها و مدارهای مرتبه اول</td><td>—</td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۰</td><td>مدارهای مرتبه اول</td><td>—</td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۲ و ۱۷</td><td>مدارهای مرتبه دوم</td><td>—</td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۹</td><td>امپدانس و ادمیتانس</td><td>—</td><td class="n">Quiz IV</td></tr><tr><td style="white-space:nowrap">آبان ۲۴ تا آذر ۱</td><td>آنالیز مدار با تبدیل لاپلاس</td><td>—</td><td class="n">Quiz IV</td></tr><tr><td style="white-space:nowrap">آذر ۳ و ۸</td><td>منحنی مشخصه، مدل و کاربردهای دیود</td><td>—</td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۱۰ و ۱۵</td><td>ساختار، عملکرد و منحنی مشخصه ماسفت افزایشی</td><td>—</td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۱۷</td><td>انواع مدارهای وارونساز با ترانزیستور</td><td>—</td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۲۲ و ۲۴</td><td>ترانزیستور گذر و دروازه انتقال</td><td>—</td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۲۹</td><td>منطق CMOS ایستا</td><td>—</td><td class="n">Quiz VI</td></tr><tr><td style="white-space:nowrap">دی ۱ و ۶</td><td>Latch و FF، شیفت رجیستر</td><td>—</td><td class="n">Quiz VI</td></tr><tr><td style="white-space:nowrap">دی ۸</td><td>انواع حافظه‌های RAM و ROM</td><td>—</td><td class="n">Quiz VI</td></tr></tbody></table></div>
+  <p class="small mut">اگر پایه ریاضی‌تان لرزان است، قبل از بخش B فصل‌های بخش A را بخوانید؛ هر فصل در ابتدایش پیش‌نیازهایش را با لینک نوشته است.</p>
+  <div class="part-block"><div class="ph"><span class="pc">A</span><h3>پایه‌ها: ریاضی و فیزیکِ لازم</h3><p>هر چیزی که درس مدار روی آن سوار است، از صفر</p></div><div class="cards"><a class="card" href="#math-functions"><span class="cc">A1</span><span class="ct">تابع، شیب، نمایی و لگاریتم</span><span class="cd">زبان نمودارها؛ چرا عدد e همه‌جای مدار پیدا می‌شود</span></a></div></div>
+</section>
+<p class="foot">این جزوه بر اساس جزوه‌های کلاس درس «مدارهای الکتریکی و الکترونیک دیجیتال» و برنامه ترم پاییز ۱۴۰۵ بازنویسی و کامل شده است. مثال‌ها تازه‌اند و همه حل‌ها قدم‌به‌قدم بازبینی شده‌اند.</p>
+</article><article class="page chapter" data-route="math-functions" data-title="تابع، شیب، نمایی و لگاریتم" hidden><header class="ch-hero"><span class="code">A1 · CHAPTER</span><h1>تابع، شیب، نمایی و لگاریتم</h1><p class="sub">زبان نمودارها؛ چرا عدد e همه‌جای مدار پیدا می‌شود</p><svg class="trace" viewBox="0 0 600 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 9 H170 L180 3 H330 L340 15 H600" style="fill:none;stroke:var(--copper);stroke-width:2"/><circle cx="170" cy="9" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/><circle cx="340" cy="15" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/></svg><div class="goals"><div class="gbox"><h4>در این فصل چه چیزی را واقعاً می‌فهمیم</h4><ul>
+<li>بفهمیم «تابع» و «نمودار» یعنی چه و چرا ولتاژ و جریان را تابعی از زمان می‌نویسیم.</li>
+<li>شیب را به‌عنوان «آهنگ تغییر» بفهمیم؛ همان چیزی که بعداً مشتق و قانون اهم را می‌سازد.</li>
+<li>قانون‌های توان را خودمان از تعریف بسازیم، نه اینکه حفظ کنیم.</li>
+<li>بفهمیم چرا شارژ و دشارژ خازن «نمایی» است و عدد e از کجا می‌آید.</li>
+<li>لگاریتم را وارون نمایی ببینیم و با آن «زمان رسیدن به یک ولتاژ» را حساب کنیم.</li>
+</ul></div><div class="gbox"><h4>پیش‌نیاز</h4><p class="mut small" style="margin:0">پیش‌نیاز خاصی ندارد؛ از همین‌جا شروع کنید.</p><h4 style="margin-top:10px">جایگاه در درس</h4><p style="margin:0">پیش‌نیاز همه فصل‌ها</p></div></div><nav class="toc" aria-label="فهرست این فصل"><b>بخش‌های این فصل</b><ol><li><a href="#math-functions-s1"><span class="sn">A1.1</span>تابع: ماشینی که ورودی می‌گیرد و خروجی می‌دهد</a></li><li><a href="#math-functions-s2"><span class="sn">A1.2</span>خط راست و شیب: آهنگ تغییر</a></li><li><a href="#math-functions-s3"><span class="sn">A1.3</span>توان‌ها و پیشوندهای علمی</a></li><li><a href="#math-functions-s4"><span class="sn">A1.4</span>رشد و افت نمایی</a></li><li><a href="#math-functions-s5"><span class="sn">A1.5</span>لگاریتم: وارون نمایی</a></li><li><a href="#math-functions-s6"><span class="sn">A1.6</span>جابه‌جایی، کشیدن و قرینه کردن نمودار</a></li><li><a href="#math-functions-s7"><span class="sn">A1.7</span>جمع‌بندی فصل</a></li><li><a href="#math-functions-s8"><span class="sn">A1.8</span>تمرین‌ها</a></li></ol></nav></header><div class="prose">
+
+<p>درس مدار پر از جمله‌هایی مثل «ولتاژ خازن به‌صورت نمایی به ۱۰ ولت می‌رسد» یا «جریان با شیب ثابت زیاد می‌شود» است. اگر کلمه‌های «تابع»، «شیب» و «نمایی» برایمان روشن نباشد، بقیه درس فقط حفظ کردن فرمول می‌شود. پس از خود این کلمه‌ها شروع می‌کنیم.</p>
+
+<h2 id="math-functions-s1"><span class="sn">A1.1</span>تابع: ماشینی که ورودی می‌گیرد و خروجی می‌دهد</h2>
+
+<div class="box def"><div class="box-h"><span class="tag">تعریف</span><span class="bt">تابع</span></div><div class="box-b">
+<p>تابع قاعده‌ای است که به هر «ورودی» دقیقاً <b>یک</b> «خروجی» نسبت می‌دهد. می‌نویسیم \(y = f(x)\) و می‌خوانیم «y تابعی از x است». \(x\) را متغیر مستقل (ورودی) و \(y\) را متغیر وابسته (خروجی) می‌گوییم.</p>
+</div></div>
+
+<p>کلمه کلیدی «دقیقاً یک» است. اگر به ماشین عدد ۲ را بدهیم، نباید یک بار ۵ و یک بار ۷ بدهد. در مدار، ورودی معمولاً <b>زمان</b> است: \(v(t)\) یعنی «ولتاژ در لحظه t». هر لحظه فقط یک ولتاژ دارد، پس ولتاژ تابعی از زمان است.</p>
+
+<p>چند مثال از توابعی که در این درس زیاد می‌بینیم:</p>
+<ul>
+<li>\(v(t) = 5\): ولتاژ ثابت (مثل باتری). هر t بدهیم، جواب ۵ است.</li>
+<li>\(i(t) = 2t\): جریانی که با گذشت زمان خطی زیاد می‌شود؛ در \(t=3\) ثانیه، جریان ۶ آمپر است.</li>
+<li>\(v(t) = 10\sin(100t)\): ولتاژ برق شهر شکلی شبیه این دارد (فصل A2).</li>
+<li>\(v(t) = 5e^{-t/2}\): ولتاژ خازنی که در حال تخلیه است (همین فصل).</li>
+</ul>
+
+<h3 id="math-functions-h1">نمودار: عکس یک تابع</h3>
+<p>نمودار یعنی همه زوج‌های \((x, f(x))\) را روی صفحه بگذاریم: محور افقی ورودی و محور عمودی خروجی. نمودار به ما اجازه می‌دهد کل رفتار تابع را با یک نگاه ببینیم: کجا زیاد می‌شود، کجا کم می‌شود، کجا ثابت است.</p>
+
+<div class="box int"><div class="box-h"><span class="tag">شهود</span></div><div class="box-b">
+<p>وقتی در این درس می‌گوییم «شکل موج»، منظور همین نمودار ولتاژ یا جریان برحسب زمان است. یک اسیلوسکوپ دقیقاً همین را روی صفحه‌اش رسم می‌کند: محور افقی زمان، محور عمودی ولتاژ.</p>
+</div></div>
+
+<h3 id="math-functions-h2">واحدها جزئی از عدد هستند</h3>
+<p>در فیزیک و مدار، عدد بدون واحد معنی ندارد. «۵» هیچ چیزی نمی‌گوید؛ «۵ ولت» یا «۵ میلی‌آمپر» می‌گوید. یک عادت خوب: در هر محاسبه واحدها را هم مثل عدد ضرب و تقسیم کنید. اگر آخر کار واحد درست درنیامد، یعنی جایی اشتباه کرده‌اید.</p>
+
+<h2 id="math-functions-s2"><span class="sn">A1.2</span>خط راست و شیب: آهنگ تغییر</h2>
+
+<p>ساده‌ترین تابع غیرثابت، خط راست است:</p>
+<div class="eq">\[ y = m\,x + b \]</div>
+<p>این رابطه دو عدد ثابت دارد: \(b\) جایی است که خط محور عمودی را قطع می‌کند (مقدار y وقتی \(x = 0\))، و \(m\) <b>شیب</b> است.</p>
+
+<div class="box def"><div class="box-h"><span class="tag">تعریف</span><span class="bt">شیب</span></div><div class="box-b">
+<p>اگر از یک نقطه خط به نقطه دیگری برویم، تغییر خروجی را \(\Delta y\) و تغییر ورودی را \(\Delta x\) می‌نامیم (\(\Delta\) یعنی «تغییرِ»). شیب نسبت این دو است:</p>
+<div class="eq">\[ m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1} \]</div>
+<p>به زبان ساده: «به ازای یک واحد جلو رفتن در x، خروجی چقدر بالا (یا پایین) می‌رود».</p>
+</div></div>
+
+<div class="box prf"><div class="box-h"><span class="tag">اثبات قدم‌به‌قدم</span><span class="bt">چرا شیب یک خط در همه‌جای آن یکی است؟</span></div><div class="box-b">
+<ol class="steps">
+<li>دو نقطه دلخواه روی خط \(y = mx + b\) برداریم: \((x_1, y_1)\) و \((x_2, y_2)\). چون روی خط‌اند: \(y_1 = m x_1 + b\) و \(y_2 = m x_2 + b\).</li>
+<li>تفریق کنیم: \(y_2 - y_1 = m x_2 + b - m x_1 - b = m(x_2 - x_1)\). عدد \(b\) کاملاً حذف شد.</li>
+<li>دو طرف را بر \(x_2 - x_1\) تقسیم کنیم: \(\dfrac{y_2 - y_1}{x_2 - x_1} = m\).</li>
+<li>نقطه‌ها را دلخواه انتخاب کرده بودیم و جواب به آن‌ها بستگی نداشت. پس شیب در همه‌جای خط همان \(m\) است. این تعریف «خط راست» است: آهنگ تغییر ثابت.</li>
+</ol>
+</div></div>
+
+<p>شیب مثبت یعنی خط بالا می‌رود، شیب منفی یعنی پایین می‌آید، شیب صفر یعنی خط افقی (مقدار ثابت). هرچه اندازه شیب بزرگ‌تر، خط تندتر.</p>
+
+<figure class="plot" data-plot="{&quot;x&quot;: [0, 5], &quot;y&quot;: [-2, 10], &quot;xl&quot;: &quot;x&quot;, &quot;yl&quot;: &quot;y&quot;, &quot;c&quot;: [{&quot;f&quot;: &quot;2*x&quot;, &quot;k&quot;: 1, &quot;name&quot;: &quot;y = 2x  (شیب ۲، از مبدأ)&quot;}, {&quot;f&quot;: &quot;2*x+3&quot;, &quot;k&quot;: 2, &quot;name&quot;: &quot;y = 2x + 3  (همان شیب، جابه‌جا)&quot;}, {&quot;f&quot;: &quot;8-1.5*x&quot;, &quot;k&quot;: 3, &quot;name&quot;: &quot;y = 8 − 1.5x  (شیب منفی)&quot;}]}"><figcaption><b>شکل:</b> سه خط. دو خط اول شیب یکسان دارند و موازی‌اند؛ فقط عرض از مبدأشان فرق دارد.</figcaption></figure>
+
+<div class="box int"><div class="box-h"><span class="tag">شهود</span><span class="bt">قانون اهم یک خط است</span></div><div class="box-b">
+<p>قانون اهم \(v = R\,i\) دقیقاً یک خط با \(b = 0\) است: اگر جریان را محور افقی و ولتاژ را محور عمودی بگیریم، مقاومت \(R\) شیب این خط است. «مقاومت ۱۰۰ اهم» یعنی «به ازای هر یک آمپر جریان بیشتر، ۱۰۰ ولت ولتاژ بیشتر». این دید «شیب» بعداً در «مقاومت دینامیکی» دیود و ماسفت دوباره به کار می‌آید.</p>
+</div></div>
+
+<div class="box note"><div class="box-h"><span class="tag">نکته</span><span class="bt">خطی که از مبدأ نمی‌گذرد</span></div><div class="box-b">
+<p>در فصل B1 می‌بینیم که در زبان مدار، «خطی» فقط به خطی گفته می‌شود که از مبدأ بگذرد (\(b=0\)). مثلاً \(v = 3i + 2\) با اینکه نمودارش خط راست است، «خطی» حساب نمی‌شود. دلیلش را آنجا دقیق می‌گوییم.</p>
+</div></div>
+
+<div class="ex" id="math-functions-ex1"><div class="ex-h"><span class="ex-n">مثال A1.1</span><span class="ex-t">آیا این مقاومت خطی است؟</span><span class="lvl" data-l="1" title="سطح: پایه"><i></i><i></i><i></i><i></i><span class="lt">پایه</span></span></div><div class="ex-b">
+<p>دو اندازه‌گیری از یک مقاومت داریم: با جریان \(1\,\text{mA}\) ولتاژ \(2.2\,\text{V}\) و با جریان \(3\,\text{mA}\) ولتاژ \(6.6\,\text{V}\). اگر رابطه خط راست باشد، شیب و عرض از مبدأ چقدر است؟</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<ol class="steps">
+<li>شیب: \(m = \dfrac{6.6 - 2.2}{3 - 1}\,\dfrac{\text{V}}{\text{mA}} = \dfrac{4.4\,\text{V}}{2\,\text{mA}} = 2.2\,\text{V/mA}\).</li>
+<li>واحد: \(1\,\text{V/mA} = \dfrac{1\,\text{V}}{0.001\,\text{A}} = 1000\,\Omega = 1\,\text{k}\Omega\). پس \(m = 2.2\,\text{k}\Omega\).</li>
+<li>عرض از مبدأ: از نقطه اول، \(2.2 = 2.2 \times 1 + b\) پس \(b = 0\).</li>
+</ol>
+<p class="ans-line">خط از مبدأ می‌گذرد: \(v = (2.2\,\text{k}\Omega)\,i\). یک مقاومت خطی ۲.۲ کیلواهمی است.</p>
+</div>
+</div></div>
+
+<h2 id="math-functions-s3"><span class="sn">A1.3</span>توان‌ها و پیشوندهای علمی</h2>
+
+<div class="box def"><div class="box-h"><span class="tag">تعریف</span><span class="bt">توان صحیح مثبت</span></div><div class="box-b">
+<p>\(a^n\) یعنی \(a\) را \(n\) بار در خودش ضرب کنیم: \(a^3 = a \times a \times a\). عدد \(a\) را پایه و \(n\) را توان (نما) می‌گوییم.</p>
+</div></div>
+
+<p>از همین تعریف ساده، همه قاعده‌های توان بیرون می‌آید. هیچ‌کدام را حفظ نکنید؛ بشمارید.</p>
+
+<div class="box prf"><div class="box-h"><span class="tag">اثبات قدم‌به‌قدم</span><span class="bt">قاعده ضرب: \(a^m \cdot a^n = a^{m+n}\)</span></div><div class="box-b">
+<p>\(a^m\) یعنی \(m\) تا \(a\) ضرب‌شده و \(a^n\) یعنی \(n\) تا. وقتی این دو را در هم ضرب کنیم، روی هم \(m + n\) تا \(a\) داریم که در هم ضرب شده‌اند. مثلاً \(a^2 \cdot a^3 = (a\cdot a)(a \cdot a \cdot a) = a^5\).</p>
+</div></div>
+
+<div class="box prf"><div class="box-h"><span class="tag">اثبات قدم‌به‌قدم</span><span class="bt">قاعده توانِ توان: \((a^m)^n = a^{mn}\)</span></div><div class="box-b">
+<p>\((a^m)^n\) یعنی \(n\) بار \(a^m\) را در هم ضرب کنیم. هر کدام \(m\) تا \(a\) دارد، پس روی هم \(m \times n\) تا. مثلاً \((a^2)^3 = a^2\cdot a^2 \cdot a^2 = a^6\).</p>
+</div></div>
+
+<div class="box prf"><div class="box-h"><span class="tag">اثبات قدم‌به‌قدم</span><span class="bt">چرا \(a^0 = 1\) و \(a^{-n} = 1/a^n\)؟</span></div><div class="box-b">
+<ol class="steps">
+<li>تقسیم را ببینیم: \(\dfrac{a^5}{a^2} = \dfrac{a\cdot a\cdot a\cdot a\cdot a}{a \cdot a} = a^3 = a^{5-2}\). پس طبیعی است که بگوییم \(\dfrac{a^m}{a^n} = a^{m-n}\).</li>
+<li>اگر \(m = n\) بگذاریم: سمت چپ \(\dfrac{a^n}{a^n} = 1\) و سمت راست \(a^0\). برای اینکه قاعده خراب نشود، <b>تعریف می‌کنیم</b> \(a^0 = 1\).</li>
+<li>اگر \(m = 0\) بگذاریم: \(\dfrac{1}{a^n} = a^{0-n} = a^{-n}\). پس توان منفی یعنی «یک تقسیم بر».</li>
+<li>توان کسری: می‌خواهیم \((a^{1/2})^2 = a^{1}\) باشد؛ پس \(a^{1/2}\) عددی است که مجذورش \(a\) است، یعنی \(\sqrt{a}\).</li>
+</ol>
+</div></div>
+
+<h3 id="math-functions-h3">پیشوندهای علمی: زبان روزمره مدار</h3>
+<p>در مدار با عددهای خیلی بزرگ و خیلی کوچک کار داریم: خازن ۱۰ پیکوفاراد، مقاومت ۲ مگااهم، فرکانس ۱ گیگاهرتز. به‌جای نوشتن صفرهای زیاد، از توان‌های ۱۰ و پیشوندها استفاده می‌کنیم:</p>
+<div class="tbl"><table>
+<thead><tr><th>پیشوند</th><th class="n">نماد</th><th class="n">ضریب</th><th>مثال در مدار</th></tr></thead>
+<tbody>
+<tr><td>پیکو</td><td class="n">p</td><td class="n">10⁻¹²</td><td>خازن‌های کوچک، خازن پارازیتی: 10 pF</td></tr>
+<tr><td>نانو</td><td class="n">n</td><td class="n">10⁻⁹</td><td>تأخیر گیت: 2 ns؛ خازن 100 nF</td></tr>
+<tr><td>میکرو</td><td class="n">µ</td><td class="n">10⁻⁶</td><td>خازن 10 µF؛ زمان 5 µs</td></tr>
+<tr><td>میلی</td><td class="n">m</td><td class="n">10⁻³</td><td>جریان 4 mA؛ سلف 20 mH</td></tr>
+<tr><td>کیلو</td><td class="n">k</td><td class="n">10³</td><td>مقاومت 4.7 kΩ</td></tr>
+<tr><td>مگا</td><td class="n">M</td><td class="n">10⁶</td><td>مقاومت 1 MΩ؛ فرکانس 50 MHz</td></tr>
+<tr><td>گیگا</td><td class="n">G</td><td class="n">10⁹</td><td>فرکانس کلاک 3 GHz</td></tr>
+</tbody></table></div>
+
+<div class="ex" id="math-functions-ex2"><div class="ex-h"><span class="ex-n">مثال A1.2</span><span class="ex-t">ضرب کیلواهم در میکروفاراد</span><span class="lvl" data-l="1" title="سطح: پایه"><i></i><i></i><i></i><i></i><span class="lt">پایه</span></span></div><div class="ex-b">
+<p>حاصل \(R\,C\) را برای \(R = 4.7\,\text{k}\Omega\) و \(C = 22\,\mu\text{F}\) حساب کنید. (بعداً می‌بینیم این عدد «ثابت زمانی» است و واحدش ثانیه است.)</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<p>\(R\,C = (4.7 \times 10^{3})(22\times 10^{-6}) = 4.7 \times 22 \times 10^{3-6} = 103.4 \times 10^{-3}\,\text{s} = 103.4\,\text{ms}\).</p>
+<p>چرا واحد ثانیه است؟ \(\Omega = \text{V/A}\) و \(\text{F} = \text{C/V}\) (کولن بر ولت)، پس \(\Omega \cdot \text{F} = \dfrac{\text{V}}{\text{A}}\cdot\dfrac{\text{C}}{\text{V}} = \dfrac{\text{C}}{\text{A}}\). آمپر یعنی کولن بر ثانیه، پس \(\dfrac{\text{C}}{\text{C/s}} = \text{s}\).</p>
+<p class="ans-line">\(RC \approx 103\,\text{ms}\). قاعده سرانگشتی مفید: کیلواهم × میکروفاراد = میلی‌ثانیه.</p>
+</div>
+</div></div>
+
+<h2 id="math-functions-s4"><span class="sn">A1.4</span>رشد و افت نمایی</h2>
+
+<p>یک خازن پر را در نظر بگیرید که از طریق یک مقاومت تخلیه می‌شود. وقتی ولتاژ خازن زیاد است، جریان تخلیه زیاد است و ولتاژ سریع پایین می‌آید؛ وقتی ولتاژ کم شد، جریان کم می‌شود و تخلیه کند می‌شود. یعنی <b>سرعت کم شدن، متناسب با مقدار فعلی است</b>. این دقیقاً تعریف رفتار نمایی است.</p>
+
+<div class="box def"><div class="box-h"><span class="tag">تعریف</span><span class="bt">رفتار نمایی</span></div><div class="box-b">
+<p>کمیتی «نمایی» تغییر می‌کند اگر در بازه‌های زمانی مساوی، در یک <b>ضریب ثابت</b> ضرب شود. مثلاً اگر هر ۱ میلی‌ثانیه نصف شود: ۱۶، ۸، ۴، ۲، ۱، … . به چنین تابعی می‌گوییم \(y = y_0\, a^{t}\).</p>
+</div></div>
+
+<p>به تفاوتش با خط دقت کنید: در خط، در بازه‌های مساوی یک مقدار ثابت <b>اضافه</b> می‌شود؛ در نمایی، در یک عدد ثابت <b>ضرب</b> می‌شود.</p>
+
+<h3 id="math-functions-h4">عدد e از کجا می‌آید؟</h3>
+<p>فرض کنید کمیتی داریم که در هر ثانیه ۱۰۰٪ رشد می‌کند. اگر کل رشد را یک‌جا در آخر ثانیه اضافه کنیم، ضریب رشد ۲ است. اما در طبیعت (و در مدار) رشد پیوسته است؛ لحظه‌به‌لحظه اتفاق می‌افتد. بیایید ثانیه را به \(n\) تکه تقسیم کنیم و در هر تکه \(\frac{1}{n}\) رشد بدهیم:</p>
+<div class="tbl"><table>
+<thead><tr><th class="n">n (تعداد تکه)</th><th class="n">ضریب رشد در یک ثانیه = (1 + 1/n)ⁿ</th></tr></thead>
+<tbody>
+<tr><td class="n">1</td><td class="n">2</td></tr>
+<tr><td class="n">2</td><td class="n">2.25</td></tr>
+<tr><td class="n">10</td><td class="n">2.5937</td></tr>
+<tr><td class="n">100</td><td class="n">2.7048</td></tr>
+<tr><td class="n">10000</td><td class="n">2.71815</td></tr>
+<tr><td class="n">∞ (پیوسته)</td><td class="n">2.718281828… = e</td></tr>
+</tbody></table></div>
+<p>هرچه تکه‌ها ریزتر، عدد کمتر بزرگ می‌شود و به یک حد ثابت می‌رسد. این حد را \(e\) می‌نامیم. پس \(e\) «ضریب رشد پیوسته» است و طبیعی است که هر جا تغییر پیوسته و متناسب با مقدار داشته باشیم، \(e\) ظاهر شود.</p>
+
+<div class="box key"><div class="box-h"><span class="tag">نتیجه کلیدی</span><span class="bt">خاصیت طلایی تابع \(e^{x}\)</span></div><div class="box-b">
+<p>شیب نمودار \(y = e^{x}\) در هر نقطه، دقیقاً برابر <b>خود مقدار</b> تابع در همان نقطه است. یعنی «آهنگ رشد = اندازه فعلی». در فصل A3 این را با مشتق ثابت می‌کنیم. به همین دلیل وقتی در مدار به معادله‌ای مثل «آهنگ تغییر ولتاژ متناسب با خود ولتاژ است» برسیم، جوابش حتماً نمایی است.</p>
+</div></div>
+
+<h3 id="math-functions-h5">تابع افت نمایی \(e^{-t/\tau}\)</h3>
+<p>در مدارها تقریباً همیشه این شکل را می‌بینیم:</p>
+<div class="eq k"><span class="eq-l">رابطه کلیدی</span>\[ x(t) = X_0\, e^{-t/\tau} \]</div>
+<p>\(X_0\) مقدار اولیه است (در \(t=0\) داریم \(e^0 = 1\)، پس \(x(0) = X_0\)). عدد \(\tau\) (تاو) را <b>ثابت زمانی</b> می‌نامیم و واحدش ثانیه است (چون توان \(e\) باید بی‌واحد باشد، \(t/\tau\) باید بی‌واحد باشد).</p>
+
+<div class="tbl"><table>
+<thead><tr><th class="n">t</th><th class="n">e^(−t/τ)</th><th>معنی</th></tr></thead>
+<tbody>
+<tr><td class="n">0</td><td class="n">1</td><td>مقدار کامل</td></tr>
+<tr><td class="n">τ</td><td class="n">0.368</td><td>۶۳٪ راه طی شده، ۳۷٪ مانده</td></tr>
+<tr><td class="n">2τ</td><td class="n">0.135</td><td>۸۶٪ طی شده</td></tr>
+<tr><td class="n">3τ</td><td class="n">0.050</td><td>۹۵٪ طی شده</td></tr>
+<tr><td class="n">4τ</td><td class="n">0.018</td><td>۹۸٪ طی شده</td></tr>
+<tr><td class="n">5τ</td><td class="n">0.0067</td><td>بیش از ۹۹٪؛ در عمل «تمام شده»</td></tr>
+</tbody></table></div>
+
+<figure class="plot" data-plot="{&quot;x&quot;: [0, 5], &quot;y&quot;: [0, 1.05], &quot;xt&quot;: [0, 1, 2, 3, 4, 5], &quot;yt&quot;: [0, 0.25, 0.5, 0.75, 1], &quot;xl&quot;: &quot;t / τ&quot;, &quot;yl&quot;: &quot;&quot;, &quot;c&quot;: [{&quot;f&quot;: &quot;exp(-x)&quot;, &quot;k&quot;: 2, &quot;name&quot;: &quot;e^(−t/τ)  افت&quot;}, {&quot;f&quot;: &quot;1-exp(-x)&quot;, &quot;k&quot;: 1, &quot;name&quot;: &quot;1 − e^(−t/τ)  رشد&quot;}, {&quot;f&quot;: &quot;1-x&quot;, &quot;k&quot;: 6, &quot;d&quot;: 1, &quot;w&quot;: 1.4, &quot;r&quot;: [0, 1], &quot;name&quot;: &quot;مماس در صفر&quot;}], &quot;vx&quot;: [1], &quot;pts&quot;: [[1, 0.368, &quot;0.368&quot;, &quot;start&quot;], [1, 0.632, &quot;0.632&quot;, &quot;start&quot;]]}"><figcaption><b>شکل:</b> افت و رشد نمایی برحسب t/τ. مماسِ منحنی افت در لحظه صفر، محور افقی را دقیقاً در t = τ قطع می‌کند.</figcaption></figure>
+
+<div class="box int"><div class="box-h"><span class="tag">شهود</span><span class="bt">ثابت زمانی را چطور تصور کنیم</span></div><div class="box-b">
+<p>\(\tau\) «مقیاس زمانی» تغییر است. اگر تغییر با همان سرعت اولیه‌اش ادامه پیدا می‌کرد، دقیقاً بعد از یک \(\tau\) کامل می‌شد (خط‌چین شکل). اما چون هرچه جلوتر می‌رویم سرعت کم می‌شود، بعد از یک \(\tau\) فقط ۶۳٪ راه طی شده است. هیچ‌وقت «دقیقاً» تمام نمی‌شود، ولی بعد از ۵ ثابت زمانی تفاوتش با مقدار نهایی کمتر از ۱٪ است.</p>
+</div></div>
+
+<h3 id="math-functions-h6">شکل عمومی: از یک مقدار به مقدار دیگر</h3>
+<p>اغلب کمیت از یک مقدار اولیه \(x(0)\) به یک مقدار نهایی \(x(\infty)\) می‌رود. فاصله تا مقصد، یعنی \(x(t) - x(\infty)\)، به‌صورت نمایی کم می‌شود:</p>
+<div class="eq k"><span class="eq-l">رابطه کلیدی</span>\[ x(t) = x(\infty) + \big[x(0) - x(\infty)\big]\, e^{-t/\tau} \]</div>
+<p>بررسی کنید: در \(t=0\) جمله نمایی ۱ است و \(x(0)\) به دست می‌آید؛ وقتی \(t\) خیلی بزرگ شود، نمایی صفر می‌شود و \(x(\infty)\) می‌ماند. این همان «فرمول طلایی مدار مرتبه اول» است که در فصل B11 کامل اثبات می‌کنیم. فعلاً فقط شکلش را بشناسید.</p>
+
+<div class="ex" id="math-functions-ex3"><div class="ex-h"><span class="ex-n">مثال A1.3</span><span class="ex-t">ولتاژ یک خازن در حال تخلیه</span><span class="lvl" data-l="2" title="سطح: متوسط"><i></i><i></i><i></i><i></i><span class="lt">متوسط</span></span></div><div class="ex-b">
+<p>ولتاژ خازنی \(v(t) = 12\,e^{-t/0.5\text{ms}}\) ولت است. (الف) ولتاژ در \(t = 1\,\text{ms}\)؟ (ب) چه موقع به ۳ ولت می‌رسد؟</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<p>(الف) \(t/\tau = 1/0.5 = 2\)، پس \(v = 12\,e^{-2} = 12 \times 0.135 = 1.62\,\text{V}\).</p>
+<p>(ب) باید \(12\,e^{-t/\tau} = 3\) شود، یعنی \(e^{-t/\tau} = 0.25\). اینجا به لگاریتم نیاز داریم (بخش بعد). جواب: \(t = \tau \ln 4 = 0.5 \times 1.386 = 0.693\,\text{ms}\).</p>
+<p>بررسی شهودی: ۱۲ تا ۳ یعنی دو بار نصف شدن (۱۲→۶→۳). پس جواب باید دو برابر «زمان نصف شدن» باشد؛ زمان نصف شدن \(\tau \ln 2 = 0.347\,\text{ms}\) است و دو برابرش 0.693 ✓.</p>
+</div>
+</div></div>
+
+<h2 id="math-functions-s5"><span class="sn">A1.5</span>لگاریتم: وارون نمایی</h2>
+
+<p>نمایی به این سؤال جواب می‌دهد: «اگر \(b\) را \(x\) بار در خودش ضرب کنم چه می‌شود؟». لگاریتم سؤال برعکس را جواب می‌دهد: «چند بار باید \(b\) را ضرب کنم تا به \(y\) برسم؟»</p>
+
+<div class="box def"><div class="box-h"><span class="tag">تعریف</span><span class="bt">لگاریتم</span></div><div class="box-b">
+<div class="eq">\[ \log_b y = x \quad \Longleftrightarrow \quad b^{x} = y \]</div>
+<p>لگاریتم در پایه \(e\) را «لگاریتم طبیعی» می‌نامیم و \(\ln\) می‌نویسیم: \(\ln y = x \Leftrightarrow e^x = y\). لگاریتم در پایه ۱۰ را \(\log\) می‌نویسیم.</p>
+</div></div>
+
+<p>نتیجه‌های فوری تعریف: \(\ln 1 = 0\) (چون \(e^0 = 1\))، \(\ln e = 1\)، و \(\ln(e^{x}) = x\) و \(e^{\ln y} = y\). یعنی \(\ln\) و \(e^{(\cdot)}\) کار هم را خنثی می‌کنند، مثل جذر و توان دو. لگاریتم فقط برای عددهای مثبت تعریف شده، چون \(e^x\) هیچ‌وقت صفر یا منفی نمی‌شود.</p>
+
+<div class="box prf"><div class="box-h"><span class="tag">اثبات قدم‌به‌قدم</span><span class="bt">سه قاعده لگاریتم، از قاعده‌های توان</span></div><div class="box-b">
+<p>فرض کنید \(\ln a = p\) و \(\ln c = q\)، یعنی \(a = e^{p}\) و \(c = e^{q}\).</p>
+<ol class="steps">
+<li><b>ضرب:</b> \(a\,c = e^{p}e^{q} = e^{p+q}\). پس \(\ln(ac) = p + q = \ln a + \ln c\). (ضرب به جمع تبدیل شد.)</li>
+<li><b>تقسیم:</b> \(\dfrac{a}{c} = \dfrac{e^p}{e^q} = e^{p-q}\). پس \(\ln\dfrac{a}{c} = \ln a - \ln c\).</li>
+<li><b>توان:</b> \(a^{k} = (e^{p})^{k} = e^{kp}\). پس \(\ln(a^{k}) = k\,\ln a\).</li>
+<li><b>تغییر پایه:</b> اگر \(\log_{10} y = x\) یعنی \(10^x = y\). از دو طرف \(\ln\) بگیریم: \(x\ln 10 = \ln y\)، پس \(\log_{10} y = \dfrac{\ln y}{\ln 10} = \dfrac{\ln y}{2.303}\).</li>
+</ol>
+</div></div>
+
+<p>چند عدد که زیاد لازم می‌شوند: \(\ln 2 = 0.693\)، \(\ln 3 = 1.099\)، \(\ln 4 = 1.386\)، \(\ln 10 = 2.303\).</p>
+
+<div class="box key"><div class="box-h"><span class="tag">نتیجه کلیدی</span><span class="bt">زمان رسیدن به یک مقدار</span></div><div class="box-b">
+<p>اگر کمیتی با \(e^{-t/\tau}\) کم شود و بخواهیم بدانیم کی به کسر \(k\) از مقدار اولیه‌اش می‌رسد:</p>
+<div class="eq">\[ e^{-t/\tau} = k \;\Rightarrow\; -\frac{t}{\tau} = \ln k \;\Rightarrow\; t = \tau \ln\frac{1}{k} \]</div>
+<p>برای نصف شدن: \(t = \tau\ln 2 \approx 0.69\,\tau\)؛ برای رسیدن به ۱۰٪: \(t = \tau \ln 10 \approx 2.3\,\tau\).</p>
+</div></div>
+
+<div class="ex" id="math-functions-ex4"><div class="ex-h"><span class="ex-n">مثال A1.4</span><span class="ex-t">کی به ۹۰٪ می‌رسد؟</span><span class="lvl" data-l="2" title="سطح: متوسط"><i></i><i></i><i></i><i></i><span class="lt">متوسط</span></span></div><div class="ex-b">
+<p>خازنی از صفر شارژ می‌شود: \(v(t) = 5(1 - e^{-t/\tau})\) با \(\tau = 2\,\text{ms}\). چه زمانی ولتاژ به \(4.5\,\text{V}\) (۹۰٪ مقدار نهایی) می‌رسد؟</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<ol class="steps">
+<li>\(5(1 - e^{-t/\tau}) = 4.5 \Rightarrow 1 - e^{-t/\tau} = 0.9 \Rightarrow e^{-t/\tau} = 0.1\).</li>
+<li>از دو طرف \(\ln\): \(-t/\tau = \ln 0.1 = -\ln 10 = -2.303\).</li>
+<li>\(t = 2.303\,\tau = 2.303 \times 2 = 4.61\,\text{ms}\).</li>
+</ol>
+<p class="ans-line">\(t \approx 4.6\,\text{ms}\). (رسیدن از ۱۰٪ تا ۹۰٪ «زمان صعود» نام دارد و برابر \(\tau\ln 9 \approx 2.2\tau\) است.)</p>
+</div>
+</div></div>
+
+<div class="ex" id="math-functions-ex5"><div class="ex-h"><span class="ex-n">مثال A1.5</span><span class="ex-t">پیدا کردن ثابت زمانی از دو اندازه‌گیری</span><span class="lvl" data-l="3" title="سطح: سخت"><i></i><i></i><i></i><i></i><span class="lt">سخت</span></span></div><div class="ex-b">
+<p>ولتاژ یک خازن در حال تخلیه در \(t = 1\,\text{ms}\) برابر ۸ ولت و در \(t = 3\,\text{ms}\) برابر ۲ ولت اندازه‌گیری شده است. \(\tau\) و ولتاژ اولیه \(v(0)\) را بیابید.</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<ol class="steps">
+<li>شکل جواب: \(v(t) = V_0 e^{-t/\tau}\). دو معادله داریم: \(V_0 e^{-1/\tau} = 8\) و \(V_0 e^{-3/\tau} = 2\) (زمان برحسب ms).</li>
+<li>تقسیم معادله اول بر دوم، \(V_0\) را حذف می‌کند: \(\dfrac{e^{-1/\tau}}{e^{-3/\tau}} = e^{(3-1)/\tau} = e^{2/\tau} = \dfrac{8}{2} = 4\).</li>
+<li>\(\dfrac{2}{\tau} = \ln 4 = 1.386 \Rightarrow \tau = 1.443\,\text{ms}\).</li>
+<li>از معادله اول: \(V_0 = 8\,e^{1/\tau} = 8\,e^{0.693} = 8 \times 2 = 16\,\text{V}\).</li>
+</ol>
+<p>بررسی شهودی: از ۱ تا ۳ میلی‌ثانیه ولتاژ ۴ برابر کم شد، یعنی دو بار نصف شد؛ پس هر ۱ میلی‌ثانیه نصف می‌شود. از ۰ تا ۱ هم باید نصف شده باشد: \(16 \to 8\) ✓.</p>
+<p class="ans-line">\(\tau \approx 1.44\,\text{ms}\) و \(v(0) = 16\,\text{V}\).</p>
+</div>
+</div></div>
+
+<div class="ex" id="math-functions-ex6"><div class="ex-h"><span class="ex-n">مثال A1.6</span><span class="ex-t">رفتن از یک مقدار غیرصفر به مقدار دیگر</span><span class="lvl" data-l="3" title="سطح: سخت"><i></i><i></i><i></i><i></i><span class="lt">سخت</span></span></div><div class="ex-b">
+<p>ولتاژی از \(2\,\text{V}\) شروع می‌کند و با ثابت زمانی \(3\,\text{ms}\) به‌سمت \(10\,\text{V}\) می‌رود. (الف) رابطه‌اش را بنویسید. (ب) کی به ۸ ولت می‌رسد؟</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<p>(الف) با شکل عمومی: \(v(t) = 10 + (2 - 10)e^{-t/3\text{ms}} = 10 - 8e^{-t/3\text{ms}}\).</p>
+<p>(ب) \(10 - 8e^{-t/\tau} = 8 \Rightarrow e^{-t/\tau} = \dfrac{2}{8} = \dfrac14 \Rightarrow t = \tau\ln 4 = 3 \times 1.386 = 4.16\,\text{ms}\).</p>
+<p>نکته: فاصله تا مقصد اول ۸ ولت بود و باید به ۲ ولت برسد؛ یعنی یک‌چهارم شود. فقط «فاصله تا مقصد» است که نمایی کم می‌شود.</p>
+</div>
+</div></div>
+
+<div class="ex" id="math-functions-ex7"><div class="ex-h"><span class="ex-n">مثال A1.7</span><span class="ex-t">ولتاژ دیود: جایی که لگاریتم خودش را نشان می‌دهد</span><span class="lvl" data-l="4" title="سطح: چالشی"><i></i><i></i><i></i><i></i><span class="lt">چالشی</span></span></div><div class="ex-b">
+<p>در فصل C1 می‌بینیم جریان دیود تقریباً \(I = I_S\,e^{V/V_T}\) است با \(I_S = 10^{-14}\,\text{A}\) و \(V_T = 25\,\text{mV}\). (الف) برای جریان \(1\,\text{mA}\) ولتاژ دیود چقدر است؟ (ب) اگر جریان ۱۰ برابر شود ولتاژ چقدر زیاد می‌شود؟</p>
+<div class="sol"><div class="sol-h">حل گام‌به‌گام</div>
+<ol class="steps">
+<li>از دو طرف \(\ln\) بگیریم: \(\ln\dfrac{I}{I_S} = \dfrac{V}{V_T}\)، پس \(V = V_T \ln\dfrac{I}{I_S}\).</li>
+<li>(الف) \(\dfrac{I}{I_S} = \dfrac{10^{-3}}{10^{-14}} = 10^{11}\). \(\ln 10^{11} = 11 \ln 10 = 11 \times 2.303 = 25.33\). پس \(V = 0.025 \times 25.33 = 0.633\,\text{V}\).</li>
+<li>(ب) \(V_2 - V_1 = V_T\ln\dfrac{I_2}{I_S} - V_T \ln\dfrac{I_1}{I_S} = V_T \ln\dfrac{I_2}{I_1} = 0.025 \times \ln 10 = 0.0576\,\text{V}\).</li>
+</ol>
+<p class="ans-line">ولتاژ حدود ۰.۶۳ ولت است و ده برابر شدن جریان فقط ۵۸ میلی‌ولت به آن اضافه می‌کند.</p>
+<p>این همان دلیلی است که در عمل می‌گوییم «ولتاژ دیود روشن تقریباً ثابت ۰.۷ ولت است»: لگاریتم تغییرهای بزرگ را خیلی کوچک می‌کند.</p>
+</div>
+</div></div>
+
+<h2 id="math-functions-s6"><span class="sn">A1.6</span>جابه‌جایی، کشیدن و قرینه کردن نمودار</h2>
+
+<p>در فصل شکل موج‌ها (B8) دائم موج‌ها را جابه‌جا و ترکیب می‌کنیم. سه عمل پایه:</p>
+<ol class="steps">
+<li><b>تأخیر:</b> \(f(t - t_0)\) همان نمودار \(f(t)\) است که \(t_0\) واحد به <b>راست</b> رفته. چرا راست؟ مقداری که \(f\) در لحظه صفر داشت، حالا وقتی پیش می‌آید که \(t - t_0 = 0\)، یعنی در \(t = t_0\)؛ همه اتفاق‌ها \(t_0\) ثانیه دیرتر می‌افتند.</li>
+<li><b>مقیاس عمودی:</b> \(A\,f(t)\) نمودار را در جهت عمودی \(A\) برابر می‌کشد. اگر \(A\) منفی باشد، نمودار حول محور افقی قرینه هم می‌شود.</li>
+<li><b>مقیاس زمانی:</b> \(f(a t)\) با \(a &gt; 1\) نمودار را در جهت افقی فشرده می‌کند (همه چیز \(a\) برابر سریع‌تر رخ می‌دهد).</li>
+</ol>
+
+<figure class="plot" data-plot="{&quot;x&quot;: [-1, 6], &quot;y&quot;: [0, 1.1], &quot;xl&quot;: &quot;t&quot;, &quot;yl&quot;: &quot;&quot;, &quot;c&quot;: [{&quot;f&quot;: &quot;x&gt;=0?exp(-x):0&quot;, &quot;k&quot;: 2, &quot;name&quot;: &quot;f(t) = e^(−t) برای t ≥ 0&quot;}, {&quot;f&quot;: &quot;x&gt;=2?exp(-(x-2)):0&quot;, &quot;k&quot;: 1, &quot;name&quot;: &quot;f(t − 2): همان، ۲ واحد دیرتر&quot;}], &quot;vx&quot;: [2]}"><figcaption><b>شکل:</b> تأخیر یعنی جابه‌جایی به راست. همه‌چیز همان است، فقط دیرتر.</figcaption></figure>
+
+<div class="box trap"><div class="box-h"><span class="tag">دام رایج</span><span class="bt">علامت جابه‌جایی</span></div><div class="box-b">
+<p>خیلی‌ها فکر می‌کنند \(f(t-2)\) چون «منهای ۲» دارد، نمودار را به چپ می‌برد. برعکس است. همیشه بپرسید: «اتفاقی که در لحظه صفر می‌افتاد، حالا در چه لحظه‌ای می‌افتد؟»</p>
+</div></div>
+
+<h2 id="math-functions-s7"><span class="sn">A1.7</span>جمع‌بندی فصل</h2>
+<div class="box sum"><div class="box-h"><span class="tag">جمع‌بندی</span></div><div class="box-b">
+<ul>
+<li>تابع به هر ورودی یک خروجی می‌دهد؛ در مدار ورودی اغلب زمان است.</li>
+<li>شیب = آهنگ تغییر = \(\Delta y / \Delta x\). مقاومت شیب نمودار ولتاژ-جریان است.</li>
+<li>قاعده‌های توان از شمردن بیرون می‌آیند؛ \(a^0 = 1\) و \(a^{-n} = 1/a^n\) برای سازگار ماندن قاعده‌ها تعریف شده‌اند.</li>
+<li>نمایی یعنی در زمان‌های مساوی، ضرب در عدد ثابت. \(e\) ضریب رشد پیوسته است و شیب \(e^x\) برابر خودش است.</li>
+<li>در \(e^{-t/\tau}\): بعد از \(\tau\) فقط ۳۷٪ مانده؛ بعد از \(5\tau\) عملاً صفر.</li>
+<li>لگاریتم وارون نمایی است و ضرب را به جمع تبدیل می‌کند؛ با آن «زمان رسیدن» را حساب می‌کنیم: \(t = \tau\ln(1/k)\).</li>
+</ul>
+</div></div>
+
+<h2 id="math-functions-s8"><span class="sn">A1.8</span>تمرین‌ها</h2>
+
+<div class="hw" id="math-functions-hw1"><div class="hw-h"><span class="hw-n">تمرین A1.1</span><span class="lvl" data-l="1" title="سطح: پایه"><i></i><i></i><i></i><i></i><span class="lt">پایه</span></span></div><div class="hw-b">
+<p>خطی از نقطه‌های \((0, 4)\) و \((2, 0)\) می‌گذرد. شیب و معادله‌اش را بنویسید. آیا در زبان مدار «خطی» است؟</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(m = (0-4)/(2-0) = -2\)، \(b = 4\)، پس \(y = -2x + 4\). چون از مبدأ نمی‌گذرد، در زبان مدار خطی نیست.</p></div></details>
+</div></div>
+
+<div class="hw" id="math-functions-hw2"><div class="hw-h"><span class="hw-n">تمرین A1.2</span><span class="lvl" data-l="1" title="سطح: پایه"><i></i><i></i><i></i><i></i><span class="lt">پایه</span></span></div><div class="hw-b">
+<p>\(R = 10\,\text{k}\Omega\) و \(C = 100\,\text{nF}\). ثابت زمانی \(RC\) چند میلی‌ثانیه است؟</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(10^4 \times 10^{-7} = 10^{-3}\,\text{s} = 1\,\text{ms}\).</p></div></details>
+</div></div>
+
+<div class="hw" id="math-functions-hw3"><div class="hw-h"><span class="hw-n">تمرین A1.3</span><span class="lvl" data-l="2" title="سطح: متوسط"><i></i><i></i><i></i><i></i><span class="lt">متوسط</span></span></div><div class="hw-b">
+<p>\(v(t) = 20e^{-t/5\text{ms}}\). ولتاژ در \(t = 10\,\text{ms}\) چقدر است و کی به ۱ ولت می‌رسد؟</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(20e^{-2} = 2.71\,\text{V}\). برای ۱ ولت: \(e^{-t/\tau} = 1/20\)، \(t = 5\ln 20 = 5 \times 2.996 = 14.98\,\text{ms}\).</p></div></details>
+</div></div>
+
+<div class="hw" id="math-functions-hw4"><div class="hw-h"><span class="hw-n">تمرین A1.4</span><span class="lvl" data-l="2" title="سطح: متوسط"><i></i><i></i><i></i><i></i><span class="lt">متوسط</span></span></div><div class="hw-b">
+<p>ثابت کنید \(\ln\sqrt{a} = \tfrac12 \ln a\) و سپس \(\ln(1/a) = -\ln a\).</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(\sqrt a = a^{1/2}\)، با قاعده توان \(\ln a^{1/2} = \tfrac12\ln a\). همچنین \(\ln(1/a) = \ln 1 - \ln a = 0 - \ln a\).</p></div></details>
+</div></div>
+
+<div class="hw" id="math-functions-hw5"><div class="hw-h"><span class="hw-n">تمرین A1.5</span><span class="lvl" data-l="3" title="سطح: سخت"><i></i><i></i><i></i><i></i><span class="lt">سخت</span></span></div><div class="hw-b">
+<p>ولتاژی از \(-4\,\text{V}\) به‌سمت \(+6\,\text{V}\) با \(\tau = 1\,\text{ms}\) می‌رود. کی از صفر عبور می‌کند؟</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(v = 6 - 10e^{-t/\tau}\). صفر شدن: \(e^{-t/\tau} = 0.6\)، \(t = \ln(1/0.6) = \ln 1.667 = 0.511\,\text{ms}\).</p></div></details>
+</div></div>
+
+<div class="hw" id="math-functions-hw6"><div class="hw-h"><span class="hw-n">تمرین A1.6</span><span class="lvl" data-l="4" title="سطح: چالشی"><i></i><i></i><i></i><i></i><span class="lt">چالشی</span></span></div><div class="hw-b">
+<p>کمیتی هر ۲ میلی‌ثانیه ۲۰٪ کم می‌شود (یعنی در ۰.۸ ضرب می‌شود). آن را به شکل \(e^{-t/\tau}\) بنویسید؛ \(\tau\) چقدر است؟</p>
+<details class="ans"><summary>جواب و راهنمایی</summary><div><p>\(e^{-2/\tau} = 0.8 \Rightarrow 2/\tau = \ln 1.25 = 0.2231 \Rightarrow \tau = 8.96\,\text{ms}\).</p></div></details>
+</div></div>
+</div><nav class="pn" aria-label="فصل قبلی و بعدی"></nav></article></main></div></div>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var root = document.documentElement;
+  var pages = $$('article.page');
+  var byRoute = {};
+  pages.forEach(function (p) { byRoute[p.dataset.route] = p; });
+  var current = null, pendingTarget = null, mjReady = false;
+
+  /* ---------------- theme ---------------- */
+  try { var saved = localStorage.getItem('eec-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  var themeBtn = $('#themebtn');
+  if (themeBtn) themeBtn.addEventListener('click', function () {
+    var isDark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    var t = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', t);
+    try { localStorage.setItem('eec-theme', t); } catch (e) {}
+  });
+
+  /* ---------------- nav drawer ---------------- */
+  var scrim = null;
+  function closeNav() { document.body.classList.remove('nav-open'); if (scrim) { scrim.remove(); scrim = null; } }
+  var navBtn = $('#navbtn');
+  if (navBtn) navBtn.addEventListener('click', function () {
+    if (document.body.classList.contains('nav-open')) { closeNav(); return; }
+    document.body.classList.add('nav-open');
+    scrim = document.createElement('div'); scrim.className = 'scrim'; scrim.addEventListener('click', closeNav);
+    document.body.appendChild(scrim);
+  });
+
+  /* ---------------- search ---------------- */
+  function norm(s) { return (s || '').replace(/ي/g, 'ی').replace(/ك/g, 'ک').replace(/‌/g, ' ').toLowerCase(); }
+  var search = $('#search');
+  function applySearch() {
+    var q = norm(search ? search.value.trim() : '');
+    $$('.nav-item').forEach(function (it) {
+      var ch = $('.nav-ch', it), secs = $('.nav-secs', it);
+      if (!q) {
+        it.hidden = false;
+        if (secs) { secs.hidden = !ch.classList.contains('on'); $$('a', secs).forEach(function (a) { a.hidden = false; }); }
+        return;
+      }
+      var chMatch = norm(ch.textContent).indexOf(q) >= 0, anySec = false;
+      if (secs) $$('a', secs).forEach(function (a) { var m = norm(a.textContent).indexOf(q) >= 0; a.hidden = !m && !chMatch; if (m) anySec = true; });
+      it.hidden = !(chMatch || anySec);
+      if (secs) secs.hidden = !(anySec || chMatch);
+    });
+    $$('.nav-part').forEach(function (p) { p.hidden = $$('.nav-item', p).every(function (i) { return i.hidden; }); });
+  }
+  if (search) search.addEventListener('input', applySearch);
+
+  /* ---------------- router ---------------- */
+  function updateNav() {
+    var r = current ? current.dataset.route : '';
+    $$('.nav-ch').forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + r); if (a.classList.contains('on')) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    applySearch();
+    var on = $('.nav-ch.on');
+    if (on && on.scrollIntoView) { try { on.scrollIntoView({ block: 'nearest' }); } catch (e) {} }
+    document.title = (current && current.dataset.title ? current.dataset.title + ' · ' : '') + 'جزوه مدار و الکترونیک دیجیتال';
+  }
+  function route() {
+    var h = '';
+    try { h = decodeURIComponent(location.hash.slice(1)); } catch (e) { h = location.hash.slice(1); }
+    var page = byRoute[h], target = null;
+    if (!page && h) { var el = document.getElementById(h); if (el) { page = el.closest('article.page'); target = el; } }
+    if (!page) page = byRoute.home;
+    if (page !== current) {
+      pages.forEach(function (p) { p.hidden = p !== page; });
+      current = page; updateNav(); renderPage(page);
+      if (!target) window.scrollTo(0, 0);
+    }
+    if (target) { pendingTarget = target; target.scrollIntoView(); }
+    closeNav();
+  }
+  window.addEventListener('hashchange', route);
+
+  function renderPage(p) {
+    $$('figure.plot', p).forEach(drawPlotFigure);
+    $$('.widget', p).forEach(initWidget);
+    typeset(p);
+  }
+
+  /* ---------------- MathJax (lazy, per page) ---------------- */
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']], tags: 'none' },
+    svg: { fontCache: 'global' },
+    options: { enableMenu: false },
+    startup: {
+      typeset: false,
+      ready: function () { window.MathJax.startup.defaultReady(); mjReady = true; if (current) typeset(current); }
+    }
+  };
+  function typeset(p) {
+    if (!mjReady || !p || p.dataset.mj) return;
+    p.dataset.mj = '1';
+    window.MathJax.typesetPromise([p]).then(function () {
+      if (pendingTarget && current && current.contains(pendingTarget)) { pendingTarget.scrollIntoView(); }
+      pendingTarget = null;
+    }).catch(function () {});
+  }
+  function loadMJ(srcs) {
+    var s = document.createElement('script');
+    s.src = srcs[0]; s.async = true;
+    s.onerror = function () { s.remove(); if (srcs.length > 1) loadMJ(srcs.slice(1)); };
+    (document.head || document.body).appendChild(s);
+  }
+  loadMJ(['https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.js',
+          'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js',
+          'https://unpkg.com/mathjax@3.2.2/es5/tex-svg.js']);
+
+  /* ---------------- plotting ---------------- */
+  var COL = ['var(--c1)', 'var(--c2)', 'var(--c3)', 'var(--c4)', 'var(--c5)', 'var(--c6)'];
+  var uid = 0;
+  function niceStep(range, n) { var raw = range / n, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p; return (m < 1.5 ? 1 : m < 3 ? 2 : m < 7 ? 5 : 10) * p; }
+  function autoTicks(a, b, n) { var s = niceStep(b - a, n || 5), out = []; for (var v = Math.ceil(a / s - 1e-9) * s; v <= b + 1e-9; v += s) out.push(+v.toFixed(10)); return out; }
+  function fmt(v) { if (typeof v === 'string') return v; var a = Math.abs(v); if (a !== 0 && (a >= 1e5 || a < 1e-3)) return v.toExponential(0); return String(+v.toFixed(3)); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  var fnCache = {};
+  function compile(expr) {
+    if (fnCache[expr]) return fnCache[expr];
+    var f = new Function('x', 'var M=Math,exp=M.exp,sin=M.sin,cos=M.cos,tan=M.tan,sqrt=M.sqrt,abs=M.abs,log=M.log,PI=M.PI,max=M.max,min=M.min,pow=M.pow,floor=M.floor,atan=M.atan,sinh=M.sinh,cosh=M.cosh,sign=M.sign,E=M.E;' +
+      'var u=function(t){return t>=0?1:0};var rect=function(t,a,b){return (t>=a&&t<b)?1:0};var mod=function(a,b){return ((a%b)+b)%b};return (' + expr + ');');
+    fnCache[expr] = f; return f;
+  }
+  function panelSVG(p, W, h, y0, last) {
+    var m = { l: 58, r: 18, t: 24, b: last ? 36 : 14 };
+    var x0 = p.x[0], x1 = p.x[1], ya = p.y[0], yb = p.y[1];
+    var L = m.l, R = W - m.r, T = y0 + m.t, B = y0 + m.t + h;
+    var sx = function (x) { return L + (x - x0) / (x1 - x0) * (R - L); };
+    var sy = function (v) { return B - (v - ya) / (yb - ya) * (B - T); };
+    var xt = p.xt || autoTicks(x0, x1, 6), yt = p.yt || autoTicks(ya, yb, 4);
+    var o = '', id = 'clp' + (++uid);
+    o += '<defs><clipPath id="' + id + '"><rect x="' + L + '" y="' + (T - 2) + '" width="' + (R - L) + '" height="' + (B - T + 4) + '"/></clipPath></defs>';
+    xt.forEach(function (t) { var X = sx(t); o += '<line class="gr" x1="' + X + '" x2="' + X + '" y1="' + T + '" y2="' + B + '"/>'; if (last) o += '<text class="tk" x="' + X + '" y="' + (B + 16) + '" text-anchor="middle">' + esc(fmt(t)) + '</text>'; });
+    yt.forEach(function (t) { var Y = sy(t); o += '<line class="gr" x1="' + L + '" x2="' + R + '" y1="' + Y + '" y2="' + Y + '"/><text class="tk" x="' + (L - 7) + '" y="' + (Y + 4) + '" text-anchor="end">' + esc(fmt(t)) + '</text>'; });
+    var axY = (ya <= 0 && yb >= 0) ? sy(0) : B;
+    o += '<line class="ax" x1="' + L + '" x2="' + R + '" y1="' + axY + '" y2="' + axY + '"/>';
+    var axX = (x0 <= 0 && x1 >= 0) ? sx(0) : L;
+    o += '<line class="ax" x1="' + axX + '" x2="' + axX + '" y1="' + T + '" y2="' + B + '"/>';
+    (p.vx || []).forEach(function (v) { var X = sx(v); o += '<line class="guide" x1="' + X + '" x2="' + X + '" y1="' + T + '" y2="' + B + '"/>'; });
+    (p.hy || []).forEach(function (v) { var Y = sy(v); o += '<line class="guide" x1="' + L + '" x2="' + R + '" y1="' + Y + '" y2="' + Y + '"/>'; });
+    o += '<g clip-path="url(#' + id + ')">';
+    (p.fill || []).forEach(function (c) { // shaded area under expr between a,b
+      var f = compile(c.f), N = 200, a = c.r[0], b = c.r[1], d = 'M' + sx(a) + ',' + sy(0);
+      for (var i = 0; i <= N; i++) { var x = a + (b - a) * i / N, y = f(x); d += 'L' + sx(x).toFixed(2) + ',' + sy(y).toFixed(2); }
+      d += 'L' + sx(b) + ',' + sy(0) + 'Z';
+      o += '<path d="' + d + '" style="fill:' + COL[(c.k || 1) - 1] + ';fill-opacity:.16;stroke:none"/>';
+    });
+    (p.c || []).forEach(function (c) {
+      var col = COL[(c.k || 1) - 1], w = c.w || 2.2, d = '';
+      if (c.f) {
+        var f = compile(c.f), a = c.r ? c.r[0] : x0, b = c.r ? c.r[1] : x1, N = c.n || 700, pen = false;
+        for (var i = 0; i <= N; i++) {
+          var x = a + (b - a) * i / N, y;
+          try { y = f(x); } catch (e) { y = NaN; }
+          if (!isFinite(y) || Math.abs(y) > 1e6) { pen = false; continue; }
+          d += (pen ? 'L' : 'M') + sx(x).toFixed(2) + ',' + sy(y).toFixed(2); pen = true;
+        }
+      } else if (c.p) {
+        c.p.forEach(function (pt, i) { d += (i ? 'L' : 'M') + sx(pt[0]).toFixed(2) + ',' + sy(pt[1]).toFixed(2); });
+      }
+      o += '<path d="' + d + '" style="fill:none;stroke:' + col + ';stroke-width:' + w + ';stroke-linejoin:round;stroke-linecap:round' + (c.d ? ';stroke-dasharray:6 5' : '') + '"/>';
+      (c.arrows || []).forEach(function (ar) { // impulse arrows [x, height]
+        var X = sx(ar[0]), Y0 = sy(0), Y1 = sy(ar[1]);
+        o += '<line x1="' + X + '" x2="' + X + '" y1="' + Y0 + '" y2="' + Y1 + '" style="stroke:' + col + ';stroke-width:' + w + '"/>' +
+          '<path d="M' + (X - 5) + ',' + (Y1 + (ar[1] > 0 ? 9 : -9)) + 'L' + X + ',' + Y1 + 'L' + (X + 5) + ',' + (Y1 + (ar[1] > 0 ? 9 : -9)) + '" style="fill:none;stroke:' + col + ';stroke-width:' + w + '"/>';
+        if (ar[2]) o += '<text class="an" x="' + (X + 7) + '" y="' + (Y1 + 4) + '">' + esc(ar[2]) + '</text>';
+      });
+    });
+    o += '</g>';
+    (p.pts || []).forEach(function (q) {
+      var X = sx(q[0]), Y = sy(q[1]), anc = q[3] || 'start', dx = anc === 'end' ? -7 : anc === 'middle' ? 0 : 7, dy = q[4] != null ? q[4] : -7;
+      o += '<circle cx="' + X + '" cy="' + Y + '" r="3.6" style="fill:var(--sheet);stroke:var(--ink);stroke-width:1.6"/>';
+      if (q[2]) o += '<text class="an" x="' + (X + dx) + '" y="' + (Y + dy) + '" text-anchor="' + anc + '">' + esc(q[2]) + '</text>';
+    });
+    (p.txt || []).forEach(function (q) { o += '<text class="an" x="' + sx(q[0]) + '" y="' + sy(q[1]) + '" text-anchor="' + (q[3] || 'middle') + '"' + (q[4] ? ' style="fill:' + COL[q[4] - 1] + '"' : '') + '>' + esc(q[2]) + '</text>'; });
+    if (p.yl) o += '<text class="al" x="' + (L - 50) + '" y="' + (T - 9) + '">' + esc(p.yl) + '</text>';
+    if (p.xl && last) o += '<text class="al" x="' + R + '" y="' + (B + 32) + '" text-anchor="end">' + esc(p.xl) + '</text>';
+    return { svg: o, H: m.t + h + m.b };
+  }
+  function plotSVG(spec) {
+    var panels = spec.panels || [spec], W = spec.w || 640, ph = spec.ph || 210, y = 0, out = '';
+    panels.forEach(function (pp, i) {
+      var p = {}; for (var k in spec) if (k !== 'panels') p[k] = spec[k]; for (var k2 in pp) p[k2] = pp[k2];
+      var r = panelSVG(p, W, pp.h || ph, y, i === panels.length - 1); out += r.svg; y += r.H;
+    });
+    return '<svg viewBox="0 0 ' + W + ' ' + y + '" role="img" aria-label="' + esc(spec.aria || 'نمودار') + '">' + out + '</svg>';
+  }
+  function legendHTML(spec) {
+    var items = [];
+    (spec.panels || [spec]).forEach(function (p) { (p.c || []).forEach(function (c) { if (c.name) items.push('<span style="--lc:' + COL[(c.k || 1) - 1] + '">' + esc(c.name) + '</span>'); }); });
+    return items.length ? '<div class="plot-legend">' + items.join('') + '</div>' : '';
+  }
+  function drawPlotFigure(fig) {
+    if (fig.dataset.done) return;
+    var spec; try { spec = JSON.parse(fig.dataset.plot); } catch (e) { fig.insertAdjacentHTML('afterbegin', '<p class="mut">plot spec error</p>'); return; }
+    fig.dataset.done = '1';
+    var cap = fig.querySelector('figcaption');
+    var div = document.createElement('div'); div.className = 'pv';
+    try { div.innerHTML = plotSVG(spec) + legendHTML(spec); } catch (e) { div.textContent = 'plot error: ' + e.message; }
+    fig.insertBefore(div, cap);
+  }
+
+  /* ---------------- widgets ---------------- */
+  function slider(id, label, min, max, step, val, unit) {
+    return '<label for="' + id + '">' + label + ' <span class="v" id="' + id + '-v"></span><input type="range" id="' + id + '" min="' + min + '" max="' + max + '" step="' + step + '" value="' + val + '"></label>';
+  }
+  function bind(w, ids, fn) {
+    ids.forEach(function (id) { var el = $('#' + id, w); if (el) el.addEventListener('input', fn); });
+    fn();
+  }
+  function val(w, id) { return parseFloat($('#' + id, w).value); }
+  function show(w, id, txt) { var el = $('#' + id + '-v', w); if (el) el.textContent = txt; }
+  function f2(v, d) { return (+v).toFixed(d == null ? 2 : d); }
+
+  var WIDGETS = {
+    tangent: function (w) {
+      w.innerHTML = '<div class="wt">آزمایشگاه شیب: از وتر تا مماس</div><p class="wd">نقطه P را جابه‌جا کنید و فاصله h را کوچک کنید. خط نارنجی (وتر) از P و Q می‌گذرد. وقتی h به صفر نزدیک می‌شود، وتر روی خط‌چین (مماس) می‌خوابد و شیبش به «مشتق» می‌رسد. تابع: <span class="ltr">f(x) = x²/4 + 1</span></p>' +
+        '<div class="ctrls">' + slider('tg-x', 'محل نقطه P (x₀)', 0.5, 5, 0.05, 2) + slider('tg-h', 'فاصله h', 0.01, 3, 0.01, 2) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['tg-x', 'tg-h'], function () {
+        var x0 = val(w, 'tg-x'), h = val(w, 'tg-h'), f = function (x) { return x * x / 4 + 1; };
+        show(w, 'tg-x', f2(x0)); show(w, 'tg-h', f2(h));
+        var ms = (f(x0 + h) - f(x0)) / h, md = x0 / 2;
+        var sec = f(x0) + '+' + ms + '*(x-' + x0 + ')', tan = f(x0) + '+' + md + '*(x-' + x0 + ')';
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 8], y: [0, 14], xl: 'x', yl: 'f(x)', c: [{ f: 'x*x/4+1', k: 2 }, { f: tan, k: 6, d: 1, w: 1.6 }, { f: sec, k: 1, w: 2 }], pts: [[x0, f(x0), 'P', 'end'], [x0 + h, f(x0 + h), 'Q', 'start']] });
+        $('.read', w).innerHTML = 'شیب وتر = Δy/Δx = <b>' + f2(ms, 4) + '</b> · شیب مماس (مشتق در x₀) = <b>' + f2(md, 4) + '</b> · اختلاف = <b>' + f2(ms - md, 4) + '</b> <span class="mut">(دقیقاً برابر h/4؛ با h→0 صفر می‌شود)</span>';
+      });
+    },
+    riemann: function (w) {
+      w.innerHTML = '<div class="wt">آزمایشگاه انتگرال: بار = مساحت زیر نمودار جریان</div><p class="wd">جریان <span class="ltr">i(t) = 1 + 0.5t + sin(2t)</span> آمپر است. بازه ۰ تا ۴ ثانیه را به n نوار باریک تقسیم می‌کنیم؛ در هر نوار جریان را تقریباً ثابت می‌گیریم و «جریان × مدت» را جمع می‌کنیم. هرچه n بزرگ‌تر، جمع به مقدار دقیق انتگرال نزدیک‌تر.</p>' +
+        '<div class="ctrls">' + slider('rm-n', 'تعداد نوارها n', 1, 80, 1, 4) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['rm-n'], function () {
+        var n = Math.round(val(w, 'rm-n')); show(w, 'rm-n', n);
+        var f = function (t) { return 1 + 0.5 * t + Math.sin(2 * t); }, a = 0, b = 4, dt = (b - a) / n, s = 0, pts = [[0, 0]];
+        for (var i = 0; i < n; i++) { var tm = a + (i + 0.5) * dt, y = f(tm); s += y * dt; pts.push([a + i * dt, y], [a + (i + 1) * dt, y], [a + (i + 1) * dt, 0]); }
+        var exact = 8 - (Math.cos(8) - 1) / 2;
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 4], y: [0, 4.5], xl: 't (s)', yl: 'i (A)', c: [{ p: pts, k: 1, w: 1.4 }, { f: '1+0.5*x+sin(2*x)', k: 2 }] });
+        $('.read', w).innerHTML = 'جمع مستطیل‌ها = <b>' + f2(s, 4) + ' C</b> · مقدار دقیق انتگرال = <b>' + f2(exact, 4) + ' C</b> · خطا = <b>' + f2(s - exact, 4) + '</b>';
+      });
+    },
+    rc: function (w) {
+      w.innerHTML = '<div class="wt">آزمایشگاه شارژ خازن (مدار RC با منبع پله)</div><p class="wd">در لحظه صفر کلید وصل می‌شود و خازن بی‌بار از طریق R شارژ می‌شود. R و C را عوض کنید و ببینید فقط حاصل‌ضرب آن‌ها (ثابت زمانی τ) سرعت را تعیین می‌کند.</p>' +
+        '<div class="ctrls">' + slider('rc-r', 'مقاومت R (kΩ)', 1, 10, 0.5, 4) + slider('rc-c', 'ظرفیت C (µF)', 10, 50, 1, 25) + slider('rc-v', 'ولتاژ منبع Vs (V)', 1, 12, 0.5, 10) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['rc-r', 'rc-c', 'rc-v'], function () {
+        var R = val(w, 'rc-r'), C = val(w, 'rc-c'), V = val(w, 'rc-v'), tau = R * C; // ms
+        show(w, 'rc-r', f2(R, 1) + ' kΩ'); show(w, 'rc-c', C + ' µF'); show(w, 'rc-v', f2(V, 1) + ' V');
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 2500], panels: [
+          { y: [0, 12.5], yt: [0, 4, 8, 12], yl: 'vC (V)', c: [{ f: V + '*(1-exp(-x/' + tau + '))', k: 1 }], vx: [tau, 5 * tau], hy: [0.632 * V], pts: [[tau, 0.632 * V, 'τ', 'start', 14]] },
+          { y: [0, 12.5], yt: [0, 4, 8, 12], yl: 'i (mA)', h: 120, c: [{ f: (V / R) + '*exp(-x/' + tau + ')', k: 2 }], vx: [tau, 5 * tau] }
+        ], xl: 't (ms)' });
+        $('.read', w).innerHTML = 'τ = R·C = <b>' + f2(tau, 0) + ' ms</b> · جریان اولیه Vs/R = <b>' + f2(V / R) + ' mA</b> · در t = τ ولتاژ <b>' + f2(0.632 * V) + ' V</b> (۶۳٪) · بعد از ۵τ = <b>' + f2(5 * tau, 0) + ' ms</b> بیش از ۹۹٪ شارژ';
+      });
+    },
+    rlc: function (w) {
+      w.innerHTML = '<div class="wt">آزمایشگاه RLC سری: چهار رفتار با یک پیچ</div><p class="wd">L = 1H و C = 0.25F ثابت‌اند (پس ω₀ = 2 rad/s). در لحظه صفر ولتاژ پله 1V وصل می‌شود و ولتاژ خازن را می‌بینیم. فقط R را عوض کنید: R کم ⇒ نوسان، R = 4Ω ⇒ بحرانی، R زیاد ⇒ کند و بی‌نوسان.</p>' +
+        '<div class="ctrls">' + slider('rl-r', 'مقاومت R (Ω)', 0, 10, 0.1, 1) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['rl-r'], function () {
+        var R = val(w, 'rl-r'), L = 1, C = 0.25, a = R / (2 * L), w0 = 1 / Math.sqrt(L * C), f, kind, roots;
+        show(w, 'rl-r', f2(R, 1) + ' Ω');
+        if (Math.abs(a - w0) < 1e-3) { f = '1-(1+' + a + '*x)*exp(-' + a + '*x)'; kind = 'میرای بحرانی'; roots = 's₁ = s₂ = ' + f2(-a); }
+        else if (a > w0) { var d = Math.sqrt(a * a - w0 * w0), s1 = -a + d, s2 = -a - d, A1 = s2 / (s1 - s2), A2 = -s1 / (s1 - s2); f = '1+(' + A1 + ')*exp(' + s1 + '*x)+(' + A2 + ')*exp(' + s2 + '*x)'; kind = 'فوق‌میرا'; roots = 's₁ = ' + f2(s1) + ' , s₂ = ' + f2(s2); }
+        else { var wd = Math.sqrt(w0 * w0 - a * a); f = '1-exp(-' + a + '*x)*(cos(' + wd + '*x)+(' + (a / wd) + ')*sin(' + wd + '*x))'; kind = a === 0 ? 'بی‌اتلاف (نوسان دائمی)' : 'زیرمیرا (نوسانی)'; roots = 's = ' + f2(-a) + ' ± j' + f2(wd); }
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 12], y: [0, 2.1], yt: [0, 0.5, 1, 1.5, 2], xl: 't (s)', yl: 'vC (V)', hy: [1], c: [{ f: f, k: 1 }] });
+        $('.read', w).innerHTML = '<span class="badge">' + kind + '</span> α = R/2L = <b>' + f2(a) + '</b> · ω₀ = <b>2</b> · ریشه‌ها: <b>' + roots + '</b> · R بحرانی = 2√(L/C) = <b>4 Ω</b>';
+      });
+    },
+    phasor: function (w) {
+      w.innerHTML = '<div class="wt">بردار چرخان و موج سینوسی</div><p class="wd">یک بردار به طول A با سرعت زاویه‌ای ثابت می‌چرخد. سایه آن روی محور عمودی، همان <span class="ltr">A·sin(θ)</span> است و سایه روی محور افقی <span class="ltr">A·cos(θ)</span>. زاویه را بچرخانید و نقطه روی موج را دنبال کنید.</p>' +
+        '<div class="ctrls">' + slider('ph-t', 'زاویه θ (درجه)', 0, 720, 1, 60) + slider('ph-a', 'دامنه A', 0.5, 2, 0.1, 1.5) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['ph-t', 'ph-a'], function () {
+        var th = val(w, 'ph-t'), A = val(w, 'ph-a'), r = th * Math.PI / 180;
+        show(w, 'ph-t', th + '°'); show(w, 'ph-a', f2(A, 1));
+        var cx = 120, cy = 130, S = 50, px = cx + S * A * Math.cos(r), py = cy - S * A * Math.sin(r);
+        var o = '<svg viewBox="0 0 640 260" role="img" aria-label="بردار چرخان">';
+        o += '<line class="gr" x1="10" x2="230" y1="' + cy + '" y2="' + cy + '"/><line class="gr" x1="' + cx + '" x2="' + cx + '" y1="20" y2="240"/>';
+        o += '<circle cx="' + cx + '" cy="' + cy + '" r="' + (S * A) + '" style="fill:none;stroke:var(--rule);stroke-width:1.5"/>';
+        o += '<line x1="' + cx + '" y1="' + cy + '" x2="' + px + '" y2="' + py + '" style="stroke:var(--c1);stroke-width:3"/><circle cx="' + px + '" cy="' + py + '" r="4.5" style="fill:var(--c1)"/>';
+        o += '<line class="guide" x1="' + px + '" y1="' + py + '" x2="' + px + '" y2="' + cy + '"/><line class="guide" x1="' + px + '" y1="' + py + '" x2="' + (260 + r / (4 * Math.PI) * 360) + '" y2="' + py + '"/>';
+        o += '<line x1="' + cx + '" y1="' + cy + '" x2="' + px + '" y2="' + cy + '" style="stroke:var(--c2);stroke-width:3"/><line x1="' + px + '" y1="' + cy + '" x2="' + px + '" y2="' + py + '" style="stroke:var(--c3);stroke-width:3"/>';
+        var d = ''; for (var i = 0; i <= 360; i++) { var t = i / 360 * 4 * Math.PI; d += (i ? 'L' : 'M') + (260 + i) + ',' + (cy - S * A * Math.sin(t)).toFixed(2); }
+        o += '<line class="gr" x1="260" x2="625" y1="' + cy + '" y2="' + cy + '"/><path d="' + d + '" style="fill:none;stroke:var(--c3);stroke-width:2.2"/>';
+        o += '<circle cx="' + (260 + r / (4 * Math.PI) * 360) + '" cy="' + py + '" r="4.5" style="fill:var(--c3)"/>';
+        o += '<text class="tk" x="262" y="250">0</text><text class="tk" x="440" y="250" text-anchor="middle">2π</text><text class="tk" x="620" y="250" text-anchor="end">4π</text></svg>';
+        $('.sv', w).innerHTML = o;
+        $('.read', w).innerHTML = 'سایه افقی A·cos θ = <b>' + f2(A * Math.cos(r)) + '</b> <span class="mut">(آبی)</span> · سایه عمودی A·sin θ = <b>' + f2(A * Math.sin(r)) + '</b> <span class="mut">(سبز)</span> · به زبان مختلط: <b>A·e^{jθ} = ' + f2(A * Math.cos(r)) + ' + j' + f2(A * Math.sin(r)) + '</b>';
+      });
+    },
+    sar: function (w) {
+      w.innerHTML = '<div class="wt">مبدل تقریب متوالی (SAR) چهاربیتی، گام‌به‌گام</div><p class="wd">بازه ۰ تا ۱۶ ولت، هر LSB یک ولت. مبدل مثل بازی «حدس عدد» از پرارزش‌ترین بیت شروع می‌کند: بیت را ۱ می‌گذارد، خروجی D/A را با ورودی مقایسه می‌کند و اگر زیادی بود آن بیت را ۰ می‌کند.</p>' +
+        '<div class="ctrls">' + slider('sar-v', 'ولتاژ ورودی Vin (V)', 0, 15.9, 0.1, 11.3) + '</div><div class="btns"><button class="iconbtn" id="sar-step" type="button">گام بعد</button><button class="iconbtn" id="sar-reset" type="button">شروع دوباره</button></div><div class="sv"></div><div class="read"></div>';
+      var k = 0;
+      function run() {
+        var vin = val(w, 'sar-v'); show(w, 'sar-v', f2(vin, 1) + ' V');
+        var code = 0, rows = [], pts = [];
+        for (var i = 0; i < Math.min(k, 4); i++) {
+          var bit = 3 - i, trial = code | (1 << bit), keep = trial <= vin; rows.push('گام ' + (i + 1) + ': آزمون <b>' + ('000' + trial.toString(2)).slice(-4) + '</b> = ' + trial + 'V ' + (keep ? '≤' : '>') + ' ' + f2(vin, 1) + ' ⇒ بیت ' + bit + ' = ' + (keep ? 1 : 0));
+          if (keep) code = trial; pts.push([i, trial], [i + 1, trial]);
+        }
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 4], y: [0, 16], xt: [0, 1, 2, 3, 4], yt: [0, 4, 8, 12, 16], xl: 'گام', yl: 'D/A (V)', c: [{ f: String(vin), k: 2, d: 1, w: 1.6 }].concat(pts.length ? [{ p: pts, k: 1 }] : []) });
+        $('.read', w).innerHTML = (rows.length ? rows.join('<br>') : 'روی «گام بعد» بزنید.') + (k >= 4 ? '<br>خروجی نهایی: <b>' + ('000' + code.toString(2)).slice(-4) + '</b> = ' + code + ' (کف ' + f2(vin, 1) + ')' : '');
+      }
+      $('#sar-v', w).addEventListener('input', function () { k = 0; run(); });
+      $('#sar-step', w).addEventListener('click', function () { if (k < 4) k++; run(); });
+      $('#sar-reset', w).addEventListener('click', function () { k = 0; run(); });
+      run();
+    },
+    vtc: function (w) {
+      w.innerHTML = '<div class="wt">منحنی انتقال معکوس‌کننده CMOS</div><p class="wd">VDD = 5V و Vtn = |Vtp| = 1V. نسبت قدرت دو ترانزیستور r = kn/kp را عوض کنید: وقتی NMOS قوی‌تر است، نقطه سوئیچ VM به چپ می‌رود و برعکس. منحنی از حل عددی «جریان NMOS = جریان PMOS» در هر ورودی به دست آمده است.</p>' +
+        '<div class="ctrls">' + slider('vt-r', 'نسبت r = kn/kp', 0.25, 4, 0.05, 1) + '</div><div class="sv"></div><div class="read"></div>';
+      bind(w, ['vt-r'], function () {
+        var r = val(w, 'vt-r'), V = 5, Vt = 1; show(w, 'vt-r', f2(r));
+        function In(vi, vo) { var ov = vi - Vt; if (ov <= 0) return 0; return vo >= ov ? r * ov * ov / 2 : r * (ov * vo - vo * vo / 2); }
+        function Ip(vi, vo) { var ov = V - vi - Vt, sd = V - vo; if (ov <= 0) return 0; return sd >= ov ? ov * ov / 2 : (ov * sd - sd * sd / 2); }
+        var pts = [];
+        for (var i = 0; i <= 500; i++) { var vi = V * i / 500, lo = 0, hi = V; for (var j = 0; j < 50; j++) { var mid = (lo + hi) / 2; if (In(vi, mid) - Ip(vi, mid) > 0) hi = mid; else lo = mid; } pts.push([vi, (lo + hi) / 2]); }
+        var sr = Math.sqrt(r), VM = (V - Vt + Vt * sr) / (1 + sr);
+        $('.sv', w).innerHTML = plotSVG({ x: [0, 5], y: [0, 5], xt: [0, 1, 2, 3, 4, 5], yt: [0, 1, 2, 3, 4, 5], xl: 'Vin (V)', yl: 'Vout (V)', c: [{ p: pts, k: 1 }, { f: 'x', k: 6, d: 1, w: 1.2 }], vx: [VM], pts: [[VM, VM, 'VM', 'start']] });
+        $('.read', w).innerHTML = 'VM = (VDD − |Vtp| + Vtn·√r)/(1 + √r) = <b>' + f2(VM) + ' V</b>' + (Math.abs(r - 1) < 0.03 ? ' <span class="mut">(متقارن: دقیقاً VDD/2)</span>' : '');
+      });
+    }
+  };
+  function initWidget(w) {
+    if (w.dataset.done) return; w.dataset.done = '1';
+    var f = WIDGETS[w.dataset.w];
+    if (f) { try { f(w); } catch (e) { w.textContent = 'widget error: ' + e.message; } }
+  }
+
+  route();
+})();
+
+</script>
+</body>
+</html>
