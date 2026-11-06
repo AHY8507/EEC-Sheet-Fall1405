@@ -115,6 +115,19 @@ def attrs(s):
     return {k: (v if v is not None else True) for k, v in ATTR_RE.findall(s or '')}
 
 
+TEX_PLAIN = {r'\\delta': 'δ', r'\\tau': 'τ', r'\\omega': 'ω', r'\\alpha': 'α', r'\\theta': 'θ', r'\\varphi': 'φ', r'\\Delta': 'Δ', r'\\pi': 'π', r'\\infty': '∞', r'\\to': '→', r'\\cdot': '·'}
+
+
+def plain(s):
+    """Heading text for places MathJax does not render (sidebar, chips)."""
+    s = re.sub('<[^>]+>', '', s)
+    s = s.replace('\\(', '').replace('\\)', '')
+    for k, v in TEX_PLAIN.items():
+        s = s.replace(k.replace('\\\\', '\\'), v)
+    s = re.sub(r'\\[a-zA-Z]+', '', s).replace('{', '').replace('}', '')
+    return s
+
+
 def lvl_html(l):
     return '<span class="lvl" data-l="%s" title="سطح: %s"><i></i><i></i><i></i><i></i><span class="lt">%s</span></span>' % (l, LVL[l], LVL[l])
 
@@ -305,7 +318,7 @@ def build(artifact=False):
         for r, c, t, d, cov in chs:
             if r not in built:
                 continue
-            secs = ''.join('<a href="#%s-s%d"><span class="sn">%s.%d</span>%s</a>' % (r, i + 1, c, i + 1, re.sub('<[^>]+>', '', s)) for i, s in enumerate(nav_secs[r]))
+            secs = ''.join('<a href="#%s-s%d"><span class="sn">%s.%d</span>%s</a>' % (r, i + 1, c, i + 1, plain(s)) for i, s in enumerate(nav_secs[r]))
             items.append('<div class="nav-item"><a class="nav-ch" href="#%s"><span class="cc">%s</span><span>%s</span></a><div class="nav-secs" hidden>%s</div></div>' % (r, c, t, secs))
         if items:
             nav.append('<div class="nav-part"><div class="ph"><span class="pc">%s</span>%s</div>%s</div>' % (pc, pt, ''.join(items)))
