@@ -53,12 +53,14 @@ def to_svg(d, scale=1.3):
 E = elm
 
 
-def box(d, x1, y1, x2, y2, text='', color=None):
+def box(d, x1, y1, x2, y2, text='', color=None, dash=False):
     """A labelled rectangle (e.g. 'rest of the circuit')."""
     for a, b in (((x1, y1), (x2, y1)), ((x2, y1), (x2, y2)), ((x2, y2), (x1, y2)), ((x1, y2), (x1, y1))):
         ln = E.Line().at(a).to(b)
         if color:
             ln = ln.color(color)
+        if dash:
+            ln = ln.linestyle('--')
         d += ln
     if text:
         d += E.Label().at(((x1 + x2) / 2, (y1 + y2) / 2)).label(text)
