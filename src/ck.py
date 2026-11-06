@@ -110,3 +110,25 @@ def arrow(d, p1, p2, lab=None, color=None):
     if color:
         a = a.color(color)
     d += a
+
+
+def nfet(d, at, color=None, lab=None):
+    """NMOS with source at `at`, drain above, gate on the left."""
+    q = E.NFet(bulk=False).at(at).anchor('source').right().reverse()
+    if color:
+        q = q.color(color)
+    if lab:
+        q = q.label(lab, loc='bottom')
+    d += q
+    return q
+
+
+def pfet(d, at, color=None, lab=None):
+    """PMOS with source at `at`, drain below, gate on the left."""
+    q = E.PFet(bulk=False).at(at).anchor('source').right().reverse()
+    if color:
+        q = q.color(color)
+    if lab:
+        q = q.label(lab, loc='bottom')
+    d += q
+    return q
