@@ -1,0 +1,111 @@
+<goals>
+<li>همه روابط مهم درس را یک‌جا ببینیم، اما هر کدام با یک جمله «چرا» تا مرور، فهمیدن باشد و نه حفظ کردن.</li>
+<li>دام‌های رایج امتحان را مرور کنیم.</li>
+<li>برای هر کوییز و آزمون بدانیم کدام فصل‌ها را باید دوباره نگاه کنیم.</li>
+</goals>
+<prereq>elements capacitor mosfet</prereq>
+
+<p>این فصل جایگزین خواندن فصل‌ها نیست؛ برای شب قبل از امتحان است. اگر «چرا»ی یک رابطه برایتان روشن نیست، روی لینک فصلش بروید.</p>
+
+<h2>پایه‌ها (بخش A)</h2>
+<div class="tbl"><table>
+<thead><tr><th>رابطه</th><th>چرا (یک جمله)</th><th>فصل</th></tr></thead>
+<tbody>
+<tr><td class="n">x(t) = x(∞) + [x(0) − x(∞)]e^(−t/τ)</td><td>فقط «فاصله تا مقصد» نمایی کم می‌شود.</td><td><a href="#math-functions">A1</a></td></tr>
+<tr><td class="n">t = τ ln(1/k)</td><td>لگاریتم وارون نمایی است.</td><td><a href="#math-functions">A1</a></td></tr>
+<tr><td class="n">e^(jθ) = cos θ + j sin θ</td><td>سرعت = j × مکان ⇒ حرکت روی دایره.</td><td><a href="#math-trig-complex">A2</a></td></tr>
+<tr><td class="n">A cos ωt + B sin ωt = √(A²+B²) cos(ωt − φ)</td><td>نقطه (A,B) را قطبی بنویس.</td><td><a href="#math-trig-complex">A2</a></td></tr>
+<tr><td class="n">(e^(at))′ = a e^(at)</td><td>نمایی شکلش با مشتق عوض نمی‌شود ⇒ جواب معادلات مدار.</td><td><a href="#math-derivative">A3</a></td></tr>
+<tr><td class="n">∫ₐᵇ f = F(b) − F(a)</td><td>آهنگ رشد مساحت = ارتفاع نمودار.</td><td><a href="#math-integral">A4</a></td></tr>
+<tr><td class="n">du/dt = δ ، ∫ f δ(t − t₀) = f(t₀)</td><td>ضربه = پله‌ای که شیبش بی‌نهایت شده؛ مساحت ۱.</td><td><a href="#math-integral">A4</a></td></tr>
+<tr><td class="n">x_k = det A_k / det A</td><td>از خود فرایند حذف بیرون می‌آید.</td><td><a href="#math-linear">A5</a></td></tr>
+<tr><td class="n">s² + 2αs + ω₀² = 0</td><td>حدس e^(st) معادله دیفرانسیل را جبری می‌کند.</td><td><a href="#math-ode">A6</a></td></tr>
+<tr><td class="n">C = εA/d ، W = ½CV²</td><td>بار اول با ولتاژ صفر و آخری با ولتاژ کامل منتقل می‌شود.</td><td><a href="#phys-electric">A7</a></td></tr>
+<tr><td class="n">v = dλ/dt = L di/dt</td><td>فارادی + λ متناسب با i.</td><td><a href="#phys-magnetic">A8</a></td></tr>
+</tbody></table></div>
+
+<h2>مدار (بخش B)</h2>
+<div class="tbl"><table>
+<thead><tr><th>رابطه</th><th>چرا</th><th>فصل</th></tr></thead>
+<tbody>
+<tr><td class="n">p = vi (جریان از + وارد)</td><td>بار از پتانسیل بالا به پایین ⇒ انرژی می‌دهد.</td><td><a href="#elements">B1</a></td></tr>
+<tr><td class="n">Σi = 0 ، Σv = 0</td><td>پایستگی بار؛ ولتاژ مثل ارتفاع است.</td><td><a href="#kirchhoff">B2</a></td></tr>
+<tr><td class="n">v_k = v R_k / ΣR ، i₁ = i R₂/(R₁+R₂)</td><td>سری: جریان مشترک؛ موازی: ولتاژ مشترک.</td><td><a href="#kirchhoff">B2</a></td></tr>
+<tr><td class="n">R₁ = R_b R_c / (R_a+R_b+R_c)</td><td>مقاومت بین هر دو گره در دو شبکه برابر.</td><td><a href="#kirchhoff">B2</a></td></tr>
+<tr><td class="n">G v = i (گره)، R I = V (مش)</td><td>مجهول درست ⇒ یکی از دو قانون خودکار برقرار.</td><td><a href="#nodal-mesh">B3</a></td></tr>
+<tr><td class="n">V_th = v_oc ، R_th = v_oc / i_sc</td><td>بار را با منبع جریان عوض کن + جمع آثار.</td><td><a href="#thevenin">B4</a></td></tr>
+<tr><td class="n">R_L = R_th ⇒ P = V_th²/4R_th</td><td>مشتق توان صفر؛ بازده ۵۰٪.</td><td><a href="#thevenin">B4</a></td></tr>
+<tr><td class="n">v₊ = v₋ ، i₊ = i₋ = 0</td><td>فیدبک منفی + بهره بی‌نهایت.</td><td><a href="#opamp">B5</a></td></tr>
+<tr><td class="n">−R_f/R₁ ، 1 + R_f/R₁</td><td>زمین مجازی / تقسیم ولتاژ فیدبک.</td><td><a href="#opamp">B5</a></td></tr>
+<tr><td class="n">i = C dv/dt ، v_C پیوسته</td><td>پرش ولتاژ = جریان بی‌نهایت.</td><td><a href="#capacitor">B6</a></td></tr>
+<tr><td class="n">ΔW = ½·C₁C₂/(C₁+C₂)·(ΔV)²</td><td>بار پایسته، انرژی نه؛ مستقل از R.</td><td><a href="#capacitor">B6</a></td></tr>
+<tr><td class="n">v = L di/dt ، i_L پیوسته</td><td>دوگان خازن.</td><td><a href="#inductor">B7</a></td></tr>
+<tr><td class="n">f(t) = Σ J·u(t−t_k) + Σ Δm·r(t−t_k)</td><td>هر پرش یک پله، هر تغییر شیب یک شیب.</td><td><a href="#waveforms">B8</a></td></tr>
+<tr><td>0⁻/∞: C باز، L کوتاه؛ 0⁺: C منبع ولتاژ، L منبع جریان</td><td>فقط v_C و i_L حافظه دارند.</td><td><a href="#switching">B9</a></td></tr>
+<tr><td class="n">مرتبه = N_C + N_L − n_C − n_L</td><td>رابطه جبری بین متغیرهای حالت یک شرط اولیه را حذف می‌کند.</td><td><a href="#order">B10</a></td></tr>
+<tr><td class="n">τ = R_th C ، τ = L / R_th</td><td>مقاومت دیده‌شده از خازن/سلف.</td><td><a href="#first-order">B11</a></td></tr>
+<tr><td class="n">α = R/2L (سری) ، 1/2RC (موازی) ، ω₀ = 1/√LC</td><td>رقابت تلف انرژی و رفت‌وبرگشت آن.</td><td><a href="#second-order">B12</a></td></tr>
+<tr><td class="n">h = ds/dt</td><td>δ مشتق u است و مدار LTI.</td><td><a href="#impulse">B13</a></td></tr>
+<tr><td class="n">y = w * h ، Y = WH</td><td>ورودی = جمع ضربه‌های کوچک.</td><td><a href="#laplace">B14</a></td></tr>
+<tr><td class="n">f(0⁺) = lim s→∞ sF ، f(∞) = lim s→0 sF</td><td>خاصیت مشتق لاپلاس در دو حد؛ شرط: قطب‌ها چپ.</td><td><a href="#laplace">B14</a></td></tr>
+<tr><td class="n">Z = R ، sL ، 1/sC</td><td>تبدیل لاپلاس رابطه المان با شرط اولیه صفر.</td><td><a href="#s-domain">B15</a></td></tr>
+<tr><td class="n">|H(jω)| ، ∠H(jω)</td><td>e^(jωt) از سیستم خطی شکل‌نخورده عبور می‌کند.</td><td><a href="#s-domain">B15</a></td></tr>
+</tbody></table></div>
+
+<h2>الکترونیک (بخش C)</h2>
+<div class="tbl"><table>
+<thead><tr><th>رابطه</th><th>چرا</th><th>فصل</th></tr></thead>
+<tbody>
+<tr><td class="n">i = I_S(e^(v/nV_T) − 1) ، V_T ≈ 25mV</td><td>پخش حامل‌ها از روی سدی که ولتاژ آن را کم می‌کند.</td><td><a href="#diode">C1</a></td></tr>
+<tr><td class="n">ΔV = 60mV / دهه ، r_d = nV_T / I</td><td>وارون نمایی لگاریتم است.</td><td><a href="#diode">C1</a></td></tr>
+<tr><td class="n">V_r ≈ V_p / fRC (نیم‌موج)</td><td>تخلیه تقریباً خطی با جریان V_p/R در یک دوره.</td><td><a href="#diode">C1</a></td></tr>
+<tr><td class="n">I = k′(W/L)[(V_ov)V_DS − V_DS²/2]</td><td>بار کانال × سرعت، انتگرال در طول کانال.</td><td><a href="#mosfet">C2</a></td></tr>
+<tr><td class="n">I = ½k′(W/L)V_ov² (V_DS ≥ V_ov)</td><td>تنگش کانال؛ ولتاژ اضافه روی ناحیه تنگ می‌افتد.</td><td><a href="#mosfet">C2</a></td></tr>
+<tr><td class="n">V_M = (V_DD − |V_tp| + √r V_tn)/(1 + √r)</td><td>هر دو اشباع با جریان برابر.</td><td><a href="#inverter">C3</a></td></tr>
+<tr><td class="n">V_IL = (3V_DD + 2V_t)/8</td><td>شیب −۱ روی منحنی انتقال.</td><td><a href="#inverter">C3</a></td></tr>
+<tr><td class="n">t_p ≈ 0.69 R_on C ، P = αCV_DD²f</td><td>رسیدن به ۵۰٪ در RC؛ نصف انرژی در شارژ و نصف در دشارژ تلف.</td><td><a href="#inverter">C3</a></td></tr>
+<tr><td>NMOS: ۰ کامل، ۱ تا V_DD − V_th</td><td>در عبور ۱، خروجی سورس است و V_GS کم می‌شود.</td><td><a href="#pass-tg">C4</a></td></tr>
+<tr><td>PDN: سری = AND، موازی = OR؛ PUN دوگان</td><td>PDN \(\bar F\) را می‌سازد؛ PMOS با ۰ روشن.</td><td><a href="#cmos-logic">C5</a></td></tr>
+<tr><td>Master–Slave = دو لچ با کلاک مخالف</td><td>Master قبل از لبه قفل، Slave بعد از لبه شفاف.</td><td><a href="#latch-ff">C6</a></td></tr>
+<tr><td class="n">ΔV_BL = ±(V_DD/2)·C_s/(C_s + C_BL)</td><td>پایستگی بار در تقسیم بار.</td><td><a href="#memory">C7</a></td></tr>
+<tr><td class="n">T = 2RC ln 3</td><td>پرش ۱.۵V_DD و تخلیه تا ۰.۵V_DD.</td><td><a href="#converters">C8</a></td></tr>
+<tr><td class="n">V_o = −(V_ref/2ⁿ) Σ a_i 2^i</td><td>تونن هر گره نردبان 2R؛ هر قدم نصف.</td><td><a href="#converters">C8</a></td></tr>
+</tbody></table></div>
+
+<h2>دام‌های رایج امتحان</h2>
+<trap>
+<ol>
+<li>علامت توان وقتی جریان از سر − وارد می‌شود (B1).</li>
+<li>KVL: جهت حرکت را عوض کردن وسط حلقه (B2).</li>
+<li>تقسیم ولتاژ روی مقاومت‌هایی که دیگر سری نیستند چون باری به گره وسط وصل است (B2).</li>
+<li>KCL جداگانه برای گره‌های ابرگره؛ فراموش کردن معادله قید (B3).</li>
+<li>خاموش کردن منبع وابسته در جمع آثار یا در محاسبه \(R_{th}\) (B4).</li>
+<li>جمع کردن توان‌ها در جمع آثار (B4).</li>
+<li>فرض پیوستگی جریان خازن یا ولتاژ سلف یا جریان مقاومت‌ها در \(0^+\) (B9).</li>
+<li>ثابت زمانی را از مدار <b>قبل</b> از کلیدزنی گرفتن (B11).</li>
+<li>تطبیق ثابت‌ها با جواب همگن به‌جای جواب کامل در مرتبه دوم (B12).</li>
+<li>استفاده از قضیه مقدار نهایی وقتی قطب روی محور موهومی یا راست است (B14).</li>
+<li>جهت منبع مدل شرط اولیه سلف در حوزه s (B15).</li>
+<li>دیود «روشن» با جریان منفی یا «خاموش» با ولتاژ بیشتر از ۰.۷ (C1).</li>
+<li>فرض اشباع بدون بررسی \(V_{DS} \ge V_{GS} - V_{th}\)؛ انتخاب ریشه اشتباه در ناحیه خطی (C2).</li>
+<li>PUN را مثل PDN کشیدن به‌جای دوگانش (C5).</li>
+</ol>
+</trap>
+
+<h2>نقشه مرور برای هر آزمون</h2>
+<div class="tbl"><table>
+<thead><tr><th>آزمون</th><th>فصل‌های جزوه</th><th>حداقل مثال‌هایی که باید بتوانید بدون نگاه حل کنید</th></tr></thead>
+<tbody>
+<tr><td>کوییز I</td><td><a href="#elements">B1</a>، <a href="#kirchhoff">B2</a>، <a href="#nodal-mesh">B3</a>، جمع آثار <a href="#thevenin">B4</a></td><td>ابرگره، ابرمش، Y–Δ پل، جمع آثار با منبع وابسته</td></tr>
+<tr><td>کوییز II</td><td>تونن و نورتن <a href="#thevenin">B4</a></td><td>تونن با منبع وابسته به سه روش، مدار بدون منبع مستقل</td></tr>
+<tr><td>کوییز III</td><td><a href="#capacitor">B6</a> تا <a href="#impulse">B13</a></td><td>جدول 0⁻/0⁺/∞، مرتبه، فرمول طلایی دومرحله‌ای، RLC چهار حالت، تطبیق ضرایب ضربه</td></tr>
+<tr><td>کوییز IV</td><td><a href="#laplace">B14</a>، <a href="#s-domain">B15</a></td><td>کسر جزئی با قطب تکراری و مختلط، مدل شرط اولیه، تابع شبکه و پایداری</td></tr>
+<tr><td>میان‌ترم</td><td>کل بخش B</td><td>همه موارد بالا</td></tr>
+<tr><td>کوییز V</td><td><a href="#diode">C1</a> تا <a href="#pass-tg">C4</a></td><td>فرض و بررسی دیود، زنر، تحلیل DC ماسفت، V_M و NM، عبور ۰ و ۱</td></tr>
+<tr><td>کوییز VI</td><td><a href="#cmos-logic">C5</a> تا <a href="#memory">C7</a></td><td>گیت پیچیده و دوگانی، اندازه‌گذاری، Master–Slave، DRAM</td></tr>
+<tr><td>پایان‌ترم</td><td>کل بخش C</td><td>همه موارد بالا و مبدل‌ها</td></tr>
+</tbody></table></div>
+
+<sum>
+<p>اگر فقط یک چیز از این درس بماند: <b>هر رابطه از چند اصل ساده بیرون می‌آید</b>: پایستگی بار و انرژی (کیرشهف)، خطی بودن (جمع آثار، تونن، لاپلاس)، حافظه خازن و سلف (پیوستگی)، و رفتار نمایی (مشتق \(e^{st}\)). وقتی رابطه‌ای را فراموش کردید، از این اصول دوباره بسازیدش.</p>
+</sum>
