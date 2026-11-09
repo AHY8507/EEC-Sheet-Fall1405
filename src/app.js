@@ -7,6 +7,7 @@
   var byRoute = {};
   pages.forEach(function (p) { byRoute[p.dataset.route] = p; });
   var current = null, pendingTarget = null, mjReady = false;
+  var PRINT = root.classList.contains('print'); // one long document for the PDF build
 
   /* ---------------- theme ---------------- */
   try { var saved = localStorage.getItem('eec-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
@@ -88,7 +89,15 @@
     options: { enableMenu: false },
     startup: {
       typeset: false,
-      ready: function () { window.MathJax.startup.defaultReady(); mjReady = true; if (current) typeset(current); }
+      ready: function () {
+        window.MathJax.startup.defaultReady(); mjReady = true;
+        if (PRINT) {
+          window.MathJax.typesetPromise([document.getElementById('main')])
+            .then(function () { root.dataset.mj = 'done'; }, function (e) { root.dataset.mj = 'error: ' + e; });
+          return;
+        }
+        if (current) typeset(current);
+      }
     }
   };
   function typeset(p) {
@@ -289,7 +298,7 @@
     sar: function (w) {
       w.innerHTML = '<div class="wt">مبدل تقریب متوالی (SAR) چهاربیتی، گام‌به‌گام</div><p class="wd">بازه ۰ تا ۱۶ ولت، هر LSB یک ولت. مبدل مثل بازی «حدس عدد» از پرارزش‌ترین بیت شروع می‌کند: بیت را ۱ می‌گذارد، خروجی D/A را با ورودی مقایسه می‌کند و اگر زیادی بود آن بیت را ۰ می‌کند.</p>' +
         '<div class="ctrls">' + slider('sar-v', 'ولتاژ ورودی Vin (V)', 0, 15.9, 0.1, 11.3) + '</div><div class="btns"><button class="iconbtn" id="sar-step" type="button">گام بعد</button><button class="iconbtn" id="sar-reset" type="button">شروع دوباره</button></div><div class="sv"></div><div class="read"></div>';
-      var k = 0;
+      var k = PRINT ? 4 : 0;
       function run() {
         var vin = val(w, 'sar-v'); show(w, 'sar-v', f2(vin, 1) + ' V');
         var code = 0, rows = [], pts = [];
@@ -326,5 +335,10 @@
     if (f) { try { f(w); } catch (e) { w.textContent = 'widget error: ' + e.message; } }
   }
 
-  route();
+  if (PRINT) {
+    pages.forEach(function (p) { $$('figure.plot', p).forEach(drawPlotFigure); $$('.widget', p).forEach(initWidget); });
+    $$('details').forEach(function (d) { d.open = true; });
+  } else {
+    route();
+  }
 })();
