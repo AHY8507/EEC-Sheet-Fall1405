@@ -308,7 +308,9 @@ def build_chapter(route, code, title, desc, cov, prev, nxt, svgs, titles, printi
 
 
 PDF_NAME = 'EEC-Notes-Fall1405.pdf'
-PAGES_URL = 'https://ahy8507.github.io/EEC-Sheet-Fall1405/'
+PDF_CTA = ('<div class="cta"><a class="pdfbtn" href="%s" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">'
+           '<path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"/></svg>'
+           'دانلود نسخه PDF کامل</a><span class="small mut">برای چاپ و مطالعه آفلاین، با فهرست و نشانک فصل‌ها</span></div>')
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap">\n')
 
@@ -371,8 +373,9 @@ def build(mode='site', pagenums=None):
                      for r, c, t, d, cov in chs if r in built)
         if cs:
             cards.append('<div class="part-block"><div class="ph"><span class="pc">%s</span><h3>%s</h3><p>%s</p></div><div class="cards">%s</div></div>' % (pc, pt, pd, cs))
-    pdf_href = (PAGES_URL + PDF_NAME) if mode == 'artifact' else PDF_NAME
-    home = ('<article class="page" data-route="home" data-title="">' + HOME_COVER.format(pdf=pdf_href, **facts) + HOWTO
+    # the PDF sits next to index.html on GitHub Pages; the Artifact viewer cannot download files, so no button there
+    cta = '' if mode == 'artifact' else PDF_CTA % PDF_NAME
+    home = ('<article class="page" data-route="home" data-title="">' + HOME_COVER.format(cta=cta, **facts) + HOWTO
             + ROADMAP.format(sched=sched_rows, cards=''.join(cards)) + HOME_FOOT + '</article>')
 
     head = ('<title>جزوه مدار و الکترونیک دیجیتال</title>\n'
@@ -504,7 +507,7 @@ HOME_COVER = '''<section class="cover">
   <span class="eyebrow">EEC · FALL 1405 · COMPLETE NOTES</span>
   <h1>مدارهای الکتریکی و الکترونیک دیجیتال<br><em>از پایه تا شاقول</em></h1>
   <p class="lead">جزوه‌ای که هیچ چیزی را بدیهی فرض نمی‌کند: از «شیب یک خط» و «بار الکتریکی» شروع می‌کند، هر رابطه را قدم‌به‌قدم استخراج می‌کند، اول شهودش را می‌گوید و بعد ریاضی‌اش را، و برای هر مبحث مثال تازه از پایه تا سخت حل می‌کند.</p>
-  <div class="cta"><a class="pdfbtn" href="{pdf}" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"/></svg>دانلود نسخه PDF کامل</a><span class="small mut">برای چاپ و مطالعه آفلاین، با فهرست و نشانک فصل‌ها</span></div>
+  {cta}
   <div class="facts"><span><b>{nch}</b> فصل</span><span><b>{nex}</b> مثال حل‌شده</span><span><b>{nhw}</b> تمرین با جواب</span><span><b>{nfig}</b> شکل مدار</span><span>منبع: جزوه‌های کلاس و برنامه ترم</span></div>
   <svg class="trace" viewBox="0 0 800 70" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 52 H120 L140 32 H300 L318 50 H420 L440 30 H520 L540 50 H800" style="fill:none;stroke:var(--copper);stroke-width:2.2"/>
