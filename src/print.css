@@ -1,0 +1,97 @@
+/* PDF edition (python3 build.py --pdf). Loaded after style.css, only in the print build.
+   A4, one chapter per page run, running header with the chapter title, Persian page numbers. */
+@page{
+  size:A4; margin:17mm 15mm 16mm;
+  @top-left{content:"جزوه مدار و الکترونیک دیجیتال · پاییز ۱۴۰۵";font-family:Vazirmatn,sans-serif;font-size:7.5pt;color:#78838c;vertical-align:bottom;padding-bottom:3mm}
+  @bottom-center{content:counter(page, persian);font-family:Vazirmatn,sans-serif;font-size:9pt;font-weight:700;color:#b04f1b;vertical-align:top;padding-top:3mm}
+}
+@page cover{margin:0;@top-left{content:none}@top-right{content:none}@bottom-center{content:none}}
+@page part{margin:0;@top-left{content:none}@top-right{content:none}@bottom-center{content:none}}
+
+html.print{background:#fff;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+html.print body{background:#fff;background-image:none;font-size:13.4px;line-height:1.9}
+html.print body::before{display:none}
+html.print .topbar,html.print .side,html.print .pn{display:none!important}
+html.print .shell{display:block}
+html.print main{padding:0;overflow:visible}
+html.print .page{max-width:none}
+html.print a{color:inherit;text-decoration:none}
+html.print .prose a,html.print .chips a{color:var(--c-def)}
+
+/* ---------- cover ---------- */
+.pcover{page:cover;position:relative;box-sizing:border-box;width:210mm;height:296.6mm;overflow:hidden;
+  background:var(--sheet);
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:6mm 6mm;
+  padding:24mm 20mm 0}
+.pcover .band{position:absolute;inset:0 0 auto 0;height:9mm;background:var(--mask)}
+.pcover .band::after{content:"";position:absolute;inset:auto 0 -2.2mm 0;height:2.2mm;background:var(--copper)}
+.pcover .eyebrow{font-family:var(--f-mono);font-size:9pt;color:var(--copper);letter-spacing:.08em;direction:ltr;display:inline-block;margin-top:8mm}
+.pcover h1{font-family:var(--f-disp);font-weight:400;font-size:46pt;line-height:1.3;margin:6mm 0 0;color:var(--ink)}
+.pcover .sub{font-family:var(--f-disp);font-size:26pt;color:var(--copper);margin:2mm 0 0;line-height:1.4}
+.pcover .lead{font-size:12pt;line-height:2;color:var(--ink-2);max-width:150mm;margin:8mm 0 0}
+.pcover .facts{display:flex;flex-wrap:wrap;gap:3mm;margin-top:9mm}
+.pcover .facts span{border:1px solid var(--rule);background:var(--sheet);border-radius:99px;padding:1mm 4.5mm;font-size:10pt;color:var(--ink-2)}
+.pcover .facts b{font-family:var(--f-mono);color:var(--ink);font-size:11pt}
+.pcover .parts{display:grid;grid-template-columns:repeat(2,1fr);gap:4mm;margin-top:12mm}
+.pcover .parts a{display:block;border:1px solid color-mix(in srgb,var(--mask) 35%,var(--rule));border-inline-start:3.5px solid var(--mask);background:color-mix(in srgb,var(--mask) 5%,var(--sheet));border-radius:3mm;padding:3mm 4.5mm;line-height:1.7}
+.pcover .parts b{display:block;font-size:11.5pt}
+.pcover .parts .pc{font-family:var(--f-mono);color:var(--copper);margin-inline-end:2mm}
+.pcover .parts small{color:var(--ink-3);font-size:9pt}
+.pcover svg.art{position:absolute;inset:auto 0 16mm 0;width:100%;height:46mm}
+.pcover .foot{position:absolute;inset:auto 20mm 7mm 20mm;display:flex;justify-content:space-between;font-size:9pt;color:var(--ink-3);margin:0}
+
+/* ---------- guide + table of contents ---------- */
+.pfront{break-before:page}
+.pfront h2{font-family:var(--f-disp);font-weight:400;font-size:22pt;line-height:1.4;margin:0 0 4mm;color:var(--ink)}
+.pfront h2::after{content:"";display:block;width:24mm;height:2.5px;background:var(--copper);margin-top:2mm}
+.pfront .legend{grid-template-columns:repeat(2,1fr)}
+.pfront .roadmap h2{margin-top:6mm}
+.pfront .tbl{overflow:visible}
+.pfront .tbl table{font-size:9.5pt}
+.ptoc .tp{margin:5mm 0 1mm;display:flex;align-items:baseline;gap:3mm;padding-bottom:1.5mm;border-bottom:2px solid var(--ink);break-after:avoid}
+.ptoc .tp .pc{font-family:var(--f-mono);font-weight:600;color:#fff;background:var(--mask);border-radius:2mm;padding:0 2.5mm;font-size:10pt}
+.ptoc .tp b{font-size:12.5pt}
+.ptoc .tp small{color:var(--ink-3);font-size:9pt}
+.tl{display:flex;align-items:baseline;gap:3mm;padding:1.6mm 0 1.2mm;border-bottom:1px dotted var(--rule);break-inside:avoid}
+.tl .cc{font-family:var(--f-mono);font-size:9pt;color:var(--copper);min-width:9mm;direction:ltr;text-align:right}
+.tl .tt{flex:1;min-width:0;line-height:1.6}
+.tl .tt b{font-weight:700;display:block;font-size:11pt}
+.tl .tt small{display:block;color:var(--ink-3);font-size:8.6pt}
+.tl .pg{font-weight:800;color:var(--ink);font-size:11pt;min-width:9mm;text-align:left}
+
+/* ---------- part divider ---------- */
+.ppart{page:part;break-before:page;position:relative;box-sizing:border-box;width:210mm;height:296.6mm;overflow:hidden;
+  background:var(--mask);color:#f3f7f4;padding:40mm 22mm 0}
+.ppart .big{position:absolute;inset:auto 14mm 10mm auto;font-family:var(--f-mono);font-weight:600;font-size:250pt;line-height:1;color:rgba(255,255,255,.08);direction:ltr}
+.ppart .k{font-family:var(--f-mono);font-size:10pt;letter-spacing:.12em;color:#f2b48e;direction:ltr;display:inline-block}
+.ppart h1{font-family:var(--f-disp);font-weight:400;font-size:38pt;line-height:1.35;margin:4mm 0 2mm;color:#fff}
+.ppart .d{font-size:12.5pt;color:rgba(243,247,244,.82);margin:0 0 10mm}
+.ppart .rule{height:2.5px;width:34mm;background:#ee8b51;margin:0 0 8mm}
+.ppart .tl{border-bottom-color:rgba(255,255,255,.18);padding:2.4mm 0 1.8mm}
+.ppart .tl .cc{color:#f2b48e;font-size:10pt}
+.ppart .tl .tt b{color:#fff;font-size:12pt}
+.ppart .tl .tt small{color:rgba(243,247,244,.7);font-size:9pt}
+.ppart .tl .pg{color:#fff}
+
+/* ---------- chapters ---------- */
+html.print article.chapter{break-before:page}
+html.print .ch-hero{padding-top:0}
+html.print .ch-hero h1{font-size:25pt}
+html.print .goals{grid-template-columns:1.5fr 1fr}
+html.print .toc ol{columns:2}
+html.print .prose h2{margin-top:1.7em;break-after:avoid}
+html.print .prose h3,html.print .prose h4{break-after:avoid}
+html.print .box-h,html.print .ex-h,html.print .hw-h,html.print .sol-h{break-after:avoid}
+html.print figure,html.print .widget,html.print .eq,html.print .ex-h,html.print .legend .lg,html.print .tbl tr,html.print ol.steps>li,
+html.print .box.def,html.print .box.key,html.print .box.trap,html.print .box.note{break-inside:avoid}
+html.print .ex{overflow:visible}
+html.print .ex-h{border-radius:12px 12px 0 0}
+html.print .eq,html.print .tbl,html.print figure.ckt,html.print figure.plot,html.print .widget,
+html.print mjx-container[display="true"]{overflow:visible}
+html.print mjx-container[display="true"] svg{max-width:100%;height:auto}
+html.print figure.ckt svg{max-width:92%}
+html.print figure.plot .pv,html.print .widget .sv{max-width:150mm;margin-inline:auto}
+html.print .widget .ctrls,html.print .widget .btns{display:none}
+html.print .widget::after{content:"در نسخه وب این شکل تعاملی است: پیچ‌ها را بچرخانید و تغییرش را ببینید.";display:block;font-size:.8rem;color:var(--ink-3);margin-top:6px}
+html.print details.ans summary{cursor:default}
+html.print details.ans summary::before{display:none}

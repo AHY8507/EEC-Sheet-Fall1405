@@ -1,0 +1,13 @@
+{
+  "name": "eec-notes-fall1405",
+  "private": true,
+  "description": "Tools for printing the PDF edition of the EEC study notes (python3 build.py --pdf)",
+  "scripts": {
+    "site": "python3 build.py",
+    "pdf": "python3 build.py --pdf"
+  },
+  "devDependencies": {
+    "mathjax": "3.2.2",
+    "playwright": "^1.49.0"
+  }
+}
