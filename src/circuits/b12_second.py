@@ -45,3 +45,16 @@ def _():
     el(d, E.SourceControlledV, (6, 0), (6, 3), 'k·i', loc='bottom', color=HL)
     el(d, E.Capacitor, (6, 0), (0, 0), '1F', loc='bottom')
     return d
+
+
+@ckt('b12-alg')
+def _():
+    """Worked example of the five-step algorithm: 12 V switched onto a series RLC at t = 0."""
+    d = new()
+    el(d, E.SourceV, (0, 0), (0, 3), '12V')
+    el(d, E.Switch, (0, 3), (2.4, 3), 't = 0', action='close', color=HL)
+    R = el(d, E.Resistor, (2.4, 3), (5.2, 3), '6Ω')
+    d += E.CurrentLabelInline(direction='in').at(R).label('i')
+    el(d, E.Inductor2, (5.2, 3), (5.2, 0), '1H', loc='bottom', loops=3)
+    el(d, E.Capacitor, (5.2, 0), (0, 0), ('+', '0.2F   v_C', '−'), loc='bottom')
+    return d
