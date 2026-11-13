@@ -95,3 +95,14 @@ html.print .widget .ctrls,html.print .widget .btns{display:none}
 html.print .widget::after{content:"در نسخه وب این شکل تعاملی است: پیچ‌ها را بچرخانید و تغییرش را ببینید.";display:block;font-size:.8rem;color:var(--ink-3);margin-top:6px}
 html.print details.ans summary{cursor:default}
 html.print details.ans summary::before{display:none}
+
+/* ---------- cheat sheet ---------- */
+html.print article[data-route="cheatsheet"]{max-width:none}
+html.print .cs-grid{columns:2;column-gap:3.5mm}
+html.print .cs-card{break-inside:avoid;border-radius:3mm;margin-bottom:3.5mm}
+html.print .cs-card.wide{column-span:all;break-inside:auto}
+html.print .cs-b{font-size:9.6pt;line-height:1.75;padding:1mm 3mm 3mm}
+html.print .cs-h{padding:2mm 3mm}
+html.print .cs-h b{font-size:10.6pt}
+html.print .fm,html.print .cs-bad,html.print .cs-stp ol.steps>li{break-inside:avoid}
+html.print .fm .fx,html.print .fm{overflow:visible}
