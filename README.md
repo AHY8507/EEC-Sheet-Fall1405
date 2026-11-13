@@ -6,8 +6,8 @@
 
 <p>
 <a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><img alt="Website" src="https://img.shields.io/badge/Website-read%20online-12634f?style=for-the-badge"></a>
-<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-344%20pages-b04f1b?style=for-the-badge"></a>
-<img alt="Chapters" src="https://img.shields.io/badge/chapters-32-1c5ea5?style=for-the-badge">
+<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-368%20pages-b04f1b?style=for-the-badge"></a>
+<img alt="Chapters" src="https://img.shields.io/badge/chapters-33-1c5ea5?style=for-the-badge">
 <img alt="Examples" src="https://img.shields.io/badge/solved%20examples-228-21734a?style=for-the-badge">
 </p>
 
@@ -18,7 +18,7 @@
 <table>
 <tr>
 <td align="center"><a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><b>📖 خواندن آنلاین</b></a><br><sub>سایت با جستجو، حالت تیره و ابزار تعاملی</sub></td>
-<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۳۴۴ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
+<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۳۶۸ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
 </tr>
 </table>
 
@@ -33,6 +33,7 @@
 - **۱۲۳ شکل مدار** برداری، ده‌ها نمودار و **۷ ابزار تعاملی** در سایت: شیب و مماس، مساحت زیر نمودار، بردار چرخان، شارژ RC، چهار حالت RLC، منحنی انتقال CMOS و مبدل SAR.
 - **منطبق با برنامه ترم.** جلسه‌ها، کوییزها و پوشش میان‌ترم و پایان‌ترم به فصل‌های جزوه نگاشت شده‌اند.
 - **پیوست مرور.** نقشه مفهومی همه روابط (هر کدام با یک جمله «چرا»)، دام‌های رایج و نقشه مرور هر کوییز.
+- **چیت‌شیت کامل.** صفحه‌ای فشرده با فرمول‌ها و «استپ‌های حل» همه فصل‌ها (بخش A تا C)، نقشه تصمیم برای انتخاب روش حل، جدول لاپلاس و چک‌لیست ۱۰ ثانیه‌ای قبل از تحویل برگه.
 
 ## راهنمای رنگ‌ها
 
@@ -102,6 +103,7 @@
 | کد | فصل | چه چیزی یاد می‌گیریم | جایگاه در درس |
 |:-:|---|---|---|
 | Z1 | [نقشه مفهومی و جمع‌بندی روابط](https://ahy8507.github.io/EEC-Sheet-Fall1405/#summary) | هر رابطه با یک جمله «چرا»؛ برای مرور شب امتحان | مرور کل درس |
+| Z2 | [چیت‌شیت: فرمول‌ها و استپ‌های حل](https://ahy8507.github.io/EEC-Sheet-Fall1405/#cheatsheet) | همه فرمول‌ها و دستورکارهای حل مسئله فصل‌به‌فصل در کارت‌های فشرده، نقشه تصمیم «این مسئله را دیدم، چه کنم؟»، جدول لاپلاس، دام‌ها و چک‌لیست پایانی | مرور کل درس |
 
 <details>
 <summary><b>برنامه ترم: هر جلسه در کدام فصل جزوه است؟</b></summary>

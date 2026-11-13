@@ -73,6 +73,7 @@ PARTS = [
     ]),
     ('Z', 'پیوست', 'مرور مفهومی', [
         ('summary', 'Z1', 'نقشه مفهومی و جمع‌بندی روابط', 'هر رابطه با یک جمله «چرا»؛ برای مرور شب امتحان', 'مرور کل درس'),
+        ('cheatsheet', 'Z2', 'چیت‌شیت: فرمول‌ها و استپ‌های حل', 'همه فرمول‌ها و دستورکارهای حل مسئله، فصل‌به‌فصل، در کارت‌های فشرده؛ برای شب امتحان و سر جلسه حل تمرین', 'مرور کل درس · میان‌ترم و پایان‌ترم'),
     ]),
 ]
 
@@ -190,7 +191,7 @@ def expand(body, route, code, svgs):
     body = re.sub(r'<widget\s+w="([\w-]+)"\s*/?>', r'<div class="widget" data-w="\1"></div>', body)
 
     # balanced-tag check
-    for t in list(BOX) + ['ex', 'sol', 'hw', 'ans', 'eq', 'steps']:
+    for t in list(BOX) + ['ex', 'sol', 'hw', 'ans', 'eq', 'steps', 'cs', 'f', 'stp', 'bad']:
         o = len(re.findall(r'<%s(?:\s(?:[^>"]|"[^"]*")*)?>' % t, body))
         c = len(re.findall(r'</%s>' % t, body))
         if o != c:
@@ -205,6 +206,29 @@ def expand(body, route, code, svgs):
                 cls, lab, '<span class="bt">%s</span>' % title if title else '')
         body = re.sub(r'<%s(\s(?:[^>"]|"[^"]*")*)?>' % t, box, body)
         body = body.replace('</%s>' % t, '</div></div>')
+
+    # cheat-sheet components:  <cs t="" c="B1 B2" k="def" w> card </cs>,  <f n="name">math</f> formula row,
+    #                          <stp> <li>..</li> </stp> numbered steps,  <bad>..</bad> pitfall line
+    code2route = {c: r for _, _, _, chs in PARTS for (r, c, *_rest) in chs}
+
+    def cs(m):
+        a = attrs(m.group(1))
+        links = []
+        for c in str(a.get('c', '')).split():
+            if c not in code2route:
+                raise BuildError('%s: <cs> refers to unknown chapter code %r' % (route, c))
+            links.append('<a class="cs-c" href="#%s">%s</a>' % (code2route[c], c))
+        return ('<section class="cs-card%s" style="--k:var(--c-%s)"><div class="cs-h">%s<b>%s</b></div><div class="cs-b">'
+                % (' wide' if a.get('w') else '', a.get('k', 'def'), ''.join(links), a.get('t', '')))
+    body = re.sub(r'<cs(\s(?:[^>"]|"[^"]*")*)?>', cs, body)
+    body = body.replace('</cs>', '</div></section>')
+    body = re.sub(r'<f\s+n="([^"]*)"\s*>', r'<div class="fm"><span class="fn">\1</span><span class="fx">', body)
+    body = re.sub(r'<f>', '<div class="fm"><span class="fx">', body)
+    body = body.replace('</f>', '</span></div>')
+    body = re.sub(r'<stp(\s[^>]*)?>', lambda m: '<div class="cs-stp"><h5>%s</h5><ol class="steps">' % attrs(m.group(1)).get('t', 'استپ‌ها'), body)
+    body = body.replace('</stp>', '</ol></div>')
+    body = re.sub(r'<bad>', '<div class="cs-bad"><span>دام</span><div>', body)
+    body = body.replace('</bad>', '</div></div>')
 
     cnt = {'ex': 0, 'hw': 0}
 
@@ -249,7 +273,7 @@ def expand(body, route, code, svgs):
         return '<h3 id="%s-h%d">%s</h3>' % (route, h3n['n'], m.group(1))
     body = re.sub(r'<h3>(.*?)</h3>', h3, body, flags=re.S)
 
-    leftovers = re.findall(r'</?(?:def|int|prf|note|trap|key|sum|phys|ex|sol|hw|ans|eq|steps|fig|plot|widget|goals|prereq)\b', body)
+    leftovers = re.findall(r'</?(?:def|int|prf|note|trap|key|sum|phys|ex|sol|hw|ans|eq|steps|fig|plot|widget|goals|prereq|cs|stp|bad)\b|</?f(?=[\s>])', body)
     if leftovers:
         raise BuildError('%s: unexpanded tags %s' % (route, leftovers[:5]))
     return body, secs, cnt
@@ -308,9 +332,13 @@ def build_chapter(route, code, title, desc, cov, prev, nxt, svgs, titles, printi
 
 
 PDF_NAME = 'EEC-Notes-Fall1405.pdf'
-PDF_CTA = ('<div class="cta"><a class="pdfbtn" href="%s" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">'
+CS_BTN = ('<a class="pdfbtn" href="#cheatsheet"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">'
+          '<path d="M3 2.5h10v11H3zM5.5 6h5M5.5 8.5h5M5.5 11h3" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"/></svg>'
+          'چیت‌شیت: فرمول‌ها و استپ‌ها</a>')
+PDF_CTA = ('<div class="cta">' + CS_BTN + '<a class="pdfbtn ghost" href="%s" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">'
            '<path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"/></svg>'
            'دانلود نسخه PDF کامل</a><span class="small mut">برای چاپ و مطالعه آفلاین، با فهرست و نشانک فصل‌ها</span></div>')
+CS_CTA = '<div class="cta">' + CS_BTN + '<span class="small mut">همه فرمول‌ها و استپ‌های حل در یک صفحه</span></div>'
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n'
          '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lalezar&family=Vazirmatn:wght@400;500;700;800&display=swap">\n')
 
@@ -374,7 +402,7 @@ def build(mode='site', pagenums=None):
         if cs:
             cards.append('<div class="part-block"><div class="ph"><span class="pc">%s</span><h3>%s</h3><p>%s</p></div><div class="cards">%s</div></div>' % (pc, pt, pd, cs))
     # the PDF sits next to index.html on GitHub Pages; the Artifact viewer cannot download files, so no button there
-    cta = '' if mode == 'artifact' else PDF_CTA % PDF_NAME
+    cta = CS_CTA if mode == 'artifact' else PDF_CTA % PDF_NAME
     home = ('<article class="page" data-route="home" data-title="">' + HOME_COVER.format(cta=cta, **facts) + HOWTO
             + ROADMAP.format(sched=sched_rows, cards=''.join(cards)) + HOME_FOOT + '</article>')
 

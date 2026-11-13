@@ -129,6 +129,8 @@ main{min-width:0;padding-block:28px 80px;padding-left:max(16px, env(safe-area-in
 .cover .trace{position:absolute;inset:auto 0 0 0;height:70px;opacity:.9;pointer-events:none}
 .cover .cta{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin-top:20px}
 .pdfbtn{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:99px;background:var(--copper);color:var(--sheet);text-decoration:none;font-weight:700;font-size:.92rem;line-height:1.6}
+.pdfbtn.ghost{background:transparent;color:var(--copper);border:1.5px solid var(--copper);padding:5.5px 15px}
+.pdfbtn.ghost:hover{background:color-mix(in srgb,var(--copper) 10%,transparent);color:var(--copper)}
 .pdfbtn:hover{color:var(--sheet);background:color-mix(in srgb,var(--copper) 85%,var(--ink))}
 .cover .facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:18px;margin-bottom:46px;font-size:.88rem;color:var(--ink-2)}
 .cover .facts b{font-family:var(--f-mono);color:var(--ink);font-size:1.02rem}
@@ -301,6 +303,41 @@ svg .guide{stroke:var(--ink-3);stroke-dasharray:4 4;stroke-width:1}
 .pn a.next{text-align:end;grid-column:2}
 .foot{margin-top:40px;font-size:.82rem;color:var(--ink-3);text-align:center}
 
+/* ---------- cheat sheet (chapter Z2) ---------- */
+article[data-route="cheatsheet"]{max-width:70rem}
+.cs-grid{columns:22rem 2;column-gap:14px;margin:1em 0}
+.cs-card{--k:var(--c-def);min-width:0;break-inside:avoid;margin:0 0 14px;border-radius:12px;border:1px solid color-mix(in srgb,var(--k) 34%, var(--rule));border-top:4px solid var(--k);background:var(--sheet);overflow:hidden}
+.cs-card.wide{column-span:all}
+.cs-h{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;padding:9px 14px;background:color-mix(in srgb,var(--k) 9%, var(--sheet));border-bottom:1px solid color-mix(in srgb,var(--k) 22%, var(--rule))}
+.cs-h b{font-size:1.02rem;line-height:1.6;color:var(--ink)}
+.cs-c{font-family:var(--f-mono);font-size:.74rem;font-weight:600;direction:ltr;text-decoration:none;color:var(--sheet);background:var(--k);border-radius:99px;padding:0 9px;line-height:1.9}
+.cs-c:hover{color:var(--sheet);filter:brightness(1.12)}
+.cs-b{padding:4px 14px 12px;font-size:.92rem;line-height:1.85}
+.cs-b p{margin:.45em 0}
+.cs-b ul{margin:.3em 0;padding-inline-start:1.3em}
+.cs-b li::marker{color:var(--k)}
+.fm{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:0 12px;padding:5px 0;border-bottom:1px dashed var(--rule)}
+.fm:last-of-type{border-bottom:0}
+.fm .fn{color:var(--ink-2);font-size:.84rem;flex:0 1 auto}
+.fm .fx{direction:ltr;margin-inline-start:auto;max-width:100%;overflow-x:auto;overflow-y:hidden}
+.fm .fx mjx-container{margin:0!important}
+.cs-stp{margin-top:8px;padding-top:6px;border-top:1.5px dashed color-mix(in srgb,var(--c-prf) 40%, var(--rule))}
+.cs-stp h5{margin:0 0 4px;font-size:.78rem;font-weight:800;color:var(--c-prf);letter-spacing:.01em}
+.cs-stp ol.steps>li{padding-inline-start:36px;padding-bottom:6px}
+.cs-stp ol.steps>li::before{width:23px;height:23px;font-size:.74rem;top:.3em;border-color:var(--c-prf);color:var(--c-prf)}
+.cs-stp ol.steps>li::after{inset-inline-start:10.5px;top:calc(.3em + 25px);background:color-mix(in srgb,var(--c-prf) 35%, transparent)}
+.cs-bad{display:flex;gap:8px;align-items:flex-start;margin-top:8px;padding:6px 10px;border-radius:8px;border:1px solid color-mix(in srgb,var(--c-trap) 35%, var(--rule));background:color-mix(in srgb,var(--c-trap) 7%, var(--sheet));font-size:.86rem;line-height:1.75}
+.cs-bad>span{flex:none;font-size:.72rem;font-weight:800;color:var(--sheet);background:var(--c-trap);border-radius:99px;padding:0 9px;line-height:1.9;margin-top:.15em}
+.cs-bad>div{min-width:0}
+.cs-note{font-size:.88rem;color:var(--ink-2)}
+.cs-jump{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.cs-jump a{font-size:.84rem;text-decoration:none;padding:3px 12px;border-radius:99px;border:1px solid var(--rule);background:var(--sheet);color:var(--ink-2)}
+.cs-jump a:hover{border-color:var(--copper);color:var(--copper)}
+.cs-jump a b{font-family:var(--f-mono);color:var(--copper);margin-inline-end:6px;font-size:.78rem}
+.cs-chk{list-style:none;padding:0!important;margin:.4em 0}
+.cs-chk li{position:relative;padding-inline-start:26px;margin:.25em 0}
+.cs-chk li::before{content:"";position:absolute;inset-inline-start:2px;top:.55em;width:13px;height:13px;border:2px solid var(--c-sum);border-radius:4px}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1000px){
   .shell{grid-template-columns:minmax(0,1fr)}
@@ -316,20 +353,23 @@ svg .guide{stroke:var(--ink-3);stroke-dasharray:4 4;stroke-width:1}
   #themebtn span{display:none}
   mjx-container:not([display="true"]){display:inline-block;max-width:100%;overflow-x:auto;overflow-y:hidden;vertical-align:middle}
   .box,.hw{padding-inline:12px}
+  .cs-b{padding-inline:11px}
   .ex-b{padding-inline:12px}
   .pn{grid-template-columns:1fr}
   .pn a.next{grid-column:1}
 }
+.cs-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:0 22px;align-items:start}
+.cs-two>*{min-width:0}
 
 </style>
 </head>
 <body>
-<div id="app" dir="rtl" lang="fa"><header class="topbar"><button class="iconbtn" id="navbtn" type="button" aria-label="باز کردن فهرست فصل‌ها"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round"/></svg>فهرست</button><a class="brand" href="#home"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" style="fill:var(--mask)"/><path d="M5 15 H12.5 M12.5 8 V22 M17.5 8 V22 M17.5 15 H25" style="fill:none;stroke:var(--sheet);stroke-width:2.2;stroke-linecap:round"/></svg><span style="display:flex;flex-direction:column;min-width:0"><span class="bt">جزوه مدار و الکترونیک دیجیتال</span><span class="bs">پاییز ۱۴۰۵ · از پایه تا شاقول</span></span></a><span class="sp"></span><button class="iconbtn" id="themebtn" type="button" aria-label="تغییر حالت روشن و تیره"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:currentColor;stroke-width:1.6"/><path d="M8 1.5 A6.5 6.5 0 0 1 8 14.5 Z" style="fill:currentColor"/></svg><span>روشن/تیره</span></button></header><div class="shell"><aside class="side" id="side" aria-label="فهرست فصل‌ها"><input class="search" id="search" type="search" placeholder="جستجو در فصل‌ها و بخش‌ها…" aria-label="جستجو در فصل‌ها و بخش‌ها"><div class="nav-part"><a class="nav-ch" href="#home"><span class="cc">00</span><span>صفحه اول، برنامه درس و راهنما</span></a></div><div class="nav-part"><div class="ph"><span class="pc">A</span>پایه‌ها: ریاضی و فیزیکِ لازم</div><div class="nav-item"><a class="nav-ch" href="#math-functions"><span class="cc">A1</span><span>تابع، شیب، نمایی و لگاریتم</span></a><div class="nav-secs" hidden><a href="#math-functions-s1"><span class="sn">A1.1</span>تابع: ماشینی که ورودی می‌گیرد و خروجی می‌دهد</a><a href="#math-functions-s2"><span class="sn">A1.2</span>خط راست و شیب: آهنگ تغییر</a><a href="#math-functions-s3"><span class="sn">A1.3</span>توان‌ها و پیشوندهای علمی</a><a href="#math-functions-s4"><span class="sn">A1.4</span>رشد و افت نمایی</a><a href="#math-functions-s5"><span class="sn">A1.5</span>لگاریتم: وارون نمایی</a><a href="#math-functions-s6"><span class="sn">A1.6</span>جابه‌جایی، کشیدن و قرینه کردن نمودار</a><a href="#math-functions-s7"><span class="sn">A1.7</span>جمع‌بندی فصل</a><a href="#math-functions-s8"><span class="sn">A1.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-trig-complex"><span class="cc">A2</span><span>سینوسی‌ها و اعداد مختلط</span></a><div class="nav-secs" hidden><a href="#math-trig-complex-s1"><span class="sn">A2.1</span>زاویه و رادیان</a><a href="#math-trig-complex-s2"><span class="sn">A2.2</span>سینوس و کسینوس روی دایره واحد</a><a href="#math-trig-complex-s3"><span class="sn">A2.3</span>موج سینوسی: دامنه، فرکانس و فاز</a><a href="#math-trig-complex-s4"><span class="sn">A2.4</span>جمع کسینوس و سینوس هم‌فرکانس</a><a href="#math-trig-complex-s5"><span class="sn">A2.5</span>اعداد مختلط</a><a href="#math-trig-complex-s6"><span class="sn">A2.6</span>فرمول اویلر: پل بین نمایی و چرخش</a><a href="#math-trig-complex-s7"><span class="sn">A2.7</span>نمایی مختلط: نوسانِ میراشونده</a><a href="#math-trig-complex-s8"><span class="sn">A2.8</span>معادله درجه دو و ریشه‌های مختلط</a><a href="#math-trig-complex-s9"><span class="sn">A2.9</span>جمع‌بندی فصل</a><a href="#math-trig-complex-s10"><span class="sn">A2.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-derivative"><span class="cc">A3</span><span>مشتق: آهنگ تغییر</span></a><div class="nav-secs" hidden><a href="#math-derivative-s1"><span class="sn">A3.1</span>از سرعت میانگین تا سرعت لحظه‌ای</a><a href="#math-derivative-s2"><span class="sn">A3.2</span>تعریف مشتق</a><a href="#math-derivative-s3"><span class="sn">A3.3</span>قاعده‌های مشتق، هر کدام با اثبات</a><a href="#math-derivative-s4"><span class="sn">A3.4</span>مشتق دوم و مشتق در نقطه‌های خاص</a><a href="#math-derivative-s5"><span class="sn">A3.5</span>کاربرد ۱: پیدا کردن بیشینه و کمینه</a><a href="#math-derivative-s6"><span class="sn">A3.6</span>کاربرد ۲: تقریب خطی (ایده سیگنال کوچک)</a><a href="#math-derivative-s7"><span class="sn">A3.7</span>جمع‌بندی فصل</a><a href="#math-derivative-s8"><span class="sn">A3.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-integral"><span class="cc">A4</span><span>انتگرال، پله و ضربه</span></a><div class="nav-secs" hidden><a href="#math-integral-s1"><span class="sn">A4.1</span>جمع کردن تکه‌های کوچک</a><a href="#math-integral-s2"><span class="sn">A4.2</span>قضیه اساسی: انتگرال، وارون مشتق</a><a href="#math-integral-s3"><span class="sn">A4.3</span>ثابت انتگرال = شرط اولیه</a><a href="#math-integral-s4"><span class="sn">A4.4</span>دو ابزار انتگرال‌گیری</a><a href="#math-integral-s5"><span class="sn">A4.5</span>میانگین و مقدار مؤثر</a><a href="#math-integral-s6"><span class="sn">A4.6</span>تابع پله واحد u(t)</a><a href="#math-integral-s7"><span class="sn">A4.7</span>تابع ضربه δ(t)</a><a href="#math-integral-s8"><span class="sn">A4.8</span>جمع‌بندی فصل</a><a href="#math-integral-s9"><span class="sn">A4.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-linear"><span class="cc">A5</span><span>دستگاه معادلات خطی</span></a><div class="nav-secs" hidden><a href="#math-linear-s1"><span class="sn">A5.1</span>دستگاه دو معادله و دو مجهول</a><a href="#math-linear-s2"><span class="sn">A5.2</span>سه معادله و سه مجهول: حذف منظم</a><a href="#math-linear-s3"><span class="sn">A5.3</span>نوشتن ماتریسی</a><a href="#math-linear-s4"><span class="sn">A5.4</span>دترمینان و قاعده کرامر</a><a href="#math-linear-s5"><span class="sn">A5.5</span>جمع‌بندی فصل</a><a href="#math-linear-s6"><span class="sn">A5.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-ode"><span class="cc">A6</span><span>معادلات دیفرانسیل مدار</span></a><div class="nav-secs" hidden><a href="#math-ode-s1"><span class="sn">A6.1</span>معادله دیفرانسیل چیست؟</a><a href="#math-ode-s2"><span class="sn">A6.2</span>مرتبه اول بدون ورودی</a><a href="#math-ode-s3"><span class="sn">A6.3</span>مرتبه اول با ورودی: همگن + خصوصی</a><a href="#math-ode-s4"><span class="sn">A6.4</span>فرمول کلی مرتبه اول (عامل انتگرال‌ساز)</a><a href="#math-ode-s5"><span class="sn">A6.5</span>مرتبه دوم: معادله مشخصه</a><a href="#math-ode-s6"><span class="sn">A6.6</span>جمع‌بندی فصل</a><a href="#math-ode-s7"><span class="sn">A6.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#phys-electric"><span class="cc">A7</span><span>فیزیک الکتریسیته</span></a><div class="nav-secs" hidden><a href="#phys-electric-s1"><span class="sn">A7.1</span>بار الکتریکی</a><a href="#phys-electric-s2"><span class="sn">A7.2</span>نیرو و میدان الکتریکی</a><a href="#phys-electric-s3"><span class="sn">A7.3</span>کار، انرژی پتانسیل و ولتاژ</a><a href="#phys-electric-s4"><span class="sn">A7.4</span>جریان الکتریکی</a><a href="#phys-electric-s5"><span class="sn">A7.5</span>مقاومت و قانون اهم</a><a href="#phys-electric-s6"><span class="sn">A7.6</span>توان و انرژی</a><a href="#phys-electric-s7"><span class="sn">A7.7</span>خازن فیزیکی</a><a href="#phys-electric-s8"><span class="sn">A7.8</span>جمع‌بندی فصل</a><a href="#phys-electric-s9"><span class="sn">A7.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#phys-magnetic"><span class="cc">A8</span><span>مغناطیس و القا</span></a><div class="nav-secs" hidden><a href="#phys-magnetic-s1"><span class="sn">A8.1</span>جریان، میدان مغناطیسی می‌سازد</a><a href="#phys-magnetic-s2"><span class="sn">A8.2</span>قانون فارادی و قانون لنز</a><a href="#phys-magnetic-s3"><span class="sn">A8.3</span>خودالقایی: تولد سلف</a><a href="#phys-magnetic-s4"><span class="sn">A8.4</span>انرژی ذخیره‌شده در سلف</a><a href="#phys-magnetic-s5"><span class="sn">A8.5</span>قیاس مکانیکی: شهود برای RLC</a><a href="#phys-magnetic-s6"><span class="sn">A8.6</span>جمع‌بندی فصل</a><a href="#phys-magnetic-s7"><span class="sn">A8.7</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">B</span>مدارهای الکتریکی</div><div class="nav-item"><a class="nav-ch" href="#elements"><span class="cc">B1</span><span>المان‌ها و منابع</span></a><div class="nav-secs" hidden><a href="#elements-s1"><span class="sn">B1.1</span>المان دوسر و مشخصه آن</a><a href="#elements-s2"><span class="sn">B1.2</span>جهت‌های مرجع و قرارداد علامت غیرفعال</a><a href="#elements-s3"><span class="sn">B1.3</span>مقاومت: المان بی‌حافظه</a><a href="#elements-s4"><span class="sn">B1.4</span>خطی بودن و تغییرناپذیری با زمان: تعریف دقیق</a><a href="#elements-s5"><span class="sn">B1.5</span>منابع مستقل</a><a href="#elements-s6"><span class="sn">B1.6</span>منابع وابسته (کنترل‌شده)</a><a href="#elements-s7"><span class="sn">B1.7</span>دو قاعده مهم درباره منابع</a><a href="#elements-s8"><span class="sn">B1.8</span>جمع‌بندی فصل</a><a href="#elements-s9"><span class="sn">B1.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#kirchhoff"><span class="cc">B2</span><span>قوانین کیرشهف و ترکیب مقاومت‌ها</span></a><div class="nav-secs" hidden><a href="#kirchhoff-s1"><span class="sn">B2.1</span>زبان ساختار: شاخه، گره، حلقه، مش</a><a href="#kirchhoff-s2"><span class="sn">B2.2</span>قانون جریان کیرشهف (KCL)</a><a href="#kirchhoff-s3"><span class="sn">B2.3</span>قانون ولتاژ کیرشهف (KVL)</a><a href="#kirchhoff-s4"><span class="sn">B2.4</span>چند معادله مستقل داریم؟</a><a href="#kirchhoff-s5"><span class="sn">B2.5</span>ترکیب سری و موازی، تقسیم ولتاژ و جریان</a><a href="#kirchhoff-s6"><span class="sn">B2.6</span>ترکیب منابع</a><a href="#kirchhoff-s7"><span class="sn">B2.7</span>تبدیل منبع</a><a href="#kirchhoff-s8"><span class="sn">B2.8</span>تبدیل ستاره-مثلث (Y–Δ)</a><a href="#kirchhoff-s9"><span class="sn">B2.9</span>جمع‌بندی فصل</a><a href="#kirchhoff-s10"><span class="sn">B2.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#nodal-mesh"><span class="cc">B3</span><span>تحلیل گره و مش</span></a><div class="nav-secs" hidden><a href="#nodal-mesh-s1"><span class="sn">B3.1</span>ایده تحلیل گره</a><a href="#nodal-mesh-s2"><span class="sn">B3.2</span>منبع ولتاژ در تحلیل گره</a><a href="#nodal-mesh-s3"><span class="sn">B3.3</span>منبع وابسته در تحلیل گره</a><a href="#nodal-mesh-s4"><span class="sn">B3.4</span>نوشتن معادلات گره با بازرسی</a><a href="#nodal-mesh-s5"><span class="sn">B3.5</span>ایده تحلیل مش</a><a href="#nodal-mesh-s6"><span class="sn">B3.6</span>منبع جریان در تحلیل مش</a><a href="#nodal-mesh-s7"><span class="sn">B3.7</span>منبع وابسته در تحلیل مش</a><a href="#nodal-mesh-s8"><span class="sn">B3.8</span>بازرسی برای مش و یک مثال سه‌مشی</a><a href="#nodal-mesh-s9"><span class="sn">B3.9</span>کدام روش؟</a><a href="#nodal-mesh-s10"><span class="sn">B3.10</span>جمع‌بندی فصل</a><a href="#nodal-mesh-s11"><span class="sn">B3.11</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#thevenin"><span class="cc">B4</span><span>خطی بودن، جمع آثار، تونن و نورتن</span></a><div class="nav-secs" hidden><a href="#thevenin-s1"><span class="sn">B4.1</span>تناسب (همگنی) در مدار خطی</a><a href="#thevenin-s2"><span class="sn">B4.2</span>اصل جمع آثار</a><a href="#thevenin-s3"><span class="sn">B4.3</span>قضیه تونن</a><a href="#thevenin-s4"><span class="sn">B4.4</span>معادل نورتن</a><a href="#thevenin-s5"><span class="sn">B4.5</span>مدار بدون منبع مستقل و مقاومت منفی</a><a href="#thevenin-s6"><span class="sn">B4.6</span>انتقال حداکثر توان</a><a href="#thevenin-s7"><span class="sn">B4.7</span>جمع‌بندی فصل</a><a href="#thevenin-s8"><span class="sn">B4.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#opamp"><span class="cc">B5</span><span>تقویت‌کننده عملیاتی</span></a><div class="nav-secs" hidden><a href="#opamp-s1"><span class="sn">B5.1</span>مدل op-amp</a><a href="#opamp-s2"><span class="sn">B5.2</span>حلقه باز: مقایسه‌گر</a><a href="#opamp-s3"><span class="sn">B5.3</span>فیدبک منفی و اتصال کوتاه مجازی</a><a href="#opamp-s4"><span class="sn">B5.4</span>تقویت‌کننده معکوس‌کننده</a><a href="#opamp-s5"><span class="sn">B5.5</span>تقویت‌کننده غیرمعکوس‌کننده و دنبال‌کننده</a><a href="#opamp-s6"><span class="sn">B5.6</span>تقویت‌کننده جمع‌کننده</a><a href="#opamp-s7"><span class="sn">B5.7</span>تقویت‌کننده تفاضلی</a><a href="#opamp-s8"><span class="sn">B5.8</span>اثر بهره محدود</a><a href="#opamp-s9"><span class="sn">B5.9</span>جمع‌بندی فصل</a><a href="#opamp-s10"><span class="sn">B5.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#capacitor"><span class="cc">B6</span><span>خازن</span></a><div class="nav-secs" hidden><a href="#capacitor-s1"><span class="sn">B6.1</span>ساختار و تعریف</a><a href="#capacitor-s2"><span class="sn">B6.2</span>رابطه جریان و ولتاژ</a><a href="#capacitor-s3"><span class="sn">B6.3</span>سه خاصیت کلیدی</a><a href="#capacitor-s4"><span class="sn">B6.4</span>توان و انرژی</a><a href="#capacitor-s5"><span class="sn">B6.5</span>ترکیب خازن‌ها</a><a href="#capacitor-s6"><span class="sn">B6.6</span>اتصال خازن‌های باردار و اتلاف انرژی</a><a href="#capacitor-s7"><span class="sn">B6.7</span>جمع‌بندی فصل</a><a href="#capacitor-s8"><span class="sn">B6.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#inductor"><span class="cc">B7</span><span>سلف و دوگانی</span></a><div class="nav-secs" hidden><a href="#inductor-s1"><span class="sn">B7.1</span>ساختار و تعریف</a><a href="#inductor-s2"><span class="sn">B7.2</span>سه خاصیت کلیدی</a><a href="#inductor-s3"><span class="sn">B7.3</span>توان و انرژی</a><a href="#inductor-s4"><span class="sn">B7.4</span>ترکیب سلف‌ها</a><a href="#inductor-s5"><span class="sn">B7.5</span>دوگانی</a><a href="#inductor-s6"><span class="sn">B7.6</span>جمع‌بندی فصل</a><a href="#inductor-s7"><span class="sn">B7.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#waveforms"><span class="cc">B8</span><span>شکل موج‌ها</span></a><div class="nav-secs" hidden><a href="#waveforms-s1"><span class="sn">B8.1</span>پله، شیب و ضربه: یک خانواده</a><a href="#waveforms-s2"><span class="sn">B8.2</span>ساختن موج تکه‌ای از پله و شیب</a><a href="#waveforms-s3"><span class="sn">B8.3</span>پالس، نمایی و سینوسی</a><a href="#waveforms-s4"><span class="sn">B8.4</span>موج‌های متناوب: میانگین، مقدار مؤثر و چرخه کار</a><a href="#waveforms-s5"><span class="sn">B8.5</span>جمع‌بندی فصل</a><a href="#waveforms-s6"><span class="sn">B8.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#switching"><span class="cc">B9</span><span>حالت دائمی DC و لحظه کلیدزنی</span></a><div class="nav-secs" hidden><a href="#switching-s1"><span class="sn">B9.1</span>سه لحظه مهم</a><a href="#switching-s2"><span class="sn">B9.2</span>دستور کار</a><a href="#switching-s3"><span class="sn">B9.3</span>مثال‌های گام‌به‌گام</a><a href="#switching-s4"><span class="sn">B9.4</span>وقتی پیوستگی برقرار نیست</a><a href="#switching-s5"><span class="sn">B9.5</span>جمع‌بندی فصل</a><a href="#switching-s6"><span class="sn">B9.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#order"><span class="cc">B10</span><span>مرتبه مدار</span></a><div class="nav-secs" hidden><a href="#order-s1"><span class="sn">B10.1</span>تعریف</a><a href="#order-s2"><span class="sn">B10.2</span>چه چیزی مرتبه را کم می‌کند</a><a href="#order-s3"><span class="sn">B10.3</span>چه چیزی مرتبه را کم نمی‌کند</a><a href="#order-s4"><span class="sn">B10.4</span>روش سریع</a><a href="#order-s5"><span class="sn">B10.5</span>مثال‌ها</a><a href="#order-s6"><span class="sn">B10.6</span>جمع‌بندی فصل</a><a href="#order-s7"><span class="sn">B10.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#first-order"><span class="cc">B11</span><span>مدارهای مرتبه اول</span></a><div class="nav-secs" hidden><a href="#first-order-s1"><span class="sn">B11.1</span>پاسخ ورودی صفر مدار RC</a><a href="#first-order-s2"><span class="sn">B11.2</span>پاسخ ورودی صفر مدار RL</a><a href="#first-order-s3"><span class="sn">B11.3</span>تجزیه پاسخ: دو راه نگاه کردن</a><a href="#first-order-s4"><span class="sn">B11.4</span>فرمول طلایی مدار مرتبه اول</a><a href="#first-order-s5"><span class="sn">B11.5</span>پاسخ پله و پاسخ ضربه</a><a href="#first-order-s6"><span class="sn">B11.6</span>منبع وابسته در مدار مرتبه اول</a><a href="#first-order-s7"><span class="sn">B11.7</span>انتگرال‌گیر و مشتق‌گیر با op-amp</a><a href="#first-order-s8"><span class="sn">B11.8</span>ورودی‌های غیرثابت</a><a href="#first-order-s9"><span class="sn">B11.9</span>جمع‌بندی فصل</a><a href="#first-order-s10"><span class="sn">B11.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#second-order"><span class="cc">B12</span><span>مدارهای مرتبه دوم (RLC)</span></a><div class="nav-secs" hidden><a href="#second-order-s1"><span class="sn">B12.1</span>RLC موازی بدون ورودی</a><a href="#second-order-s2"><span class="sn">B12.2</span>RLC سری</a><a href="#second-order-s3"><span class="sn">B12.3</span>چهار نوع پاسخ</a><a href="#second-order-s4"><span class="sn">B12.4</span>پاسخ کامل با ورودی ثابت</a><a href="#second-order-s5"><span class="sn">B12.5</span>پاسخ ضربه RLC موازی</a><a href="#second-order-s6"><span class="sn">B12.6</span>جمع‌بندی فصل</a><a href="#second-order-s7"><span class="sn">B12.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#impulse"><span class="cc">B13</span><span>پاسخ ضربه از روی معادله دیفرانسیل</span></a><div class="nav-secs" hidden><a href="#impulse-s1"><span class="sn">B13.1</span>صورت مسئله</a><a href="#impulse-s2"><span class="sn">B13.2</span>حالت ساده: m = 0 و شرایط اولیه معادل</a><a href="#impulse-s3"><span class="sn">B13.3</span>وقتی ورودی مشتق دارد</a><a href="#impulse-s4"><span class="sn">B13.4</span>بررسی سریع با تابع تبدیل</a><a href="#impulse-s5"><span class="sn">B13.5</span>پاسخ ضربه، پاسخ پله و یک مدار</a><a href="#impulse-s6"><span class="sn">B13.6</span>جمع‌بندی فصل</a><a href="#impulse-s7"><span class="sn">B13.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#laplace"><span class="cc">B14</span><span>کانولوشن و تبدیل لاپلاس</span></a><div class="nav-secs" hidden><a href="#laplace-s1"><span class="sn">B14.1</span>کانولوشن: پاسخ به ورودی دلخواه</a><a href="#laplace-s2"><span class="sn">B14.2</span>تبدیل لاپلاس</a><a href="#laplace-s3"><span class="sn">B14.3</span>عکس لاپلاس با کسرهای جزئی</a><a href="#laplace-s4"><span class="sn">B14.4</span>قضایای مقدار اولیه و نهایی</a><a href="#laplace-s5"><span class="sn">B14.5</span>حل معادله دیفرانسیل با لاپلاس</a><a href="#laplace-s6"><span class="sn">B14.6</span>جمع‌بندی فصل</a><a href="#laplace-s7"><span class="sn">B14.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#s-domain"><span class="cc">B15</span><span>امپدانس، ادمیتانس و تحلیل در حوزه s</span></a><div class="nav-secs" hidden><a href="#s-domain-s1"><span class="sn">B15.1</span>امپدانس و ادمیتانس</a><a href="#s-domain-s2"><span class="sn">B15.2</span>مدل المان‌ها با شرط اولیه</a><a href="#s-domain-s3"><span class="sn">B15.3</span>تابع شبکه، قطب‌ها و صفرها</a><a href="#s-domain-s4"><span class="sn">B15.4</span>حالت دائمی سینوسی و فازورها</a><a href="#s-domain-s5"><span class="sn">B15.5</span>جمع‌بندی فصل</a><a href="#s-domain-s6"><span class="sn">B15.6</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">C</span>الکترونیک دیجیتال</div><div class="nav-item"><a class="nav-ch" href="#diode"><span class="cc">C1</span><span>دیود</span></a><div class="nav-secs" hidden><a href="#diode-s1"><span class="sn">C1.1</span>نیمه‌هادی: الکترون و حفره</a><a href="#diode-s2"><span class="sn">C1.2</span>پیوند p-n: ناحیه تخلیه و سد پتانسیل</a><a href="#diode-s3"><span class="sn">C1.3</span>مشخصه جریان-ولتاژ</a><a href="#diode-s4"><span class="sn">C1.4</span>مدل‌های ساده و روش فرض و بررسی</a><a href="#diode-s5"><span class="sn">C1.5</span>یکسوساز و برش‌دهنده</a><a href="#diode-s6"><span class="sn">C1.6</span>دیود زنر و تنظیم ولتاژ</a><a href="#diode-s7"><span class="sn">C1.7</span>جمع‌بندی فصل</a><a href="#diode-s8"><span class="sn">C1.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#mosfet"><span class="cc">C2</span><span>ترانزیستور ماسفت افزایشی</span></a><div class="nav-secs" hidden><a href="#mosfet-s1"><span class="sn">C2.1</span>انواع ترانزیستور</a><a href="#mosfet-s2"><span class="sn">C2.2</span>ساختار NMOS</a><a href="#mosfet-s3"><span class="sn">C2.3</span>تشکیل کانال و ولتاژ آستانه</a><a href="#mosfet-s4"><span class="sn">C2.4</span>ناحیه خطی (تریود): استخراج رابطه جریان</a><a href="#mosfet-s5"><span class="sn">C2.5</span>تنگش کانال و ناحیه اشباع</a><a href="#mosfet-s6"><span class="sn">C2.6</span>افزایشی و تخلیه‌ای؛ PMOS</a><a href="#mosfet-s7"><span class="sn">C2.7</span>تحلیل DC مدار ماسفت</a><a href="#mosfet-s8"><span class="sn">C2.8</span>جمع‌بندی فصل</a><a href="#mosfet-s9"><span class="sn">C2.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#inverter"><span class="cc">C3</span><span>وارونسازها و CMOS</span></a><div class="nav-secs" hidden><a href="#inverter-s1"><span class="sn">C3.1</span>معکوس‌کننده NMOS با بار مقاومتی</a><a href="#inverter-s2"><span class="sn">C3.2</span>معکوس‌کننده با بار ترانزیستوری</a><a href="#inverter-s3"><span class="sn">C3.3</span>معکوس‌کننده CMOS</a><a href="#inverter-s4"><span class="sn">C3.4</span>حاشیه نویز</a><a href="#inverter-s5"><span class="sn">C3.5</span>تأخیر انتشار</a><a href="#inverter-s6"><span class="sn">C3.6</span>توان دینامیکی</a><a href="#inverter-s7"><span class="sn">C3.7</span>جمع‌بندی فصل</a><a href="#inverter-s8"><span class="sn">C3.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#pass-tg"><span class="cc">C4</span><span>ترانزیستور گذر و دروازه انتقال</span></a><div class="nav-secs" hidden><a href="#pass-tg-s1"><span class="sn">C4.1</span>ترانزیستور عبور NMOS</a><a href="#pass-tg-s2"><span class="sn">C4.2</span>زنجیره ترانزیستورهای عبور</a><a href="#pass-tg-s3"><span class="sn">C4.3</span>گیت انتقال (TG)</a><a href="#pass-tg-s4"><span class="sn">C4.4</span>طراحی منطق با TG از روی جدول درستی</a><a href="#pass-tg-s5"><span class="sn">C4.5</span>محدودیت‌ها</a><a href="#pass-tg-s6"><span class="sn">C4.6</span>جمع‌بندی فصل</a><a href="#pass-tg-s7"><span class="sn">C4.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#cmos-logic"><span class="cc">C5</span><span>منطق CMOS ایستا و پویا</span></a><div class="nav-secs" hidden><a href="#cmos-logic-s1"><span class="sn">C5.1</span>ساختار کلی</a><a href="#cmos-logic-s2"><span class="sn">C5.2</span>NAND و NOR</a><a href="#cmos-logic-s3"><span class="sn">C5.3</span>گیت‌های پیچیده</a><a href="#cmos-logic-s4"><span class="sn">C5.4</span>اندازه‌گذاری ترانزیستورها</a><a href="#cmos-logic-s5"><span class="sn">C5.5</span>منطق دینامیک: پیش‌شارژ و ارزیابی</a><a href="#cmos-logic-s6"><span class="sn">C5.6</span>منطق دومینو</a><a href="#cmos-logic-s7"><span class="sn">C5.7</span>جمع‌بندی فصل</a><a href="#cmos-logic-s8"><span class="sn">C5.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#latch-ff"><span class="cc">C6</span><span>لچ، فلیپ‌فلاپ و شیفت رجیستر</span></a><div class="nav-secs" hidden><a href="#latch-ff-s1"><span class="sn">C6.1</span>عنصر دوپایدار: دو معکوس‌کننده ضربدری</a><a href="#latch-ff-s2"><span class="sn">C6.2</span>لچ SR</a><a href="#latch-ff-s3"><span class="sn">C6.3</span>لچ D</a><a href="#latch-ff-s4"><span class="sn">C6.4</span>لچ در برابر فلیپ‌فلاپ</a><a href="#latch-ff-s5"><span class="sn">C6.5</span>لچ با معکوس‌کننده‌های ضربدری و ترانزیستورهای نوشتن</a><a href="#latch-ff-s6"><span class="sn">C6.6</span>شیفت رجیستر دینامیک و کلاک دوفاز</a><a href="#latch-ff-s7"><span class="sn">C6.7</span>جمع‌بندی فصل</a><a href="#latch-ff-s8"><span class="sn">C6.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#memory"><span class="cc">C7</span><span>حافظه‌های RAM و ROM</span></a><div class="nav-secs" hidden><a href="#memory-s1"><span class="sn">C7.1</span>دسته‌بندی</a><a href="#memory-s2"><span class="sn">C7.2</span>سازمان آرایه حافظه</a><a href="#memory-s3"><span class="sn">C7.3</span>ROM و PROM</a><a href="#memory-s4"><span class="sn">C7.4</span>EPROM، E²PROM و Flash: گیت شناور</a><a href="#memory-s5"><span class="sn">C7.5</span>DRAM: یک ترانزیستور، یک خازن</a><a href="#memory-s6"><span class="sn">C7.6</span>SRAM: شش ترانزیستور</a><a href="#memory-s7"><span class="sn">C7.7</span>جمع‌بندی فصل</a><a href="#memory-s8"><span class="sn">C7.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#converters"><span class="cc">C8</span><span>نوسان‌ساز و مبدل‌های داده</span></a><div class="nav-secs" hidden><a href="#converters-s1"><span class="sn">C8.1</span>نوسان‌ساز RC با دو معکوس‌کننده</a><a href="#converters-s2"><span class="sn">C8.2</span>آنالوگ، نمونه‌برداری‌شده، دیجیتال</a><a href="#converters-s3"><span class="sn">C8.3</span>مبدل D/A با مقاومت‌های وزن‌دار</a><a href="#converters-s4"><span class="sn">C8.4</span>مبدل D/A نردبانی R-2R</a><a href="#converters-s5"><span class="sn">C8.5</span>مبدل A/D: بلوک‌ها</a><a href="#converters-s6"><span class="sn">C8.6</span>جمع‌بندی فصل</a><a href="#converters-s7"><span class="sn">C8.7</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">Z</span>پیوست</div><div class="nav-item"><a class="nav-ch" href="#summary"><span class="cc">Z1</span><span>نقشه مفهومی و جمع‌بندی روابط</span></a><div class="nav-secs" hidden><a href="#summary-s1"><span class="sn">Z1.1</span>پایه‌ها (بخش A)</a><a href="#summary-s2"><span class="sn">Z1.2</span>مدار (بخش B)</a><a href="#summary-s3"><span class="sn">Z1.3</span>الکترونیک (بخش C)</a><a href="#summary-s4"><span class="sn">Z1.4</span>دام‌های رایج امتحان</a><a href="#summary-s5"><span class="sn">Z1.5</span>نقشه مرور برای هر آزمون</a></div></div></div></aside><main id="main"><article class="page" data-route="home" data-title=""><section class="cover">
+<div id="app" dir="rtl" lang="fa"><header class="topbar"><button class="iconbtn" id="navbtn" type="button" aria-label="باز کردن فهرست فصل‌ها"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 4h12M2 8h12M2 12h12" style="stroke:currentColor;stroke-width:1.8;stroke-linecap:round"/></svg>فهرست</button><a class="brand" href="#home"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect x="1" y="1" width="28" height="28" rx="7" style="fill:var(--mask)"/><path d="M5 15 H12.5 M12.5 8 V22 M17.5 8 V22 M17.5 15 H25" style="fill:none;stroke:var(--sheet);stroke-width:2.2;stroke-linecap:round"/></svg><span style="display:flex;flex-direction:column;min-width:0"><span class="bt">جزوه مدار و الکترونیک دیجیتال</span><span class="bs">پاییز ۱۴۰۵ · از پایه تا شاقول</span></span></a><span class="sp"></span><button class="iconbtn" id="themebtn" type="button" aria-label="تغییر حالت روشن و تیره"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" style="fill:none;stroke:currentColor;stroke-width:1.6"/><path d="M8 1.5 A6.5 6.5 0 0 1 8 14.5 Z" style="fill:currentColor"/></svg><span>روشن/تیره</span></button></header><div class="shell"><aside class="side" id="side" aria-label="فهرست فصل‌ها"><input class="search" id="search" type="search" placeholder="جستجو در فصل‌ها و بخش‌ها…" aria-label="جستجو در فصل‌ها و بخش‌ها"><div class="nav-part"><a class="nav-ch" href="#home"><span class="cc">00</span><span>صفحه اول، برنامه درس و راهنما</span></a></div><div class="nav-part"><div class="ph"><span class="pc">A</span>پایه‌ها: ریاضی و فیزیکِ لازم</div><div class="nav-item"><a class="nav-ch" href="#math-functions"><span class="cc">A1</span><span>تابع، شیب، نمایی و لگاریتم</span></a><div class="nav-secs" hidden><a href="#math-functions-s1"><span class="sn">A1.1</span>تابع: ماشینی که ورودی می‌گیرد و خروجی می‌دهد</a><a href="#math-functions-s2"><span class="sn">A1.2</span>خط راست و شیب: آهنگ تغییر</a><a href="#math-functions-s3"><span class="sn">A1.3</span>توان‌ها و پیشوندهای علمی</a><a href="#math-functions-s4"><span class="sn">A1.4</span>رشد و افت نمایی</a><a href="#math-functions-s5"><span class="sn">A1.5</span>لگاریتم: وارون نمایی</a><a href="#math-functions-s6"><span class="sn">A1.6</span>جابه‌جایی، کشیدن و قرینه کردن نمودار</a><a href="#math-functions-s7"><span class="sn">A1.7</span>جمع‌بندی فصل</a><a href="#math-functions-s8"><span class="sn">A1.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-trig-complex"><span class="cc">A2</span><span>سینوسی‌ها و اعداد مختلط</span></a><div class="nav-secs" hidden><a href="#math-trig-complex-s1"><span class="sn">A2.1</span>زاویه و رادیان</a><a href="#math-trig-complex-s2"><span class="sn">A2.2</span>سینوس و کسینوس روی دایره واحد</a><a href="#math-trig-complex-s3"><span class="sn">A2.3</span>موج سینوسی: دامنه، فرکانس و فاز</a><a href="#math-trig-complex-s4"><span class="sn">A2.4</span>جمع کسینوس و سینوس هم‌فرکانس</a><a href="#math-trig-complex-s5"><span class="sn">A2.5</span>اعداد مختلط</a><a href="#math-trig-complex-s6"><span class="sn">A2.6</span>فرمول اویلر: پل بین نمایی و چرخش</a><a href="#math-trig-complex-s7"><span class="sn">A2.7</span>نمایی مختلط: نوسانِ میراشونده</a><a href="#math-trig-complex-s8"><span class="sn">A2.8</span>معادله درجه دو و ریشه‌های مختلط</a><a href="#math-trig-complex-s9"><span class="sn">A2.9</span>جمع‌بندی فصل</a><a href="#math-trig-complex-s10"><span class="sn">A2.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-derivative"><span class="cc">A3</span><span>مشتق: آهنگ تغییر</span></a><div class="nav-secs" hidden><a href="#math-derivative-s1"><span class="sn">A3.1</span>از سرعت میانگین تا سرعت لحظه‌ای</a><a href="#math-derivative-s2"><span class="sn">A3.2</span>تعریف مشتق</a><a href="#math-derivative-s3"><span class="sn">A3.3</span>قاعده‌های مشتق، هر کدام با اثبات</a><a href="#math-derivative-s4"><span class="sn">A3.4</span>مشتق دوم و مشتق در نقطه‌های خاص</a><a href="#math-derivative-s5"><span class="sn">A3.5</span>کاربرد ۱: پیدا کردن بیشینه و کمینه</a><a href="#math-derivative-s6"><span class="sn">A3.6</span>کاربرد ۲: تقریب خطی (ایده سیگنال کوچک)</a><a href="#math-derivative-s7"><span class="sn">A3.7</span>جمع‌بندی فصل</a><a href="#math-derivative-s8"><span class="sn">A3.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-integral"><span class="cc">A4</span><span>انتگرال، پله و ضربه</span></a><div class="nav-secs" hidden><a href="#math-integral-s1"><span class="sn">A4.1</span>جمع کردن تکه‌های کوچک</a><a href="#math-integral-s2"><span class="sn">A4.2</span>قضیه اساسی: انتگرال، وارون مشتق</a><a href="#math-integral-s3"><span class="sn">A4.3</span>ثابت انتگرال = شرط اولیه</a><a href="#math-integral-s4"><span class="sn">A4.4</span>دو ابزار انتگرال‌گیری</a><a href="#math-integral-s5"><span class="sn">A4.5</span>میانگین و مقدار مؤثر</a><a href="#math-integral-s6"><span class="sn">A4.6</span>تابع پله واحد u(t)</a><a href="#math-integral-s7"><span class="sn">A4.7</span>تابع ضربه δ(t)</a><a href="#math-integral-s8"><span class="sn">A4.8</span>جمع‌بندی فصل</a><a href="#math-integral-s9"><span class="sn">A4.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-linear"><span class="cc">A5</span><span>دستگاه معادلات خطی</span></a><div class="nav-secs" hidden><a href="#math-linear-s1"><span class="sn">A5.1</span>دستگاه دو معادله و دو مجهول</a><a href="#math-linear-s2"><span class="sn">A5.2</span>سه معادله و سه مجهول: حذف منظم</a><a href="#math-linear-s3"><span class="sn">A5.3</span>نوشتن ماتریسی</a><a href="#math-linear-s4"><span class="sn">A5.4</span>دترمینان و قاعده کرامر</a><a href="#math-linear-s5"><span class="sn">A5.5</span>جمع‌بندی فصل</a><a href="#math-linear-s6"><span class="sn">A5.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#math-ode"><span class="cc">A6</span><span>معادلات دیفرانسیل مدار</span></a><div class="nav-secs" hidden><a href="#math-ode-s1"><span class="sn">A6.1</span>معادله دیفرانسیل چیست؟</a><a href="#math-ode-s2"><span class="sn">A6.2</span>مرتبه اول بدون ورودی</a><a href="#math-ode-s3"><span class="sn">A6.3</span>مرتبه اول با ورودی: همگن + خصوصی</a><a href="#math-ode-s4"><span class="sn">A6.4</span>فرمول کلی مرتبه اول (عامل انتگرال‌ساز)</a><a href="#math-ode-s5"><span class="sn">A6.5</span>مرتبه دوم: معادله مشخصه</a><a href="#math-ode-s6"><span class="sn">A6.6</span>جمع‌بندی فصل</a><a href="#math-ode-s7"><span class="sn">A6.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#phys-electric"><span class="cc">A7</span><span>فیزیک الکتریسیته</span></a><div class="nav-secs" hidden><a href="#phys-electric-s1"><span class="sn">A7.1</span>بار الکتریکی</a><a href="#phys-electric-s2"><span class="sn">A7.2</span>نیرو و میدان الکتریکی</a><a href="#phys-electric-s3"><span class="sn">A7.3</span>کار، انرژی پتانسیل و ولتاژ</a><a href="#phys-electric-s4"><span class="sn">A7.4</span>جریان الکتریکی</a><a href="#phys-electric-s5"><span class="sn">A7.5</span>مقاومت و قانون اهم</a><a href="#phys-electric-s6"><span class="sn">A7.6</span>توان و انرژی</a><a href="#phys-electric-s7"><span class="sn">A7.7</span>خازن فیزیکی</a><a href="#phys-electric-s8"><span class="sn">A7.8</span>جمع‌بندی فصل</a><a href="#phys-electric-s9"><span class="sn">A7.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#phys-magnetic"><span class="cc">A8</span><span>مغناطیس و القا</span></a><div class="nav-secs" hidden><a href="#phys-magnetic-s1"><span class="sn">A8.1</span>جریان، میدان مغناطیسی می‌سازد</a><a href="#phys-magnetic-s2"><span class="sn">A8.2</span>قانون فارادی و قانون لنز</a><a href="#phys-magnetic-s3"><span class="sn">A8.3</span>خودالقایی: تولد سلف</a><a href="#phys-magnetic-s4"><span class="sn">A8.4</span>انرژی ذخیره‌شده در سلف</a><a href="#phys-magnetic-s5"><span class="sn">A8.5</span>قیاس مکانیکی: شهود برای RLC</a><a href="#phys-magnetic-s6"><span class="sn">A8.6</span>جمع‌بندی فصل</a><a href="#phys-magnetic-s7"><span class="sn">A8.7</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">B</span>مدارهای الکتریکی</div><div class="nav-item"><a class="nav-ch" href="#elements"><span class="cc">B1</span><span>المان‌ها و منابع</span></a><div class="nav-secs" hidden><a href="#elements-s1"><span class="sn">B1.1</span>المان دوسر و مشخصه آن</a><a href="#elements-s2"><span class="sn">B1.2</span>جهت‌های مرجع و قرارداد علامت غیرفعال</a><a href="#elements-s3"><span class="sn">B1.3</span>مقاومت: المان بی‌حافظه</a><a href="#elements-s4"><span class="sn">B1.4</span>خطی بودن و تغییرناپذیری با زمان: تعریف دقیق</a><a href="#elements-s5"><span class="sn">B1.5</span>منابع مستقل</a><a href="#elements-s6"><span class="sn">B1.6</span>منابع وابسته (کنترل‌شده)</a><a href="#elements-s7"><span class="sn">B1.7</span>دو قاعده مهم درباره منابع</a><a href="#elements-s8"><span class="sn">B1.8</span>جمع‌بندی فصل</a><a href="#elements-s9"><span class="sn">B1.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#kirchhoff"><span class="cc">B2</span><span>قوانین کیرشهف و ترکیب مقاومت‌ها</span></a><div class="nav-secs" hidden><a href="#kirchhoff-s1"><span class="sn">B2.1</span>زبان ساختار: شاخه، گره، حلقه، مش</a><a href="#kirchhoff-s2"><span class="sn">B2.2</span>قانون جریان کیرشهف (KCL)</a><a href="#kirchhoff-s3"><span class="sn">B2.3</span>قانون ولتاژ کیرشهف (KVL)</a><a href="#kirchhoff-s4"><span class="sn">B2.4</span>چند معادله مستقل داریم؟</a><a href="#kirchhoff-s5"><span class="sn">B2.5</span>ترکیب سری و موازی، تقسیم ولتاژ و جریان</a><a href="#kirchhoff-s6"><span class="sn">B2.6</span>ترکیب منابع</a><a href="#kirchhoff-s7"><span class="sn">B2.7</span>تبدیل منبع</a><a href="#kirchhoff-s8"><span class="sn">B2.8</span>تبدیل ستاره-مثلث (Y–Δ)</a><a href="#kirchhoff-s9"><span class="sn">B2.9</span>جمع‌بندی فصل</a><a href="#kirchhoff-s10"><span class="sn">B2.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#nodal-mesh"><span class="cc">B3</span><span>تحلیل گره و مش</span></a><div class="nav-secs" hidden><a href="#nodal-mesh-s1"><span class="sn">B3.1</span>ایده تحلیل گره</a><a href="#nodal-mesh-s2"><span class="sn">B3.2</span>منبع ولتاژ در تحلیل گره</a><a href="#nodal-mesh-s3"><span class="sn">B3.3</span>منبع وابسته در تحلیل گره</a><a href="#nodal-mesh-s4"><span class="sn">B3.4</span>نوشتن معادلات گره با بازرسی</a><a href="#nodal-mesh-s5"><span class="sn">B3.5</span>ایده تحلیل مش</a><a href="#nodal-mesh-s6"><span class="sn">B3.6</span>منبع جریان در تحلیل مش</a><a href="#nodal-mesh-s7"><span class="sn">B3.7</span>منبع وابسته در تحلیل مش</a><a href="#nodal-mesh-s8"><span class="sn">B3.8</span>بازرسی برای مش و یک مثال سه‌مشی</a><a href="#nodal-mesh-s9"><span class="sn">B3.9</span>کدام روش؟</a><a href="#nodal-mesh-s10"><span class="sn">B3.10</span>جمع‌بندی فصل</a><a href="#nodal-mesh-s11"><span class="sn">B3.11</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#thevenin"><span class="cc">B4</span><span>خطی بودن، جمع آثار، تونن و نورتن</span></a><div class="nav-secs" hidden><a href="#thevenin-s1"><span class="sn">B4.1</span>تناسب (همگنی) در مدار خطی</a><a href="#thevenin-s2"><span class="sn">B4.2</span>اصل جمع آثار</a><a href="#thevenin-s3"><span class="sn">B4.3</span>قضیه تونن</a><a href="#thevenin-s4"><span class="sn">B4.4</span>معادل نورتن</a><a href="#thevenin-s5"><span class="sn">B4.5</span>مدار بدون منبع مستقل و مقاومت منفی</a><a href="#thevenin-s6"><span class="sn">B4.6</span>انتقال حداکثر توان</a><a href="#thevenin-s7"><span class="sn">B4.7</span>جمع‌بندی فصل</a><a href="#thevenin-s8"><span class="sn">B4.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#opamp"><span class="cc">B5</span><span>تقویت‌کننده عملیاتی</span></a><div class="nav-secs" hidden><a href="#opamp-s1"><span class="sn">B5.1</span>مدل op-amp</a><a href="#opamp-s2"><span class="sn">B5.2</span>حلقه باز: مقایسه‌گر</a><a href="#opamp-s3"><span class="sn">B5.3</span>فیدبک منفی و اتصال کوتاه مجازی</a><a href="#opamp-s4"><span class="sn">B5.4</span>تقویت‌کننده معکوس‌کننده</a><a href="#opamp-s5"><span class="sn">B5.5</span>تقویت‌کننده غیرمعکوس‌کننده و دنبال‌کننده</a><a href="#opamp-s6"><span class="sn">B5.6</span>تقویت‌کننده جمع‌کننده</a><a href="#opamp-s7"><span class="sn">B5.7</span>تقویت‌کننده تفاضلی</a><a href="#opamp-s8"><span class="sn">B5.8</span>اثر بهره محدود</a><a href="#opamp-s9"><span class="sn">B5.9</span>جمع‌بندی فصل</a><a href="#opamp-s10"><span class="sn">B5.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#capacitor"><span class="cc">B6</span><span>خازن</span></a><div class="nav-secs" hidden><a href="#capacitor-s1"><span class="sn">B6.1</span>ساختار و تعریف</a><a href="#capacitor-s2"><span class="sn">B6.2</span>رابطه جریان و ولتاژ</a><a href="#capacitor-s3"><span class="sn">B6.3</span>سه خاصیت کلیدی</a><a href="#capacitor-s4"><span class="sn">B6.4</span>توان و انرژی</a><a href="#capacitor-s5"><span class="sn">B6.5</span>ترکیب خازن‌ها</a><a href="#capacitor-s6"><span class="sn">B6.6</span>اتصال خازن‌های باردار و اتلاف انرژی</a><a href="#capacitor-s7"><span class="sn">B6.7</span>جمع‌بندی فصل</a><a href="#capacitor-s8"><span class="sn">B6.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#inductor"><span class="cc">B7</span><span>سلف و دوگانی</span></a><div class="nav-secs" hidden><a href="#inductor-s1"><span class="sn">B7.1</span>ساختار و تعریف</a><a href="#inductor-s2"><span class="sn">B7.2</span>سه خاصیت کلیدی</a><a href="#inductor-s3"><span class="sn">B7.3</span>توان و انرژی</a><a href="#inductor-s4"><span class="sn">B7.4</span>ترکیب سلف‌ها</a><a href="#inductor-s5"><span class="sn">B7.5</span>دوگانی</a><a href="#inductor-s6"><span class="sn">B7.6</span>جمع‌بندی فصل</a><a href="#inductor-s7"><span class="sn">B7.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#waveforms"><span class="cc">B8</span><span>شکل موج‌ها</span></a><div class="nav-secs" hidden><a href="#waveforms-s1"><span class="sn">B8.1</span>پله، شیب و ضربه: یک خانواده</a><a href="#waveforms-s2"><span class="sn">B8.2</span>ساختن موج تکه‌ای از پله و شیب</a><a href="#waveforms-s3"><span class="sn">B8.3</span>پالس، نمایی و سینوسی</a><a href="#waveforms-s4"><span class="sn">B8.4</span>موج‌های متناوب: میانگین، مقدار مؤثر و چرخه کار</a><a href="#waveforms-s5"><span class="sn">B8.5</span>جمع‌بندی فصل</a><a href="#waveforms-s6"><span class="sn">B8.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#switching"><span class="cc">B9</span><span>حالت دائمی DC و لحظه کلیدزنی</span></a><div class="nav-secs" hidden><a href="#switching-s1"><span class="sn">B9.1</span>سه لحظه مهم</a><a href="#switching-s2"><span class="sn">B9.2</span>دستور کار</a><a href="#switching-s3"><span class="sn">B9.3</span>مثال‌های گام‌به‌گام</a><a href="#switching-s4"><span class="sn">B9.4</span>وقتی پیوستگی برقرار نیست</a><a href="#switching-s5"><span class="sn">B9.5</span>جمع‌بندی فصل</a><a href="#switching-s6"><span class="sn">B9.6</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#order"><span class="cc">B10</span><span>مرتبه مدار</span></a><div class="nav-secs" hidden><a href="#order-s1"><span class="sn">B10.1</span>تعریف</a><a href="#order-s2"><span class="sn">B10.2</span>چه چیزی مرتبه را کم می‌کند</a><a href="#order-s3"><span class="sn">B10.3</span>چه چیزی مرتبه را کم نمی‌کند</a><a href="#order-s4"><span class="sn">B10.4</span>روش سریع</a><a href="#order-s5"><span class="sn">B10.5</span>مثال‌ها</a><a href="#order-s6"><span class="sn">B10.6</span>جمع‌بندی فصل</a><a href="#order-s7"><span class="sn">B10.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#first-order"><span class="cc">B11</span><span>مدارهای مرتبه اول</span></a><div class="nav-secs" hidden><a href="#first-order-s1"><span class="sn">B11.1</span>پاسخ ورودی صفر مدار RC</a><a href="#first-order-s2"><span class="sn">B11.2</span>پاسخ ورودی صفر مدار RL</a><a href="#first-order-s3"><span class="sn">B11.3</span>تجزیه پاسخ: دو راه نگاه کردن</a><a href="#first-order-s4"><span class="sn">B11.4</span>فرمول طلایی مدار مرتبه اول</a><a href="#first-order-s5"><span class="sn">B11.5</span>پاسخ پله و پاسخ ضربه</a><a href="#first-order-s6"><span class="sn">B11.6</span>منبع وابسته در مدار مرتبه اول</a><a href="#first-order-s7"><span class="sn">B11.7</span>انتگرال‌گیر و مشتق‌گیر با op-amp</a><a href="#first-order-s8"><span class="sn">B11.8</span>ورودی‌های غیرثابت</a><a href="#first-order-s9"><span class="sn">B11.9</span>جمع‌بندی فصل</a><a href="#first-order-s10"><span class="sn">B11.10</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#second-order"><span class="cc">B12</span><span>مدارهای مرتبه دوم (RLC)</span></a><div class="nav-secs" hidden><a href="#second-order-s1"><span class="sn">B12.1</span>RLC موازی بدون ورودی</a><a href="#second-order-s2"><span class="sn">B12.2</span>RLC سری</a><a href="#second-order-s3"><span class="sn">B12.3</span>چهار نوع پاسخ</a><a href="#second-order-s4"><span class="sn">B12.4</span>پاسخ کامل با ورودی ثابت</a><a href="#second-order-s5"><span class="sn">B12.5</span>پاسخ ضربه RLC موازی</a><a href="#second-order-s6"><span class="sn">B12.6</span>جمع‌بندی فصل</a><a href="#second-order-s7"><span class="sn">B12.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#impulse"><span class="cc">B13</span><span>پاسخ ضربه از روی معادله دیفرانسیل</span></a><div class="nav-secs" hidden><a href="#impulse-s1"><span class="sn">B13.1</span>صورت مسئله</a><a href="#impulse-s2"><span class="sn">B13.2</span>حالت ساده: m = 0 و شرایط اولیه معادل</a><a href="#impulse-s3"><span class="sn">B13.3</span>وقتی ورودی مشتق دارد</a><a href="#impulse-s4"><span class="sn">B13.4</span>بررسی سریع با تابع تبدیل</a><a href="#impulse-s5"><span class="sn">B13.5</span>پاسخ ضربه، پاسخ پله و یک مدار</a><a href="#impulse-s6"><span class="sn">B13.6</span>جمع‌بندی فصل</a><a href="#impulse-s7"><span class="sn">B13.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#laplace"><span class="cc">B14</span><span>کانولوشن و تبدیل لاپلاس</span></a><div class="nav-secs" hidden><a href="#laplace-s1"><span class="sn">B14.1</span>کانولوشن: پاسخ به ورودی دلخواه</a><a href="#laplace-s2"><span class="sn">B14.2</span>تبدیل لاپلاس</a><a href="#laplace-s3"><span class="sn">B14.3</span>عکس لاپلاس با کسرهای جزئی</a><a href="#laplace-s4"><span class="sn">B14.4</span>قضایای مقدار اولیه و نهایی</a><a href="#laplace-s5"><span class="sn">B14.5</span>حل معادله دیفرانسیل با لاپلاس</a><a href="#laplace-s6"><span class="sn">B14.6</span>جمع‌بندی فصل</a><a href="#laplace-s7"><span class="sn">B14.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#s-domain"><span class="cc">B15</span><span>امپدانس، ادمیتانس و تحلیل در حوزه s</span></a><div class="nav-secs" hidden><a href="#s-domain-s1"><span class="sn">B15.1</span>امپدانس و ادمیتانس</a><a href="#s-domain-s2"><span class="sn">B15.2</span>مدل المان‌ها با شرط اولیه</a><a href="#s-domain-s3"><span class="sn">B15.3</span>تابع شبکه، قطب‌ها و صفرها</a><a href="#s-domain-s4"><span class="sn">B15.4</span>حالت دائمی سینوسی و فازورها</a><a href="#s-domain-s5"><span class="sn">B15.5</span>جمع‌بندی فصل</a><a href="#s-domain-s6"><span class="sn">B15.6</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">C</span>الکترونیک دیجیتال</div><div class="nav-item"><a class="nav-ch" href="#diode"><span class="cc">C1</span><span>دیود</span></a><div class="nav-secs" hidden><a href="#diode-s1"><span class="sn">C1.1</span>نیمه‌هادی: الکترون و حفره</a><a href="#diode-s2"><span class="sn">C1.2</span>پیوند p-n: ناحیه تخلیه و سد پتانسیل</a><a href="#diode-s3"><span class="sn">C1.3</span>مشخصه جریان-ولتاژ</a><a href="#diode-s4"><span class="sn">C1.4</span>مدل‌های ساده و روش فرض و بررسی</a><a href="#diode-s5"><span class="sn">C1.5</span>یکسوساز و برش‌دهنده</a><a href="#diode-s6"><span class="sn">C1.6</span>دیود زنر و تنظیم ولتاژ</a><a href="#diode-s7"><span class="sn">C1.7</span>جمع‌بندی فصل</a><a href="#diode-s8"><span class="sn">C1.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#mosfet"><span class="cc">C2</span><span>ترانزیستور ماسفت افزایشی</span></a><div class="nav-secs" hidden><a href="#mosfet-s1"><span class="sn">C2.1</span>انواع ترانزیستور</a><a href="#mosfet-s2"><span class="sn">C2.2</span>ساختار NMOS</a><a href="#mosfet-s3"><span class="sn">C2.3</span>تشکیل کانال و ولتاژ آستانه</a><a href="#mosfet-s4"><span class="sn">C2.4</span>ناحیه خطی (تریود): استخراج رابطه جریان</a><a href="#mosfet-s5"><span class="sn">C2.5</span>تنگش کانال و ناحیه اشباع</a><a href="#mosfet-s6"><span class="sn">C2.6</span>افزایشی و تخلیه‌ای؛ PMOS</a><a href="#mosfet-s7"><span class="sn">C2.7</span>تحلیل DC مدار ماسفت</a><a href="#mosfet-s8"><span class="sn">C2.8</span>جمع‌بندی فصل</a><a href="#mosfet-s9"><span class="sn">C2.9</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#inverter"><span class="cc">C3</span><span>وارونسازها و CMOS</span></a><div class="nav-secs" hidden><a href="#inverter-s1"><span class="sn">C3.1</span>معکوس‌کننده NMOS با بار مقاومتی</a><a href="#inverter-s2"><span class="sn">C3.2</span>معکوس‌کننده با بار ترانزیستوری</a><a href="#inverter-s3"><span class="sn">C3.3</span>معکوس‌کننده CMOS</a><a href="#inverter-s4"><span class="sn">C3.4</span>حاشیه نویز</a><a href="#inverter-s5"><span class="sn">C3.5</span>تأخیر انتشار</a><a href="#inverter-s6"><span class="sn">C3.6</span>توان دینامیکی</a><a href="#inverter-s7"><span class="sn">C3.7</span>جمع‌بندی فصل</a><a href="#inverter-s8"><span class="sn">C3.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#pass-tg"><span class="cc">C4</span><span>ترانزیستور گذر و دروازه انتقال</span></a><div class="nav-secs" hidden><a href="#pass-tg-s1"><span class="sn">C4.1</span>ترانزیستور عبور NMOS</a><a href="#pass-tg-s2"><span class="sn">C4.2</span>زنجیره ترانزیستورهای عبور</a><a href="#pass-tg-s3"><span class="sn">C4.3</span>گیت انتقال (TG)</a><a href="#pass-tg-s4"><span class="sn">C4.4</span>طراحی منطق با TG از روی جدول درستی</a><a href="#pass-tg-s5"><span class="sn">C4.5</span>محدودیت‌ها</a><a href="#pass-tg-s6"><span class="sn">C4.6</span>جمع‌بندی فصل</a><a href="#pass-tg-s7"><span class="sn">C4.7</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#cmos-logic"><span class="cc">C5</span><span>منطق CMOS ایستا و پویا</span></a><div class="nav-secs" hidden><a href="#cmos-logic-s1"><span class="sn">C5.1</span>ساختار کلی</a><a href="#cmos-logic-s2"><span class="sn">C5.2</span>NAND و NOR</a><a href="#cmos-logic-s3"><span class="sn">C5.3</span>گیت‌های پیچیده</a><a href="#cmos-logic-s4"><span class="sn">C5.4</span>اندازه‌گذاری ترانزیستورها</a><a href="#cmos-logic-s5"><span class="sn">C5.5</span>منطق دینامیک: پیش‌شارژ و ارزیابی</a><a href="#cmos-logic-s6"><span class="sn">C5.6</span>منطق دومینو</a><a href="#cmos-logic-s7"><span class="sn">C5.7</span>جمع‌بندی فصل</a><a href="#cmos-logic-s8"><span class="sn">C5.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#latch-ff"><span class="cc">C6</span><span>لچ، فلیپ‌فلاپ و شیفت رجیستر</span></a><div class="nav-secs" hidden><a href="#latch-ff-s1"><span class="sn">C6.1</span>عنصر دوپایدار: دو معکوس‌کننده ضربدری</a><a href="#latch-ff-s2"><span class="sn">C6.2</span>لچ SR</a><a href="#latch-ff-s3"><span class="sn">C6.3</span>لچ D</a><a href="#latch-ff-s4"><span class="sn">C6.4</span>لچ در برابر فلیپ‌فلاپ</a><a href="#latch-ff-s5"><span class="sn">C6.5</span>لچ با معکوس‌کننده‌های ضربدری و ترانزیستورهای نوشتن</a><a href="#latch-ff-s6"><span class="sn">C6.6</span>شیفت رجیستر دینامیک و کلاک دوفاز</a><a href="#latch-ff-s7"><span class="sn">C6.7</span>جمع‌بندی فصل</a><a href="#latch-ff-s8"><span class="sn">C6.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#memory"><span class="cc">C7</span><span>حافظه‌های RAM و ROM</span></a><div class="nav-secs" hidden><a href="#memory-s1"><span class="sn">C7.1</span>دسته‌بندی</a><a href="#memory-s2"><span class="sn">C7.2</span>سازمان آرایه حافظه</a><a href="#memory-s3"><span class="sn">C7.3</span>ROM و PROM</a><a href="#memory-s4"><span class="sn">C7.4</span>EPROM، E²PROM و Flash: گیت شناور</a><a href="#memory-s5"><span class="sn">C7.5</span>DRAM: یک ترانزیستور، یک خازن</a><a href="#memory-s6"><span class="sn">C7.6</span>SRAM: شش ترانزیستور</a><a href="#memory-s7"><span class="sn">C7.7</span>جمع‌بندی فصل</a><a href="#memory-s8"><span class="sn">C7.8</span>تمرین‌ها</a></div></div><div class="nav-item"><a class="nav-ch" href="#converters"><span class="cc">C8</span><span>نوسان‌ساز و مبدل‌های داده</span></a><div class="nav-secs" hidden><a href="#converters-s1"><span class="sn">C8.1</span>نوسان‌ساز RC با دو معکوس‌کننده</a><a href="#converters-s2"><span class="sn">C8.2</span>آنالوگ، نمونه‌برداری‌شده، دیجیتال</a><a href="#converters-s3"><span class="sn">C8.3</span>مبدل D/A با مقاومت‌های وزن‌دار</a><a href="#converters-s4"><span class="sn">C8.4</span>مبدل D/A نردبانی R-2R</a><a href="#converters-s5"><span class="sn">C8.5</span>مبدل A/D: بلوک‌ها</a><a href="#converters-s6"><span class="sn">C8.6</span>جمع‌بندی فصل</a><a href="#converters-s7"><span class="sn">C8.7</span>تمرین‌ها</a></div></div></div><div class="nav-part"><div class="ph"><span class="pc">Z</span>پیوست</div><div class="nav-item"><a class="nav-ch" href="#summary"><span class="cc">Z1</span><span>نقشه مفهومی و جمع‌بندی روابط</span></a><div class="nav-secs" hidden><a href="#summary-s1"><span class="sn">Z1.1</span>پایه‌ها (بخش A)</a><a href="#summary-s2"><span class="sn">Z1.2</span>مدار (بخش B)</a><a href="#summary-s3"><span class="sn">Z1.3</span>الکترونیک (بخش C)</a><a href="#summary-s4"><span class="sn">Z1.4</span>دام‌های رایج امتحان</a><a href="#summary-s5"><span class="sn">Z1.5</span>نقشه مرور برای هر آزمون</a></div></div><div class="nav-item"><a class="nav-ch" href="#cheatsheet"><span class="cc">Z2</span><span>چیت‌شیت: فرمول‌ها و استپ‌های حل</span></a><div class="nav-secs" hidden><a href="#cheatsheet-s1"><span class="sn">Z2.1</span>نقشه تصمیم: مسئله را دیدم، از کجا شروع کنم؟</a><a href="#cheatsheet-s2"><span class="sn">Z2.2</span>ثابت‌ها، یکاها و عددهای حفظ‌کردنی</a><a href="#cheatsheet-s3"><span class="sn">Z2.3</span>ریاضی و فیزیکِ لازم (بخش A) در یک نگاه</a><a href="#cheatsheet-s4"><span class="sn">Z2.4</span>تحلیل مدار مقاومتی (B1 تا B5)</a><a href="#cheatsheet-s5"><span class="sn">Z2.5</span>خازن، سلف، شکل موج و کلیدزنی (B6 تا B10)</a><a href="#cheatsheet-s6"><span class="sn">Z2.6</span>پاسخ زمانی: مرتبه اول، مرتبه دوم و پاسخ ضربه (B11 تا B13)</a><a href="#cheatsheet-s7"><span class="sn">Z2.7</span>تبدیل لاپلاس و تحلیل در حوزه s (B14 و B15)</a><a href="#cheatsheet-s8"><span class="sn">Z2.8</span>دیود و ترانزیستور ماسفت (C1 و C2)</a><a href="#cheatsheet-s9"><span class="sn">Z2.9</span>وارونساز، دروازه انتقال و منطق CMOS (C3 تا C5)</a><a href="#cheatsheet-s10"><span class="sn">Z2.10</span>لچ، فلیپ‌فلاپ، حافظه و مبدل‌ها (C6 تا C8)</a><a href="#cheatsheet-s11"><span class="sn">Z2.11</span>دام‌های رایج و چک‌لیست پایانی</a></div></div></div></aside><main id="main"><article class="page" data-route="home" data-title=""><section class="cover">
   <span class="eyebrow">EEC · FALL 1405 · COMPLETE NOTES</span>
   <h1>مدارهای الکتریکی و الکترونیک دیجیتال<br><em>از پایه تا شاقول</em></h1>
   <p class="lead">جزوه‌ای که هیچ چیزی را بدیهی فرض نمی‌کند: از «شیب یک خط» و «بار الکتریکی» شروع می‌کند، هر رابطه را قدم‌به‌قدم استخراج می‌کند، اول شهودش را می‌گوید و بعد ریاضی‌اش را، و برای هر مبحث مثال تازه از پایه تا سخت حل می‌کند.</p>
-  <div class="cta"><a class="pdfbtn" href="EEC-Notes-Fall1405.pdf" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"/></svg>دانلود نسخه PDF کامل</a><span class="small mut">برای چاپ و مطالعه آفلاین، با فهرست و نشانک فصل‌ها</span></div>
-  <div class="facts"><span><b>۳۲</b> فصل</span><span><b>۲۲۸</b> مثال حل‌شده</span><span><b>۱۵۱</b> تمرین با جواب</span><span><b>۱۲۳</b> شکل مدار</span><span>منبع: جزوه‌های کلاس و برنامه ترم</span></div>
+  <div class="cta"><a class="pdfbtn" href="#cheatsheet"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5h10v11H3zM5.5 6h5M5.5 8.5h5M5.5 11h3" style="fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round"/></svg>چیت‌شیت: فرمول‌ها و استپ‌ها</a><a class="pdfbtn ghost" href="EEC-Notes-Fall1405.pdf" download><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8M4.5 6.8 8 10.3l3.5-3.5M3 13.5h10" style="fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"/></svg>دانلود نسخه PDF کامل</a><span class="small mut">برای چاپ و مطالعه آفلاین، با فهرست و نشانک فصل‌ها</span></div>
+  <div class="facts"><span><b>۳۳</b> فصل</span><span><b>۲۲۸</b> مثال حل‌شده</span><span><b>۱۵۱</b> تمرین با جواب</span><span><b>۱۲۳</b> شکل مدار</span><span>منبع: جزوه‌های کلاس و برنامه ترم</span></div>
   <svg class="trace" viewBox="0 0 800 70" preserveAspectRatio="none" aria-hidden="true">
     <path d="M0 52 H120 L140 32 H300 L318 50 H420 L440 30 H520 L540 50 H800" style="fill:none;stroke:var(--copper);stroke-width:2.2"/>
     <path d="M0 62 H210 L226 46 H600 L616 62 H800" style="fill:none;stroke:var(--mask);stroke-width:1.6;opacity:.7"/>
@@ -357,7 +397,7 @@ svg .guide{stroke:var(--ink-3);stroke-dasharray:4 4;stroke-width:1}
   <p>جدول زیر از برنامه رسمی درس آمده است. ستون سوم فصل‌های این جزوه را نشان می‌دهد که آن جلسه را پوشش می‌دهند. نمره از ۲۰: میان‌ترم ۵، پایان‌ترم ۷، کوییزها ۴، تمرین‌ها ۴. میان‌ترم فصل‌های ۱ تا ۳ درس (بخش B) و پایان‌ترم فصل‌های ۴ تا ۶ (بخش C) را می‌پوشاند.</p>
   <div class="tbl"><table><thead><tr><th>جلسه</th><th>مبحث</th><th>فصل جزوه</th><th class="n">کوییز</th></tr></thead><tbody><tr><td style="white-space:nowrap">مهر ۵</td><td>المان‌های الکتریکی، قانون ولتاژ و جریان کیرشهف</td><td><a href="#elements">B1</a> <a href="#kirchhoff">B2</a></td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۷</td><td>تحلیل مدار، اتصالات سری و موازی المان‌های مقاومتی</td><td><a href="#kirchhoff">B2</a></td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۲</td><td>روش‌های تحلیل مدار: آنالیز گره و مش</td><td><a href="#nodal-mesh">B3</a></td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۴</td><td>خطی بودن و اصل برهم‌نهی</td><td><a href="#thevenin">B4</a></td><td class="n">Quiz I</td></tr><tr><td style="white-space:nowrap">مهر ۱۹ تا ۲۶</td><td>مدارهای معادل تونن و نورتن</td><td><a href="#thevenin">B4</a></td><td class="n">Quiz II</td></tr><tr><td style="white-space:nowrap">مهر ۲۸</td><td>معرفی عناصر ذخیره‌کننده انرژی</td><td><a href="#capacitor">B6</a> <a href="#inductor">B7</a></td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۳</td><td>شکل موج‌ها و مدارهای مرتبه اول</td><td><a href="#waveforms">B8</a> <a href="#switching">B9</a> <a href="#order">B10</a> <a href="#first-order">B11</a></td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۰</td><td>مدارهای مرتبه اول</td><td><a href="#first-order">B11</a></td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۲ و ۱۷</td><td>مدارهای مرتبه دوم</td><td><a href="#second-order">B12</a> <a href="#impulse">B13</a></td><td class="n">Quiz III</td></tr><tr><td style="white-space:nowrap">آبان ۱۹</td><td>امپدانس و ادمیتانس</td><td><a href="#s-domain">B15</a></td><td class="n">Quiz IV</td></tr><tr><td style="white-space:nowrap">آبان ۲۴ تا آذر ۱</td><td>آنالیز مدار با تبدیل لاپلاس</td><td><a href="#laplace">B14</a> <a href="#s-domain">B15</a></td><td class="n">Quiz IV</td></tr><tr><td style="white-space:nowrap">آذر ۳ و ۸</td><td>منحنی مشخصه، مدل و کاربردهای دیود</td><td><a href="#diode">C1</a></td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۱۰ و ۱۵</td><td>ساختار، عملکرد و منحنی مشخصه ماسفت افزایشی</td><td><a href="#mosfet">C2</a></td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۱۷</td><td>انواع مدارهای وارونساز با ترانزیستور</td><td><a href="#inverter">C3</a></td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۲۲ و ۲۴</td><td>ترانزیستور گذر و دروازه انتقال</td><td><a href="#pass-tg">C4</a></td><td class="n">Quiz V</td></tr><tr><td style="white-space:nowrap">آذر ۲۹</td><td>منطق CMOS ایستا</td><td><a href="#cmos-logic">C5</a></td><td class="n">Quiz VI</td></tr><tr><td style="white-space:nowrap">دی ۱ و ۶</td><td>Latch و FF، شیفت رجیستر</td><td><a href="#latch-ff">C6</a></td><td class="n">Quiz VI</td></tr><tr><td style="white-space:nowrap">دی ۸</td><td>انواع حافظه‌های RAM و ROM</td><td><a href="#memory">C7</a></td><td class="n">Quiz VI</td></tr></tbody></table></div>
   <p class="small mut">اگر پایه ریاضی‌تان لرزان است، قبل از بخش B فصل‌های بخش A را بخوانید؛ هر فصل در ابتدایش پیش‌نیازهایش را با لینک نوشته است.</p>
-  <div class="part-block"><div class="ph"><span class="pc">A</span><h3>پایه‌ها: ریاضی و فیزیکِ لازم</h3><p>هر چیزی که درس مدار روی آن سوار است، از صفر</p></div><div class="cards"><a class="card" href="#math-functions"><span class="cc">A1</span><span class="ct">تابع، شیب، نمایی و لگاریتم</span><span class="cd">زبان نمودارها؛ چرا عدد e همه‌جای مدار پیدا می‌شود</span></a><a class="card" href="#math-trig-complex"><span class="cc">A2</span><span class="ct">سینوسی‌ها و اعداد مختلط</span><span class="cd">دامنه، فرکانس، فاز؛ بردار چرخان و فرمول اویلر</span></a><a class="card" href="#math-derivative"><span class="cc">A3</span><span class="ct">مشتق: آهنگ تغییر</span><span class="cd">از شیب وتر تا مشتق؛ همه قاعده‌ها با اثبات</span></a><a class="card" href="#math-integral"><span class="cc">A4</span><span class="ct">انتگرال، پله و ضربه</span><span class="cd">جمع تکه‌های کوچک؛ مساحت؛ قضیه اساسی؛ u(t) و δ(t)</span></a><a class="card" href="#math-linear"><span class="cc">A5</span><span class="ct">دستگاه معادلات خطی</span><span class="cd">حذف، جایگذاری، کرامر و نوشتن ماتریسی</span></a><a class="card" href="#math-ode"><span class="cc">A6</span><span class="ct">معادلات دیفرانسیل مدار</span><span class="cd">مرتبه اول و دوم؛ معادله مشخصه؛ جواب همگن و خصوصی</span></a><a class="card" href="#phys-electric"><span class="cc">A7</span><span class="ct">فیزیک الکتریسیته</span><span class="cd">بار، میدان، ولتاژ، جریان، مقاومت و خازن فیزیکی</span></a><a class="card" href="#phys-magnetic"><span class="cc">A8</span><span class="ct">مغناطیس و القا</span><span class="cd">شار، قانون فارادی، لنز و سلف فیزیکی</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">B</span><h3>مدارهای الکتریکی</h3><p>فصل‌های ۱ تا ۳ درس · پوشش میان‌ترم</p></div><div class="cards"><a class="card" href="#elements"><span class="cc">B1</span><span class="ct">المان‌ها و منابع</span><span class="cd">کمیت‌های پایه، مقاومت، خطی بودن، منابع مستقل و وابسته</span></a><a class="card" href="#kirchhoff"><span class="cc">B2</span><span class="ct">قوانین کیرشهف و ترکیب مقاومت‌ها</span><span class="cd">KCL، KVL، سری و موازی، تقسیم ولتاژ و جریان، تبدیل منبع، ستاره-مثلث</span></a><a class="card" href="#nodal-mesh"><span class="cc">B3</span><span class="ct">تحلیل گره و مش</span><span class="cd">ابرگره، ابرمش، منابع وابسته و روش بازرسی</span></a><a class="card" href="#thevenin"><span class="cc">B4</span><span class="ct">خطی بودن، جمع آثار، تونن و نورتن</span><span class="cd">همگنی، برهم‌نهی، مدار معادل و انتقال حداکثر توان</span></a><a class="card" href="#opamp"><span class="cc">B5</span><span class="ct">تقویت‌کننده عملیاتی</span><span class="cd">مدل ایده‌آل، اتصال کوتاه مجازی، معکوس‌کننده، جمع‌کننده، تفاضلی</span></a><a class="card" href="#capacitor"><span class="cc">B6</span><span class="ct">خازن</span><span class="cd">رابطه جریان و ولتاژ، پیوستگی ولتاژ، انرژی، سری و موازی، اتصال خازن‌های باردار</span></a><a class="card" href="#inductor"><span class="cc">B7</span><span class="ct">سلف و دوگانی</span><span class="cd">رابطه ولتاژ و جریان، پیوستگی جریان، انرژی، ترکیب سلف‌ها، مدار دوگان</span></a><a class="card" href="#waveforms"><span class="cc">B8</span><span class="ct">شکل موج‌ها</span><span class="cd">پله، شیب، ضربه، پالس، نمایی و سینوسی؛ ساختن موج از قطعه‌ها</span></a><a class="card" href="#switching"><span class="cc">B9</span><span class="ct">حالت دائمی DC و لحظه کلیدزنی</span><span class="cd">مقادیر 0⁻ و 0⁺ و ∞ و مشتق‌های اولیه</span></a><a class="card" href="#order"><span class="cc">B10</span><span class="ct">مرتبه مدار</span><span class="cd">حلقه خازنی، کات‌ست سلفی و روش سریع شمارش</span></a><a class="card" href="#first-order"><span class="cc">B11</span><span class="ct">مدارهای مرتبه اول</span><span class="cd">ورودی صفر، حالت صفر، فرمول طلایی، پاسخ پله و ضربه، انتگرال‌گیر</span></a><a class="card" href="#second-order"><span class="cc">B12</span><span class="ct">مدارهای مرتبه دوم (RLC)</span><span class="cd">معادله مشخصه، چهار نوع پاسخ، جواب خصوصی، ضربه</span></a><a class="card" href="#impulse"><span class="cc">B13</span><span class="ct">پاسخ ضربه از روی معادله دیفرانسیل</span><span class="cd">تطبیق ضرایب ضربه، رابطه پاسخ پله و ضربه</span></a><a class="card" href="#laplace"><span class="cc">B14</span><span class="ct">کانولوشن و تبدیل لاپلاس</span><span class="cd">پاسخ به ورودی دلخواه، جدول تبدیل‌ها، قضایا، کسرهای جزئی</span></a><a class="card" href="#s-domain"><span class="cc">B15</span><span class="ct">امپدانس، ادمیتانس و تحلیل در حوزه s</span><span class="cd">مدل المان‌ها با شرط اولیه، تابع شبکه، قطب و صفر، پایداری، حالت دائمی سینوسی</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">C</span><h3>الکترونیک دیجیتال</h3><p>فصل‌های ۴ تا ۶ درس · پوشش پایان‌ترم</p></div><div class="cards"><a class="card" href="#diode"><span class="cc">C1</span><span class="ct">دیود</span><span class="cd">نیمه‌هادی، پیوند p-n، مشخصه نمایی، مدل‌ها، یکسوساز، برش‌دهنده و زنر</span></a><a class="card" href="#mosfet"><span class="cc">C2</span><span class="ct">ترانزیستور ماسفت افزایشی</span><span class="cd">ساختار، تشکیل کانال، نواحی کاری، مدل مداری و تحلیل DC</span></a><a class="card" href="#inverter"><span class="cc">C3</span><span class="ct">وارونسازها و CMOS</span><span class="cd">بار مقاومتی و ترانزیستوری، CMOS، منحنی انتقال، حاشیه نویز، تأخیر و توان</span></a><a class="card" href="#pass-tg"><span class="cc">C4</span><span class="ct">ترانزیستور گذر و دروازه انتقال</span><span class="cd">عبور ۰ و ۱، افت آستانه، گیت انتقال و طراحی منطق با آن</span></a><a class="card" href="#cmos-logic"><span class="cc">C5</span><span class="ct">منطق CMOS ایستا و پویا</span><span class="cd">شبکه بالاکش و پایین‌کش، دوگانی، گیت پیچیده، اندازه‌گذاری، منطق دینامیک و دومینو</span></a><a class="card" href="#latch-ff"><span class="cc">C6</span><span class="ct">لچ، فلیپ‌فلاپ و شیفت رجیستر</span><span class="cd">لچ SR و D، معکوس‌کننده کلاک‌دار، Master–Slave، شیفت رجیستر دینامیک</span></a><a class="card" href="#memory"><span class="cc">C7</span><span class="ct">حافظه‌های RAM و ROM</span><span class="cd">آرایه، رمزگشا، PROM، EPROM، Flash، DRAM و SRAM</span></a><a class="card" href="#converters"><span class="cc">C8</span><span class="ct">نوسان‌ساز و مبدل‌های داده</span><span class="cd">نوسان‌ساز RC، مبدل D/A وزن‌دار و R-2R، مبدل‌های A/D</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">Z</span><h3>پیوست</h3><p>مرور مفهومی</p></div><div class="cards"><a class="card" href="#summary"><span class="cc">Z1</span><span class="ct">نقشه مفهومی و جمع‌بندی روابط</span><span class="cd">هر رابطه با یک جمله «چرا»؛ برای مرور شب امتحان</span></a></div></div>
+  <div class="part-block"><div class="ph"><span class="pc">A</span><h3>پایه‌ها: ریاضی و فیزیکِ لازم</h3><p>هر چیزی که درس مدار روی آن سوار است، از صفر</p></div><div class="cards"><a class="card" href="#math-functions"><span class="cc">A1</span><span class="ct">تابع، شیب، نمایی و لگاریتم</span><span class="cd">زبان نمودارها؛ چرا عدد e همه‌جای مدار پیدا می‌شود</span></a><a class="card" href="#math-trig-complex"><span class="cc">A2</span><span class="ct">سینوسی‌ها و اعداد مختلط</span><span class="cd">دامنه، فرکانس، فاز؛ بردار چرخان و فرمول اویلر</span></a><a class="card" href="#math-derivative"><span class="cc">A3</span><span class="ct">مشتق: آهنگ تغییر</span><span class="cd">از شیب وتر تا مشتق؛ همه قاعده‌ها با اثبات</span></a><a class="card" href="#math-integral"><span class="cc">A4</span><span class="ct">انتگرال، پله و ضربه</span><span class="cd">جمع تکه‌های کوچک؛ مساحت؛ قضیه اساسی؛ u(t) و δ(t)</span></a><a class="card" href="#math-linear"><span class="cc">A5</span><span class="ct">دستگاه معادلات خطی</span><span class="cd">حذف، جایگذاری، کرامر و نوشتن ماتریسی</span></a><a class="card" href="#math-ode"><span class="cc">A6</span><span class="ct">معادلات دیفرانسیل مدار</span><span class="cd">مرتبه اول و دوم؛ معادله مشخصه؛ جواب همگن و خصوصی</span></a><a class="card" href="#phys-electric"><span class="cc">A7</span><span class="ct">فیزیک الکتریسیته</span><span class="cd">بار، میدان، ولتاژ، جریان، مقاومت و خازن فیزیکی</span></a><a class="card" href="#phys-magnetic"><span class="cc">A8</span><span class="ct">مغناطیس و القا</span><span class="cd">شار، قانون فارادی، لنز و سلف فیزیکی</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">B</span><h3>مدارهای الکتریکی</h3><p>فصل‌های ۱ تا ۳ درس · پوشش میان‌ترم</p></div><div class="cards"><a class="card" href="#elements"><span class="cc">B1</span><span class="ct">المان‌ها و منابع</span><span class="cd">کمیت‌های پایه، مقاومت، خطی بودن، منابع مستقل و وابسته</span></a><a class="card" href="#kirchhoff"><span class="cc">B2</span><span class="ct">قوانین کیرشهف و ترکیب مقاومت‌ها</span><span class="cd">KCL، KVL، سری و موازی، تقسیم ولتاژ و جریان، تبدیل منبع، ستاره-مثلث</span></a><a class="card" href="#nodal-mesh"><span class="cc">B3</span><span class="ct">تحلیل گره و مش</span><span class="cd">ابرگره، ابرمش، منابع وابسته و روش بازرسی</span></a><a class="card" href="#thevenin"><span class="cc">B4</span><span class="ct">خطی بودن، جمع آثار، تونن و نورتن</span><span class="cd">همگنی، برهم‌نهی، مدار معادل و انتقال حداکثر توان</span></a><a class="card" href="#opamp"><span class="cc">B5</span><span class="ct">تقویت‌کننده عملیاتی</span><span class="cd">مدل ایده‌آل، اتصال کوتاه مجازی، معکوس‌کننده، جمع‌کننده، تفاضلی</span></a><a class="card" href="#capacitor"><span class="cc">B6</span><span class="ct">خازن</span><span class="cd">رابطه جریان و ولتاژ، پیوستگی ولتاژ، انرژی، سری و موازی، اتصال خازن‌های باردار</span></a><a class="card" href="#inductor"><span class="cc">B7</span><span class="ct">سلف و دوگانی</span><span class="cd">رابطه ولتاژ و جریان، پیوستگی جریان، انرژی، ترکیب سلف‌ها، مدار دوگان</span></a><a class="card" href="#waveforms"><span class="cc">B8</span><span class="ct">شکل موج‌ها</span><span class="cd">پله، شیب، ضربه، پالس، نمایی و سینوسی؛ ساختن موج از قطعه‌ها</span></a><a class="card" href="#switching"><span class="cc">B9</span><span class="ct">حالت دائمی DC و لحظه کلیدزنی</span><span class="cd">مقادیر 0⁻ و 0⁺ و ∞ و مشتق‌های اولیه</span></a><a class="card" href="#order"><span class="cc">B10</span><span class="ct">مرتبه مدار</span><span class="cd">حلقه خازنی، کات‌ست سلفی و روش سریع شمارش</span></a><a class="card" href="#first-order"><span class="cc">B11</span><span class="ct">مدارهای مرتبه اول</span><span class="cd">ورودی صفر، حالت صفر، فرمول طلایی، پاسخ پله و ضربه، انتگرال‌گیر</span></a><a class="card" href="#second-order"><span class="cc">B12</span><span class="ct">مدارهای مرتبه دوم (RLC)</span><span class="cd">معادله مشخصه، چهار نوع پاسخ، جواب خصوصی، ضربه</span></a><a class="card" href="#impulse"><span class="cc">B13</span><span class="ct">پاسخ ضربه از روی معادله دیفرانسیل</span><span class="cd">تطبیق ضرایب ضربه، رابطه پاسخ پله و ضربه</span></a><a class="card" href="#laplace"><span class="cc">B14</span><span class="ct">کانولوشن و تبدیل لاپلاس</span><span class="cd">پاسخ به ورودی دلخواه، جدول تبدیل‌ها، قضایا، کسرهای جزئی</span></a><a class="card" href="#s-domain"><span class="cc">B15</span><span class="ct">امپدانس، ادمیتانس و تحلیل در حوزه s</span><span class="cd">مدل المان‌ها با شرط اولیه، تابع شبکه، قطب و صفر، پایداری، حالت دائمی سینوسی</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">C</span><h3>الکترونیک دیجیتال</h3><p>فصل‌های ۴ تا ۶ درس · پوشش پایان‌ترم</p></div><div class="cards"><a class="card" href="#diode"><span class="cc">C1</span><span class="ct">دیود</span><span class="cd">نیمه‌هادی، پیوند p-n، مشخصه نمایی، مدل‌ها، یکسوساز، برش‌دهنده و زنر</span></a><a class="card" href="#mosfet"><span class="cc">C2</span><span class="ct">ترانزیستور ماسفت افزایشی</span><span class="cd">ساختار، تشکیل کانال، نواحی کاری، مدل مداری و تحلیل DC</span></a><a class="card" href="#inverter"><span class="cc">C3</span><span class="ct">وارونسازها و CMOS</span><span class="cd">بار مقاومتی و ترانزیستوری، CMOS، منحنی انتقال، حاشیه نویز، تأخیر و توان</span></a><a class="card" href="#pass-tg"><span class="cc">C4</span><span class="ct">ترانزیستور گذر و دروازه انتقال</span><span class="cd">عبور ۰ و ۱، افت آستانه، گیت انتقال و طراحی منطق با آن</span></a><a class="card" href="#cmos-logic"><span class="cc">C5</span><span class="ct">منطق CMOS ایستا و پویا</span><span class="cd">شبکه بالاکش و پایین‌کش، دوگانی، گیت پیچیده، اندازه‌گذاری، منطق دینامیک و دومینو</span></a><a class="card" href="#latch-ff"><span class="cc">C6</span><span class="ct">لچ، فلیپ‌فلاپ و شیفت رجیستر</span><span class="cd">لچ SR و D، معکوس‌کننده کلاک‌دار، Master–Slave، شیفت رجیستر دینامیک</span></a><a class="card" href="#memory"><span class="cc">C7</span><span class="ct">حافظه‌های RAM و ROM</span><span class="cd">آرایه، رمزگشا، PROM، EPROM، Flash، DRAM و SRAM</span></a><a class="card" href="#converters"><span class="cc">C8</span><span class="ct">نوسان‌ساز و مبدل‌های داده</span><span class="cd">نوسان‌ساز RC، مبدل D/A وزن‌دار و R-2R، مبدل‌های A/D</span></a></div></div><div class="part-block"><div class="ph"><span class="pc">Z</span><h3>پیوست</h3><p>مرور مفهومی</p></div><div class="cards"><a class="card" href="#summary"><span class="cc">Z1</span><span class="ct">نقشه مفهومی و جمع‌بندی روابط</span><span class="cd">هر رابطه با یک جمله «چرا»؛ برای مرور شب امتحان</span></a><a class="card" href="#cheatsheet"><span class="cc">Z2</span><span class="ct">چیت‌شیت: فرمول‌ها و استپ‌های حل</span><span class="cd">همه فرمول‌ها و دستورکارهای حل مسئله، فصل‌به‌فصل، در کارت‌های فشرده؛ برای شب امتحان و سر جلسه حل تمرین</span></a></div></div>
 </section>
 <p class="foot">این جزوه بر اساس جزوه‌های کلاس درس «مدارهای الکتریکی و الکترونیک دیجیتال» و برنامه ترم پاییز ۱۴۰۵ بازنویسی و کامل شده است. مثال‌ها تازه‌اند و همه حل‌ها قدم‌به‌قدم بازبینی شده‌اند.</p>
 </article><article class="page chapter" data-route="math-functions" data-title="تابع، شیب، نمایی و لگاریتم" hidden><header class="ch-hero"><span class="code">A1 · CHAPTER</span><h1>تابع، شیب، نمایی و لگاریتم</h1><p class="sub">زبان نمودارها؛ چرا عدد e همه‌جای مدار پیدا می‌شود</p><svg class="trace" viewBox="0 0 600 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 9 H170 L180 3 H330 L340 15 H600" style="fill:none;stroke:var(--copper);stroke-width:2"/><circle cx="170" cy="9" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/><circle cx="340" cy="15" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/></svg><div class="goals"><div class="gbox"><h4>در این فصل چه چیزی را واقعاً می‌فهمیم</h4><ul>
@@ -7113,7 +7153,786 @@ svg .guide{stroke:var(--ink-3);stroke-dasharray:4 4;stroke-width:1}
 <div class="box sum"><div class="box-h"><span class="tag">جمع‌بندی</span></div><div class="box-b">
 <p>اگر فقط یک چیز از این درس بماند: <b>هر رابطه از چند اصل ساده بیرون می‌آید</b>: پایستگی بار و انرژی (کیرشهف)، خطی بودن (جمع آثار، تونن، لاپلاس)، حافظه خازن و سلف (پیوستگی)، و رفتار نمایی (مشتق \(e^{st}\)). وقتی رابطه‌ای را فراموش کردید، از این اصول دوباره بسازیدش.</p>
 </div></div>
-</div><nav class="pn" aria-label="فصل قبلی و بعدی"><a class="prev" href="#converters"><span class="k">→ فصل قبل</span><span class="t">C8 · نوسان‌ساز و مبدل‌های داده</span></a></nav></article></main></div></div>
+</div><nav class="pn" aria-label="فصل قبلی و بعدی"><a class="prev" href="#converters"><span class="k">→ فصل قبل</span><span class="t">C8 · نوسان‌ساز و مبدل‌های داده</span></a><a class="next" href="#cheatsheet"><span class="k">فصل بعد ←</span><span class="t">Z2 · چیت‌شیت: فرمول‌ها و استپ‌های حل</span></a></nav></article><article class="page chapter" data-route="cheatsheet" data-title="چیت‌شیت: فرمول‌ها و استپ‌های حل" hidden><header class="ch-hero"><span class="code">Z2 · CHAPTER</span><h1>چیت‌شیت: فرمول‌ها و استپ‌های حل</h1><p class="sub">همه فرمول‌ها و دستورکارهای حل مسئله، فصل‌به‌فصل، در کارت‌های فشرده؛ برای شب امتحان و سر جلسه حل تمرین</p><svg class="trace" viewBox="0 0 600 18" preserveAspectRatio="none" aria-hidden="true"><path d="M0 9 H170 L180 3 H330 L340 15 H600" style="fill:none;stroke:var(--copper);stroke-width:2"/><circle cx="170" cy="9" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/><circle cx="340" cy="15" r="3.4" style="fill:var(--sheet);stroke:var(--copper);stroke-width:2"/></svg><div class="goals"><div class="gbox"><h4>در این فصل چه چیزی را واقعاً می‌فهمیم</h4><ul>
+<li>همه فرمول‌های درس را یک‌جا و فصل‌به‌فصل داشته باشیم، هر کدام با شرط کاربردش.</li>
+<li>برای هر نوع مسئله «استپ‌های حل» را مثل یک دستورالعمل کوتاه ببینیم، نه یک توضیح طولانی.</li>
+<li>قبل از تحویل برگه، با یک چک‌لیست ۱۰ ثانیه‌ای جواب را بررسی کنیم.</li>
+</ul></div><div class="gbox"><h4>پیش‌نیاز</h4><div class="chips"><a href="#summary">Z1 · نقشه مفهومی و جمع‌بندی روابط</a></div><h4 style="margin-top:10px">جایگاه در درس</h4><p style="margin:0">مرور کل درس · میان‌ترم و پایان‌ترم</p></div></div><nav class="toc" aria-label="فهرست این فصل"><b>بخش‌های این فصل</b><ol><li><a href="#cheatsheet-s1"><span class="sn">Z2.1</span>نقشه تصمیم: مسئله را دیدم، از کجا شروع کنم؟</a></li><li><a href="#cheatsheet-s2"><span class="sn">Z2.2</span>ثابت‌ها، یکاها و عددهای حفظ‌کردنی</a></li><li><a href="#cheatsheet-s3"><span class="sn">Z2.3</span>ریاضی و فیزیکِ لازم (بخش A) در یک نگاه</a></li><li><a href="#cheatsheet-s4"><span class="sn">Z2.4</span>تحلیل مدار مقاومتی (B1 تا B5)</a></li><li><a href="#cheatsheet-s5"><span class="sn">Z2.5</span>خازن، سلف، شکل موج و کلیدزنی (B6 تا B10)</a></li><li><a href="#cheatsheet-s6"><span class="sn">Z2.6</span>پاسخ زمانی: مرتبه اول، مرتبه دوم و پاسخ ضربه (B11 تا B13)</a></li><li><a href="#cheatsheet-s7"><span class="sn">Z2.7</span>تبدیل لاپلاس و تحلیل در حوزه s (B14 و B15)</a></li><li><a href="#cheatsheet-s8"><span class="sn">Z2.8</span>دیود و ترانزیستور ماسفت (C1 و C2)</a></li><li><a href="#cheatsheet-s9"><span class="sn">Z2.9</span>وارونساز، دروازه انتقال و منطق CMOS (C3 تا C5)</a></li><li><a href="#cheatsheet-s10"><span class="sn">Z2.10</span>لچ، فلیپ‌فلاپ، حافظه و مبدل‌ها (C6 تا C8)</a></li><li><a href="#cheatsheet-s11"><span class="sn">Z2.11</span>دام‌های رایج و چک‌لیست پایانی</a></li></ol></nav></header><div class="prose">
+
+
+<p>این صفحه <b>چیت‌شیت</b> است: بدون اثبات و بدون شهود، فقط «چه رابطه‌ای» و «به چه ترتیبی حل کنم». اگر جایی «چرا»ی یک رابطه را فراموش کرده‌اید، روی کد فصل (مثل <a href="#first-order">B11</a>) در سرتیتر هر کارت بزنید تا به توضیح کامل برسید. نقشه مفهومی همه رابطه‌ها در <a href="#summary">Z1</a> است.</p>
+
+<div class="cs-jump">
+<a href="#cheatsheet-s1"><b>۱</b>نقشه تصمیم</a>
+<a href="#cheatsheet-s2"><b>۲</b>ثابت‌ها و یکاها</a>
+<a href="#cheatsheet-s3"><b>۳</b>ریاضی و فیزیک</a>
+<a href="#cheatsheet-s4"><b>۴</b>مدار مقاومتی</a>
+<a href="#cheatsheet-s5"><b>۵</b>خازن، سلف، کلیدزنی</a>
+<a href="#cheatsheet-s6"><b>۶</b>پاسخ زمانی</a>
+<a href="#cheatsheet-s7"><b>۷</b>لاپلاس و حوزه s</a>
+<a href="#cheatsheet-s8"><b>۸</b>دیود و ماسفت</a>
+<a href="#cheatsheet-s9"><b>۹</b>منطق CMOS</a>
+<a href="#cheatsheet-s10"><b>۱۰</b>لچ، حافظه، مبدل</a>
+<a href="#cheatsheet-s11"><b>۱۱</b>دام‌ها و چک‌لیست</a>
+</div>
+
+<h2 id="cheatsheet-s1"><span class="sn">Z2.1</span>نقشه تصمیم: مسئله را دیدم، از کجا شروع کنم؟</h2>
+
+<p>ستون اول را با صورت مسئله مطابقت دهید؛ ستون دوم اولین حرکت است و ستون سوم فصل.</p>
+
+<div class="tbl"><table>
+<thead><tr><th>در صورت مسئله می‌بینم…</th><th>اولین حرکت</th><th>فصل</th></tr></thead>
+<tbody>
+<tr><td>مدار مقاومتی، چند منبع، ولتاژ یا جریان یک نقطه</td><td>تحلیل گره (منبع ولتاژ کم) یا مش (منبع جریان کم)؛ ابتدا ساده‌سازی سری/موازی و تبدیل منبع</td><td><a href="#nodal-mesh">B3</a></td></tr>
+<tr><td>منبع ولتاژ بین دو گره غیرزمین / منبع جریان بین دو مش</td><td>ابرگره (یک KCL + معادله قید) / ابرمش (یک KVL + معادله قید)</td><td><a href="#nodal-mesh">B3</a></td></tr>
+<tr><td>بار متغیر، «معادل»، «بیشترین توان»</td><td>تونن/نورتن؛ \(V_{th}=v_{oc}\)، \(R_{th}\) با منابع مستقل خاموش؛ بیشینه توان در \(R_L=R_{th}\)</td><td><a href="#thevenin">B4</a></td></tr>
+<tr><td>منبع وابسته و خواسته \(R_{th}\)</td><td>منبع آزمون (وابسته‌ها روشن) یا \(R_{th}=v_{oc}/i_{sc}\)</td><td><a href="#thevenin">B4</a></td></tr>
+<tr><td>چند منبع مستقل و یک خروجی</td><td>جمع آثار: ولتاژی ⇐ اتصال کوتاه، جریانی ⇐ باز، وابسته همیشه روشن</td><td><a href="#thevenin">B4</a></td></tr>
+<tr><td>تقویت‌کننده عملیاتی با فیدبک منفی</td><td>\(v_+=v_-\) و \(i_\pm=0\)، سپس KCL در گره \(v_-\)</td><td><a href="#opamp">B5</a></td></tr>
+<tr><td>کلید، «در \(t=0^+\)»، مشتق اولیه</td><td>سه مدار \(0^-\)، \(0^+\)، \(\infty\)؛ فقط \(v_C\) و \(i_L\) پیوسته‌اند</td><td><a href="#switching">B9</a></td></tr>
+<tr><td>«مرتبه مدار چند است؟»</td><td>\(N_C+N_L-n_C-n_L\) برای مدار بعد از کلیدزنی</td><td><a href="#order">B10</a></td></tr>
+<tr><td>مرتبه اول، منابع ثابت، \(y(t)\)</td><td>فرمول طلایی \(y(\infty)+[y(0^+)-y(\infty)]e^{-t/\tau}\)</td><td><a href="#first-order">B11</a></td></tr>
+<tr><td>RLC، «نوع پاسخ»</td><td>\(\alpha\) و \(\omega_0\) را بسازید و مقایسه کنید</td><td><a href="#second-order">B12</a></td></tr>
+<tr><td>معادله دیفرانسیل و «پاسخ ضربه»</td><td>جواب همگن × \(u(t)\) (+ ضربه اگر \(m\ge n\))، تطبیق ضرایب؛ یا \(\mathcal L^{-1}\{H\}\)</td><td><a href="#impulse">B13</a></td></tr>
+<tr><td>ورودی دلخواه، کانولوشن</td><td>\(Y=W\cdot H\) و کسر جزئی</td><td><a href="#laplace">B14</a></td></tr>
+<tr><td>مدار با شرط اولیه و ورودی دلخواه</td><td>مدار حوزه s با منبع‌های شرط اولیه، بعد کسر جزئی</td><td><a href="#s-domain">B15</a></td></tr>
+<tr><td>منبع سینوسی، «حالت دائمی»</td><td>\(s=j\omega\)؛ دامنه × \(|H|\)، فاز + \(\angle H\)</td><td><a href="#s-domain">B15</a></td></tr>
+<tr><td>دیود در مدار</td><td>فرض روشن/خاموش، حل، بررسی (\(i&gt;0\) یا \(v&lt;0.7\))</td><td><a href="#diode">C1</a></td></tr>
+<tr><td>ماسفت، تحلیل DC</td><td>\(V_{GS}\)، اشباع فرض کن، بررسی \(V_{DS}\ge V_{ov}\)، در غیر این‌صورت خطی</td><td><a href="#mosfet">C2</a></td></tr>
+<tr><td>منحنی انتقال، \(V_M\)، حاشیه نویز، تأخیر، توان</td><td>مناطق CMOS، \(V_M\) با \(r=k_n/k_p\)، \(t_p=0.69R_{on}C\)، \(P=\alpha CV_{DD}^2f\)</td><td><a href="#inverter">C3</a></td></tr>
+<tr><td>طراحی گیت از روی تابع</td><td>\(F=\overline G\)؛ PDN از \(G\) (AND سری، OR موازی)؛ PUN دوگان؛ بررسی دو سطر</td><td><a href="#cmos-logic">C5</a></td></tr>
+<tr><td>منطق با ترانزیستور گذر / دروازه انتقال</td><td>برای هر سطر جدول یک مسیر TG؛ افت آستانه NMOS برای ۱ و PMOS برای ۰</td><td><a href="#pass-tg">C4</a></td></tr>
+<tr><td>لچ، فلیپ‌فلاپ، شیفت رجیستر</td><td>لچ = حساس به سطح؛ FF = دو لچ با کلاک مخالف؛ دوفاز بدون همپوشانی</td><td><a href="#latch-ff">C6</a></td></tr>
+<tr><td>RAM / ROM، ظرفیت، تقسیم بار</td><td>\(2^n\times m\)، رمزگشا، \(\Delta V_{BL}=\pm\frac{V_{DD}}{2}\frac{C_s}{C_s+C_{BL}}\)</td><td><a href="#memory">C7</a></td></tr>
+<tr><td>D/A یا A/D، نوسان‌ساز</td><td>LSB، \(V_o\) نردبان R-2R، ساختار فلش/SAR، \(T=2RC\ln3\)</td><td><a href="#converters">C8</a></td></tr>
+</tbody></table></div>
+
+<h2 id="cheatsheet-s2"><span class="sn">Z2.2</span>ثابت‌ها، یکاها و عددهای حفظ‌کردنی</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-note)"><div class="cs-h"><a class="cs-c" href="#math-functions">A1</a><b>عددهای کلیدی</b></div><div class="cs-b">
+<div class="fm"><span class="fn">باقی‌مانده بعد از \(\tau,2\tau,3\tau,5\tau\)</span><span class="fx">\(e^{-1}=0.368,\ e^{-2}=0.135,\ e^{-3}=0.050,\ e^{-5}=0.0067\)</span></div>
+<div class="fm"><span class="fn">رسیدن به ۶۳٪ مقصد</span><span class="fx">\(1-e^{-1}=0.632\)</span></div>
+<div class="fm"><span class="fn">لگاریتم‌ها</span><span class="fx">\(\ln2=0.693,\ \ln3=1.099,\ \ln10=2.303\)</span></div>
+<div class="fm"><span class="fn">تأخیر ۵۰٪</span><span class="fx">\(t_{50\%}=\tau\ln2=0.69\,\tau\)</span></div>
+<div class="fm"><span class="fn">زمان صعود ۱۰ تا ۹۰٪</span><span class="fx">\(t_r=\tau\ln9=2.2\,\tau\)</span></div>
+<div class="fm"><span class="fn">پایان گذرا (باقی‌مانده کمتر از ۱٪)</span><span class="fx">\(t\approx5\tau\)</span></div>
+<div class="fm"><span class="fn">ریشه‌ها</span><span class="fx">\(\sqrt2=1.414,\ \sqrt3=1.732,\ 1/\sqrt2=0.707\)</span></div>
+<div class="fm"><span class="fn">فرکانس</span><span class="fx">\(\omega=2\pi f,\quad T=1/f\)</span></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-ex)"><div class="cs-h"><a class="cs-c" href="#diode">C1</a><a class="cs-c" href="#mosfet">C2</a><b>دیود، ترانزیستور و دما</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ولتاژ حرارتی (دمای اتاق)</span><span class="fx">\(V_T=kT/q\approx25\,\text{mV}\)</span></div>
+<div class="fm"><span class="fn">افت دیود سیلیسیم روشن</span><span class="fx">\(V_D\approx0.7\,\text{V}\)</span></div>
+<div class="fm"><span class="fn">هر ۱۰ برابر جریان</span><span class="fx">\(\Delta V\approx60\,\text{mV}\)</span></div>
+<div class="fm"><span class="fn">اثر دما</span><span class="fx">\(\approx-2\,\text{mV}/^\circ\text{C}\)</span></div>
+<div class="fm"><span class="fn">LSB مبدل \(n\) بیتی</span><span class="fx">\(V_{FS}/2^n\)</span></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-hw)"><div class="cs-h"><a class="cs-c" href="#math-functions">A1</a><b>پیشوندهای SI</b></div><div class="cs-b">
+<div class="tbl" style="margin:.4em 0"><table>
+<tbody>
+<tr><td class="n">p = 10⁻¹²</td><td class="n">n = 10⁻⁹</td><td class="n">µ = 10⁻⁶</td><td class="n">m = 10⁻³</td></tr>
+<tr><td class="n">k = 10³</td><td class="n">M = 10⁶</td><td class="n">G = 10⁹</td><td class="n">f = 10⁻¹⁵</td></tr>
+</tbody></table></div>
+<p class="cs-note">مثال‌های رایج: \(\text{kΩ}\times\text{mA}=\text{V}\)؛ \(\text{kΩ}\times\mu\text{F}=\text{ms}\)؛ \(\text{kΩ}\times\text{nF}=\mu\text{s}\)؛ \(\text{mH}/\Omega=\text{ms}\).</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#elements">B1</a><b>یکاها و ارتباطشان</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ولتاژ ← توان</span><span class="fx">\(\text{W}=\text{V}\cdot\text{A}\)</span></div>
+<div class="fm"><span class="fn">رسانایی</span><span class="fx">\(\text{S}=1/\Omega\)</span></div>
+<div class="fm"><span class="fn">خازن</span><span class="fx">\(\text{F}=\text{C}/\text{V}=\text{s}/\Omega\)</span></div>
+<div class="fm"><span class="fn">سلف</span><span class="fx">\(\text{H}=\text{Wb}/\text{A}=\Omega\cdot\text{s}\)</span></div>
+<div class="fm"><span class="fn">انرژی</span><span class="fx">\(\text{J}=\text{W}\cdot\text{s}\)</span></div>
+<div class="fm"><span class="fn">ثابت زمانی RC و L/R</span><span class="fx">\(\Omega\cdot\text{F}=\text{s},\quad \text{H}/\Omega=\text{s}\)</span></div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s3"><span class="sn">Z2.3</span>ریاضی و فیزیکِ لازم (بخش A) در یک نگاه</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-note)"><div class="cs-h"><a class="cs-c" href="#math-functions">A1</a><b>نمایی، لگاریتم، شیب</b></div><div class="cs-b">
+<div class="fm"><span class="fn">قاعده‌های توان</span><span class="fx">\(a^ma^n=a^{m+n},\ (a^m)^n=a^{mn},\ a^{-n}=\tfrac1{a^n}\)</span></div>
+<div class="fm"><span class="fn">لگاریتم</span><span class="fx">\(\ln(ab)=\ln a+\ln b,\ \ln\tfrac1a=-\ln a,\ e^{\ln x}=x\)</span></div>
+<div class="fm"><span class="fn">نمایی کاهنده</span><span class="fx">\(x(t)=X_0e^{-t/\tau}\)</span></div>
+<div class="fm"><span class="fn">نمایی با مقصد</span><span class="fx">\(x(t)=x_\infty+[x_0-x_\infty]e^{-t/\tau}\)</span></div>
+<div class="fm"><span class="fn">کی به کسر \(k\) می‌رسد؟</span><span class="fx">\(t=\tau\ln\tfrac1k\)</span></div>
+<div class="fm"><span class="fn">شیب</span><span class="fx">\(m=\Delta y/\Delta x\)</span></div>
+<div class="cs-stp"><h5>زمان رسیدن به مقدار دلخواه \(y_1\)</h5><ol class="steps">
+<li>رابطه نمایی را با \(y_\infty\)، \(y_0\) و \(\tau\) بنویسید.</li>
+<li>معادله را برای \(e^{-t/\tau}\) حل کنید: \(e^{-t/\tau}=\dfrac{y_1-y_\infty}{y_0-y_\infty}\).</li>
+<li>لگاریتم بگیرید: \(t=\tau\ln\dfrac{y_0-y_\infty}{y_1-y_\infty}\).</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-note)"><div class="cs-h"><a class="cs-c" href="#math-trig-complex">A2</a><b>سینوسی و اعداد مختلط</b></div><div class="cs-b">
+<div class="fm"><span class="fn">شکل کلی</span><span class="fx">\(v=V_m\cos(\omega t+\varphi)\)</span></div>
+<div class="fm"><span class="fn">ترکیب دو سینوسی</span><span class="fx">\(A\cos\omega t+B\sin\omega t=\sqrt{A^2+B^2}\cos(\omega t-\varphi),\ \tan\varphi=\tfrac BA\)</span></div>
+<div class="fm"><span class="fn">اویلر</span><span class="fx">\(e^{j\theta}=\cos\theta+j\sin\theta\)</span></div>
+<div class="fm"><span class="fn">قطبی</span><span class="fx">\(a+jb=re^{j\theta},\ r=\sqrt{a^2+b^2},\ \theta=\arctan\tfrac ba\)</span></div>
+<div class="fm"><span class="fn">ضرب و تقسیم</span><span class="fx">\(r_1e^{j\theta_1}\cdot r_2e^{j\theta_2}=r_1r_2e^{j(\theta_1+\theta_2)}\)</span></div>
+<div class="fm"><span class="fn">ساده</span><span class="fx">\(j^2=-1,\ \tfrac1j=-j\)</span></div>
+<div class="fm"><span class="fn">مقدار مؤثر</span><span class="fx">\(V_{rms}=V_m/\sqrt2\)</span></div>
+<div class="fm"><span class="fn">نمایی مختلط (\(\sigma\) میرایی، \(\omega\) نوسان)</span><span class="fx">\(e^{(\sigma+j\omega)t}\)</span></div>
+<div class="cs-bad"><span>دام</span><div>زاویه \(\arctan(b/a)\) را برای \(a&lt;0\) به ربع درست ببرید (۱۸۰° اضافه کنید).</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#math-derivative">A3</a><b>مشتق</b></div><div class="cs-b">
+<div class="fm"><span class="fn">تعریف</span><span class="fx">\(f'=\lim_{h\to0}\tfrac{f(x+h)-f(x)}{h}\)</span></div>
+<div class="fm"><span class="fx">\((x^n)'=nx^{n-1},\ (\ln x)'=\tfrac1x\)</span></div>
+<div class="fm"><span class="fx">\((e^{at})'=ae^{at},\ (e^{-t/\tau})'=-\tfrac1\tau e^{-t/\tau}\)</span></div>
+<div class="fm"><span class="fx">\((\sin\omega t)'=\omega\cos\omega t,\ (\cos\omega t)'=-\omega\sin\omega t\)</span></div>
+<div class="fm"><span class="fn">ضرب</span><span class="fx">\((fg)'=f'g+fg'\)</span></div>
+<div class="fm"><span class="fn">زنجیره‌ای</span><span class="fx">\([f(g(t))]'=f'(g)\,g'\)</span></div>
+<div class="fm"><span class="fn">تقریب خطی</span><span class="fx">\(\Delta f\approx f'(x_0)\Delta x\)</span></div>
+<div class="fm"><span class="fn">بیشینه/کمینه</span><span class="fx">\(f'=0\)</span></div>
+<p class="cs-note">گوشه در تابع ⇐ پرش در مشتق؛ پرش در تابع ⇐ ضربه در مشتق.</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#math-integral">A4</a><b>انتگرال، پله و ضربه</b></div><div class="cs-b">
+<div class="fm"><span class="fn">قضیه اساسی</span><span class="fx">\(\int_a^bf=F(b)-F(a),\ F'=f\)</span></div>
+<div class="fm"><span class="fx">\(\int e^{at}dt=\tfrac{e^{at}}{a},\ \int_0^\infty e^{-t/\tau}dt=\tau\)</span></div>
+<div class="fm"><span class="fx">\(\int t^ndt=\tfrac{t^{n+1}}{n+1},\ \int\sin\omega t=-\tfrac{\cos\omega t}{\omega}\)</span></div>
+<div class="fm"><span class="fn">ثابت انتگرال = شرط اولیه</span><span class="fx">\(x(t)=x(t_0)+\int_{t_0}^tx'\,d\tau\)</span></div>
+<div class="fm"><span class="fn">مقدار مؤثر</span><span class="fx">\(X_{rms}=\sqrt{\tfrac1T\int_0^Tx^2dt}\)</span></div>
+<div class="fm"><span class="fn">زنجیره</span><span class="fx">\(\delta\xrightarrow{\int}u\xrightarrow{\int}r\)</span></div>
+<div class="fm"><span class="fn">غربال</span><span class="fx">\(\int f(t)\delta(t-t_0)dt=f(t_0)\)</span></div>
+<div class="fm"><span class="fn">مشتق تابع ضرب در پله</span><span class="fx">\((fu)'=f'u+f(0)\delta\)</span></div>
+<div class="fm"><span class="fn">مقیاس</span><span class="fx">\(\delta(at)=\tfrac{\delta(t)}{|a|}\)</span></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#math-linear">A5</a><b>دستگاه معادلات خطی</b></div><div class="cs-b">
+<p>\(a_1x+b_1y=c_1,\ a_2x+b_2y=c_2\):</p>
+<div class="fm"><span class="fn">دترمینان ۲×۲</span><span class="fx">\(\Delta=a_1b_2-a_2b_1\)</span></div>
+<div class="fm"><span class="fn">کرامر</span><span class="fx">\(x=\tfrac{c_1b_2-c_2b_1}{\Delta},\quad y=\tfrac{a_1c_2-a_2c_1}{\Delta}\)</span></div>
+<div class="fm"><span class="fn">دترمینان ۳×۳</span><span class="fx">\(a(ei-fh)-b(di-fg)+c(dh-eg)\)</span></div>
+<div class="fm"><span class="fn">ماتریسی</span><span class="fx">\(A\mathbf x=\mathbf b,\ x_k=\det A_k/\det A\)</span></div>
+<div class="cs-bad"><span>دام</span><div>\(\det A=0\) یعنی معادله‌ها وابسته یا متناقض‌اند؛ کرامر جواب یکتا نمی‌دهد.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#math-ode">A6</a><b>معادله دیفرانسیل مدار</b></div><div class="cs-b">
+<div class="fm"><span class="fn">مرتبه اول</span><span class="fx">\(x'+\tfrac1\tau x=\tfrac F\tau\ \Rightarrow\ x=x_\infty+[x_0-x_\infty]e^{-t/\tau}\)</span></div>
+<div class="fm"><span class="fn">مشخصه مرتبه دوم</span><span class="fx">\(s^2+bs+c=0\)</span></div>
+<div class="fm"><span class="fn">دو ریشه حقیقی</span><span class="fx">\(x_h=A_1e^{s_1t}+A_2e^{s_2t}\)</span></div>
+<div class="fm"><span class="fn">ریشه مضاعف</span><span class="fx">\(x_h=(A_1+A_2t)e^{st}\)</span></div>
+<div class="fm"><span class="fn">ریشه مختلط</span><span class="fx">\(x_h=e^{-\alpha t}(A\cos\omega_dt+B\sin\omega_dt)\)</span></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>جواب خصوصی هم‌شکل ورودی (ثابت ⇐ ثابت). اگر ورودی هم‌شکل جواب همگن بود، در \(t\) ضرب کنید.</li>
+<li>جواب همگن را از ریشه‌های معادله مشخصه بنویسید.</li>
+<li>جواب کامل = همگن + خصوصی؛ ثابت‌ها را با شرایط اولیه (\(x(0^+)\)، \(x'(0^+)\)) تعیین کنید.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>ثابت‌ها را با جواب همگن تنها تطبیق ندهید؛ با جواب کامل تطبیق دهید.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-phys)"><div class="cs-h"><a class="cs-c" href="#phys-electric">A7</a><a class="cs-c" href="#phys-magnetic">A8</a><b>فیزیک الکتریسیته و مغناطیس</b></div><div class="cs-b">
+<div class="fm"><span class="fn">میدان یکنواخت</span><span class="fx">\(V=Ed\)</span></div>
+<div class="fm"><span class="fn">مقاومت سیم</span><span class="fx">\(R=\rho L/A\)</span></div>
+<div class="fm"><span class="fn">خازن تخت</span><span class="fx">\(C=\varepsilon A/d,\quad W=\tfrac12CV^2\)</span></div>
+<div class="fm"><span class="fn">توان</span><span class="fx">\(p=vi\)</span></div>
+<div class="fm"><span class="fn">فارادی</span><span class="fx">\(v=d\lambda/dt,\quad\lambda=N\Phi\)</span></div>
+<div class="fm"><span class="fn">سلف</span><span class="fx">\(\lambda=Li,\quad L=\mu N^2A/\ell\)</span></div>
+<div class="fm"><span class="fn">انرژی سلف</span><span class="fx">\(W=\tfrac12LI^2\)</span></div>
+<p class="cs-note">قیاس مکانیکی: L ↔ جرم، C ↔ فنر، R ↔ اصطکاک.</p>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s4"><span class="sn">Z2.4</span>تحلیل مدار مقاومتی (B1 تا B5)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#elements">B1</a><b>المان‌ها، توان و منابع</b></div><div class="cs-b">
+<div class="fm"><span class="fn">توان جذب‌شده (جریان از + وارد)</span><span class="fx">\(p=vi\)</span></div>
+<div class="fm"><span class="fn">مقاومت</span><span class="fx">\(v=Ri=i/G,\quad p=Ri^2=v^2/R\)</span></div>
+<div class="fm"><span class="fn">پایستگی توان (جمع توان جذب‌شده)</span><span class="fx">\(\sum p_k=0\)</span></div>
+<div class="fm"><span class="fn">چهار منبع وابسته</span><span class="fx">\(\text{VCVS}\ \mu v_x,\ \text{CCVS}\ ri_x,\ \text{VCCS}\ gv_x,\ \text{CCCS}\ \beta i_x\)</span></div>
+<p>منبع ولتاژ ایده‌آل: \(v\) ثابت و \(i\) هرچه مدار بخواهد؛ منبع جریان ایده‌آل: \(i\) ثابت و \(v\) آزاد.</p>
+<p>المان موازی با منبع ولتاژ و المان سری با منبع جریان از دید بقیه مدار حذف‌شدنی‌اند.</p>
+<div class="cs-stp"><h5>استپ‌های بررسی توان</h5><ol class="steps">
+<li>برای هر المان جهت جریان نسبت به سر + را مشخص کنید.</li>
+<li>اگر جریان از + وارد است \(p=+vi\) (جذب)، اگر خارج است \(p=-vi\) (تحویل).</li>
+<li>جمع جذب‌شده‌ها باید صفر شود؛ در غیر این‌صورت حل غلط است.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>علامت توان وقتی جریان از سر − وارد المان می‌شود.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#kirchhoff">B2</a><b>کیرشهف و ترکیب مقاومت‌ها</b></div><div class="cs-b">
+<div class="fm"><span class="fn">KCL</span><span class="fx">\(\sum i_{in}=\sum i_{out}\)</span></div>
+<div class="fm"><span class="fn">KVL (دور هر حلقه)</span><span class="fx">\(\sum v=0\)</span></div>
+<div class="fm"><span class="fn">سری</span><span class="fx">\(R_{eq}=R_1+\dots+R_N\)</span></div>
+<div class="fm"><span class="fn">موازی</span><span class="fx">\(G_{eq}=G_1+\dots+G_N,\quad R_1\parallel R_2=\tfrac{R_1R_2}{R_1+R_2}\)</span></div>
+<div class="fm"><span class="fn">تقسیم ولتاژ</span><span class="fx">\(v_k=\tfrac{R_k}{\sum R}\,v\)</span></div>
+<div class="fm"><span class="fn">تقسیم جریان</span><span class="fx">\(i_1=\tfrac{R_2}{R_1+R_2}\,i\)</span></div>
+<div class="fm"><span class="fn">تبدیل منبع</span><span class="fx">\(i_s=v_s/R\ \Longleftrightarrow\ v_s=Ri_s\)</span></div>
+<div class="fm"><span class="fn">شمار معادلات</span><span class="fx">\(\text{KCL}:n-1,\quad\text{KVL}:b-n+1\)</span></div>
+<div class="cs-stp"><h5>استپ‌های مقاومت معادل</h5><ol class="steps">
+<li>منابع مستقل را خاموش کنید (ولتاژ ⇐ سیم، جریان ⇐ باز) و دو سر خواسته را مشخص کنید.</li>
+<li>از دورترین سمت شروع کنید؛ هر سری/موازی آشکار را ادغام کنید.</li>
+<li>اگر هیچ سری/موازی ساده نماند، Y–Δ یا تقارن (گره هم‌پتانسیل) را امتحان کنید.</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-def)"><div class="cs-h"><a class="cs-c" href="#kirchhoff">B2</a><b>ستاره–مثلث (Y–Δ)</b></div><div class="cs-b">
+<div class="fm"><span class="fn">Δ → Y</span><span class="fx">\(R_1=\tfrac{R_bR_c}{S},\ R_2=\tfrac{R_cR_a}{S},\ R_3=\tfrac{R_aR_b}{S},\ S=R_a+R_b+R_c\)</span></div>
+<div class="fm"><span class="fn">Y → Δ</span><span class="fx">\(R_a=\tfrac{R_1R_2+R_2R_3+R_3R_1}{R_1}\) (و مشابه برای \(R_b,R_c\))</span></div>
+<div class="fm"><span class="fn">حالت متقارن</span><span class="fx">\(R_Y=R_\Delta/3\)</span></div>
+<p>قاعده حفظ‌کردن: ساق ستاره روی هر گره = (حاصل‌ضرب دو ضلع مثلث که به آن گره می‌رسند) ÷ (جمع سه ضلع).</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#nodal-mesh">B3</a><b>تحلیل گره</b></div><div class="cs-b">
+<div class="fm"><span class="fn">جریان مقاومت از a به b</span><span class="fx">\(i=\tfrac{v_a-v_b}{R}\)</span></div>
+<div class="fm"><span class="fn">بازرسی (فقط R و منبع جریان)</span><span class="fx">\(G\mathbf v=\mathbf i\)</span></div>
+<p>\(G_{kk}\): جمع رسانایی‌های متصل به گره \(k\)؛ \(G_{kj}\): منفی رسانایی‌های بین دو گره؛ \(i_k\): جریان منابع واردشونده به گره.</p>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>یک گره را مرجع (زمین) بگیرید.</li>
+<li>برای باقی گره‌ها \(v_1,v_2,\ldots\) تعریف کنید.</li>
+<li>در هر گره KCL بزنید: \(\sum_j\dfrac{v_k-v_j}{R_{kj}}\) (جمع روی همسایه‌ها) برابر جریان منابعِ واردشونده است.</li>
+<li><b>ابرگره</b> (منبع ولتاژ بین دو گره غیرزمین): قید \(v_a-v_b=V_s\) + یک KCL برای کل ابرگره.</li>
+<li>منبع وابسته: کنترل‌کننده را برحسب \(v\)ها بنویسید و جایگذاری کنید؛ بازرسی کورکورانه نکنید.</li>
+<li>حل دستگاه و بررسی با یک KCL آزاد.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>برای گره‌های داخل ابرگره KCL جداگانه نزنید؛ معادله قید را فراموش نکنید.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#nodal-mesh">B3</a><b>تحلیل مش</b></div><div class="cs-b">
+<div class="fm"><span class="fn">جریان شاخه مشترک</span><span class="fx">\(I_k-I_j\)</span></div>
+<div class="fm"><span class="fn">بازرسی (فقط R و منبع ولتاژ)</span><span class="fx">\(R\mathbf I=\mathbf V\)</span></div>
+<p>\(R_{kk}\): جمع مقاومت‌های مش؛ \(R_{kj}\): منفیِ مقاومت‌های مشترک؛ \(V_k\): منابعی که جریان ساعتگرد را «هل می‌دهند» مثبت.</p>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>برای هر مش جریان ساعتگرد \(I_k\) بگیرید.</li>
+<li>KVL مش: \(\sum RI=\sum V_s\) (جریان هر مقاومت در جهت حرکت).</li>
+<li><b>ابرمش</b> (منبع جریان بین دو مش): قید \(I_a-I_b=\pm I_s\) + یک KVL روی حلقه بیرونیِ دو مش (بدون عبور از منبع جریان).</li>
+<li>منبع وابسته: کنترل‌کننده را برحسب جریان مش‌ها بنویسید.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>جهت حرکت KVL را وسط حلقه عوض نکنید.</div></div>
+</div></section>
+
+<section class="cs-card wide" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#thevenin">B4</a><b>جمع آثار، تونن، نورتن</b></div><div class="cs-b">
+<div class="cs-two">
+<div>
+<div class="fm"><span class="fn">جمع آثار (هر بار فقط منبع \(k\) روشن)</span><span class="fx">\(y=\sum_k y_k\)</span></div>
+<div class="fm"><span class="fn">منبع ولتاژ خاموش = اتصال کوتاه</span><span class="fx">\(v=0\)</span></div>
+<div class="fm"><span class="fn">منبع جریان خاموش = مدار باز</span><span class="fx">\(i=0\)</span></div>
+<div class="fm"><span class="fn">تونن</span><span class="fx">\(V_{th}=v_{oc},\quad R_{th}=\tfrac{v_{oc}}{i_{sc}}\)</span></div>
+<div class="fm"><span class="fn">نورتن</span><span class="fx">\(I_N=i_{sc}=\tfrac{V_{th}}{R_{th}},\quad R_N=R_{th}\)</span></div>
+<div class="fm"><span class="fn">جریان بار</span><span class="fx">\(i_L=\tfrac{V_{th}}{R_{th}+R_L}\)</span></div>
+<div class="fm"><span class="fn">حداکثر توان</span><span class="fx">\(R_L=R_{th}\Rightarrow P_{max}=\tfrac{V_{th}^2}{4R_{th}}\)</span></div>
+<div class="fm"><span class="fn">بازده در حداکثر توان</span><span class="fx">\(\eta=50\%\)</span></div>
+</div>
+<div>
+<div class="cs-stp"><h5>استپ‌های تونن</h5><ol class="steps">
+<li>بار را بردارید و دو سر a، b را باز بگذارید.</li>
+<li>\(V_{th}\): ولتاژ مدار باز \(v_{ab}\) را با هر روشی حساب کنید.</li>
+<li>\(R_{th}\): بدون منبع وابسته ⇐ منابع مستقل را خاموش و ترکیب کنید؛ با منبع وابسته ⇐ منبع آزمون \(R_{th}=v_t/i_t\) (مستقل‌ها خاموش، وابسته‌ها روشن) یا \(v_{oc}/i_{sc}\).</li>
+<li>مدار معادل: \(V_{th}\) سری \(R_{th}\) (یا نورتن)؛ بار را وصل کنید.</li>
+</ol></div>
+<div class="cs-stp"><h5>استپ‌های جمع آثار</h5><ol class="steps">
+<li>یک منبع مستقل را نگه دارید، بقیه مستقل‌ها را خاموش کنید (وابسته‌ها روشن).</li>
+<li>پاسخ خواسته‌شده را حساب کنید.</li>
+<li>برای هر منبع تکرار؛ پاسخ‌ها را جمع جبری کنید.</li>
+</ol></div>
+</div>
+</div>
+<div class="cs-bad"><span>دام</span><div>توان را با جمع آثار جمع نکنید (غیرخطی است)؛ وابسته را هرگز خاموش نکنید؛ اگر \(v_{oc}=0\) از \(v_{oc}/i_{sc}\) استفاده نکنید. \(R_{th}\) با منبع وابسته می‌تواند منفی شود.</div></div>
+</div></section>
+
+<section class="cs-card wide" style="--k:var(--c-note)"><div class="cs-h"><a class="cs-c" href="#opamp">B5</a><b>تقویت‌کننده عملیاتی</b></div><div class="cs-b">
+<div class="cs-two">
+<div>
+<div class="fm"><span class="fn">مدل</span><span class="fx">\(v_o=A(v_+-v_-),\ |v_o|\le V_{sat}\)</span></div>
+<div class="fm"><span class="fn">با فیدبک منفی</span><span class="fx">\(v_+=v_-,\quad i_+=i_-=0\)</span></div>
+<div class="fm"><span class="fn">معکوس‌کننده</span><span class="fx">\(\tfrac{v_o}{v_i}=-\tfrac{R_f}{R_1}\)</span></div>
+<div class="fm"><span class="fn">غیرمعکوس‌کننده</span><span class="fx">\(\tfrac{v_o}{v_i}=1+\tfrac{R_f}{R_1}\)</span></div>
+<div class="fm"><span class="fn">دنبال‌کننده (بافر)</span><span class="fx">\(v_o=v_i\)</span></div>
+<div class="fm"><span class="fn">جمع‌کننده</span><span class="fx">\(v_o=-R_f\left(\tfrac{v_1}{R_1}+\tfrac{v_2}{R_2}+\dots\right)\)</span></div>
+<div class="fm"><span class="fn">تفاضلی (نسبت‌ها برابر)</span><span class="fx">\(v_o=\tfrac{R_2}{R_1}(v_2-v_1)\)</span></div>
+<div class="fm"><span class="fn">انتگرال‌گیر</span><span class="fx">\(v_o=-\tfrac1{RC}\int v_i\,dt\)</span></div>
+<div class="fm"><span class="fn">مشتق‌گیر</span><span class="fx">\(v_o=-RC\,\tfrac{dv_i}{dt}\)</span></div>
+</div>
+<div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>فیدبک منفی (از خروجی به ورودی \(-\)) را تأیید کنید.</li>
+<li>\(v_+\) را از مدار ورودی بنویسید؛ سپس \(v_-=v_+\).</li>
+<li>در گره \(v_-\) KCL بزنید با \(i_-=0\) (جریان ورودی‌ها = جریان فیدبک).</li>
+<li>\(v_o\) را حل کنید؛ بررسی کنید \(|v_o|\le V_{sat}\).</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>بدون فیدبک یا با فیدبک مثبت op-amp مقایسه‌گر است: \(v_+\ne v_-\) و خروجی اشباع.</div></div>
+</div>
+</div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s5"><span class="sn">Z2.5</span>خازن، سلف، شکل موج و کلیدزنی (B6 تا B10)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#capacitor">B6</a><b>خازن</b></div><div class="cs-b">
+<div class="fm"><span class="fn">رابطه بار</span><span class="fx">\(q=Cv\)</span></div>
+<div class="fm"><span class="fn">جریان</span><span class="fx">\(i=C\,\tfrac{dv}{dt}\)</span></div>
+<div class="fm"><span class="fn">ولتاژ</span><span class="fx">\(v(t)=v(t_0)+\tfrac1C\int_{t_0}^ti\,d\tau\)</span></div>
+<div class="fm"><span class="fn">انرژی</span><span class="fx">\(w=\tfrac12Cv^2=\tfrac{q^2}{2C}\)</span></div>
+<div class="fm"><span class="fn">موازی</span><span class="fx">\(C_{eq}=\sum C_k\)</span></div>
+<div class="fm"><span class="fn">سری</span><span class="fx">\(\tfrac1{C_{eq}}=\sum\tfrac1{C_k},\quad v_1=\tfrac{C_2}{C_1+C_2}v\)</span></div>
+<div class="fm"><span class="fn">پرش ولتاژ \(\Delta V\)</span><span class="fx">\(i=C\Delta V\,\delta(t)\)</span></div>
+<div class="fm"><span class="fn">اتصال دو خازن باردار</span><span class="fx">\(V_f=\tfrac{C_1V_1+C_2V_2}{C_1+C_2}\)</span></div>
+<div class="fm"><span class="fn">اتلاف انرژی</span><span class="fx">\(\Delta W=\tfrac12\tfrac{C_1C_2}{C_1+C_2}(V_1-V_2)^2\)</span></div>
+<p>DC دائمی: خازن مدار باز. \(v_C\) پیوسته است؛ \(i_C\) می‌تواند بپرد.</p>
+<div class="cs-bad"><span>دام</span><div>اتلاف اتصال خازن‌ها به مقدار \(R\) بستگی ندارد؛ بار پایسته است ولی انرژی نه.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#inductor">B7</a><b>سلف</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ولتاژ</span><span class="fx">\(v=L\,\tfrac{di}{dt}\)</span></div>
+<div class="fm"><span class="fn">جریان</span><span class="fx">\(i(t)=i(t_0)+\tfrac1L\int_{t_0}^tv\,d\tau\)</span></div>
+<div class="fm"><span class="fn">انرژی</span><span class="fx">\(w=\tfrac12Li^2\)</span></div>
+<div class="fm"><span class="fn">سری</span><span class="fx">\(L_{eq}=\sum L_k,\quad v_1=\tfrac{L_1}{L_1+L_2}v\)</span></div>
+<div class="fm"><span class="fn">موازی</span><span class="fx">\(\tfrac1{L_{eq}}=\sum\tfrac1{L_k}\)</span></div>
+<div class="fm"><span class="fn">پرش جریان \(\Delta I\)</span><span class="fx">\(v=L\Delta I\,\delta(t)\)</span></div>
+<p>DC دائمی: سلف اتصال کوتاه. \(i_L\) پیوسته است؛ \(v_L\) می‌تواند بپرد.</p>
+<div class="tbl" style="margin:.5em 0"><table>
+<thead><tr><th colspan="3">دوگانی</th></tr></thead>
+<tbody>
+<tr><td>ولتاژ ⟷ جریان</td><td>C ⟷ L</td><td>R ⟷ G</td></tr>
+<tr><td>سری ⟷ موازی</td><td>KVL ⟷ KCL</td><td>مش ⟷ گره</td></tr>
+<tr><td>کوتاه ⟷ باز</td><td>منبع V ⟷ منبع I</td><td>تونن ⟷ نورتن</td></tr>
+</tbody></table></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#waveforms">B8</a><b>شکل موج‌ها</b></div><div class="cs-b">
+<div class="fm"><span class="fn">رابطه‌ها</span><span class="fx">\(\delta=\tfrac{du}{dt},\quad u=\tfrac{dr}{dt}\)</span></div>
+<div class="fm"><span class="fn">انتگرال‌ها</span><span class="fx">\(r=\int u,\quad u=\int\delta\)</span></div>
+<div class="fm"><span class="fn">پالس</span><span class="fx">\(A[u(t)-u(t-T)]\)</span></div>
+<div class="fm"><span class="fn">مقدار میانگین پالس (چرخه کار \(D\))</span><span class="fx">\(DA\)</span></div>
+<div class="fm"><span class="fn">مؤثر پالس</span><span class="fx">\(A\sqrt D\)</span></div>
+<div class="fm"><span class="fn">مؤثر مثلثی / سینوسی</span><span class="fx">\(A/\sqrt3,\quad A/\sqrt2\)</span></div>
+<div class="cs-stp"><h5>ساختن موج تکه‌ای</h5><ol class="steps">
+<li>از چپ به راست حرکت کنید و نقطه‌های شکست \(t_k\) را بیابید.</li>
+<li>پرش به اندازه \(J\): جمله \(J\,u(t-t_k)\).</li>
+<li>تغییر شیب از \(m_1\) به \(m_2\): جمله \((m_2-m_1)\,r(t-t_k)\).</li>
+<li>مشتق: هر شیب ⇐ پله، هر پرش ⇐ ضربه.</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card wide" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#switching">B9</a><b>لحظه کلیدزنی: \(0^-\)، \(0^+\)، \(\infty\)</b></div><div class="cs-b">
+<div class="tbl" style="margin:.4em 0"><table>
+<thead><tr><th>المان</th><th>\(0^-\) (DC)</th><th>\(0^+\)</th><th>\(\infty\) (DC)</th></tr></thead>
+<tbody>
+<tr><td>خازن</td><td>باز</td><td>منبع ولتاژ \(v_C(0^-)\)</td><td>باز</td></tr>
+<tr><td>سلف</td><td>کوتاه</td><td>منبع جریان \(i_L(0^-)\)</td><td>کوتاه</td></tr>
+<tr><td>خازن بی‌بار</td><td>—</td><td>کوتاه</td><td>باز</td></tr>
+<tr><td>سلف بی‌جریان</td><td>—</td><td>باز</td><td>کوتاه</td></tr>
+</tbody></table></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li><b>مدار \(0^-\):</b> وضعیت قبلی کلید؛ خازن باز و سلف کوتاه؛ \(v_C(0^-)\) و \(i_L(0^-)\) را حساب کنید.</li>
+<li><b>پیوستگی:</b> \(v_C(0^+)=v_C(0^-)\)، \(i_L(0^+)=i_L(0^-)\).</li>
+<li><b>مدار \(0^+\):</b> وضعیت جدید کلید؛ C ← منبع ولتاژ، L ← منبع جریان؛ باقی کمیت‌ها (\(i_C\)، \(v_L\)، جریان R) را با KCL/KVL پیدا کنید.</li>
+<li><b>مشتق اولیه:</b> \(v_C'(0^+)=i_C(0^+)/C\)، \(i_L'(0^+)=v_L(0^+)/L\).</li>
+<li><b>مدار \(\infty\):</b> وضعیت جدید کلید؛ C باز، L کوتاه؛ مقادیر نهایی.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>جریان و ولتاژ مقاومت‌ها در \(0^+\) پیوسته نیستند؛ \(i_R(0^+)=i_R(0^-)\) تقریباً همیشه غلط است.</div></div>
+<p class="cs-note">حلقه فقط-خازنی: بار کل گره پایسته. کات‌ست فقط-سلفی: \(\sum L_ki_k\) پایسته. با این‌ها شرایط \(0^+\) سازگار می‌شود.</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-int)"><div class="cs-h"><a class="cs-c" href="#order">B10</a><b>مرتبه مدار</b></div><div class="cs-b">
+<div class="fm"><span class="fn">مرتبه مدار</span><span class="fx">\(N_C+N_L-n_C-n_L\)</span></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>مدار را برای \(t&gt;0\) (وضعیت جدید کلید) بکشید.</li>
+<li>تعداد خازن \(N_C\) و سلف \(N_L\) را بشمارید.</li>
+<li>\(n_C\): تعداد حلقه‌های مستقلِ فقط-خازن/منبع ولتاژ.</li>
+<li>\(n_L\): تعداد گره/ابرگره‌های مستقلِ فقط-سلف/منبع جریان (کات‌ست سلفی).</li>
+<li>مرتبه را محاسبه کنید.</li>
+</ol></div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s6"><span class="sn">Z2.6</span>پاسخ زمانی: مرتبه اول، مرتبه دوم و پاسخ ضربه (B11 تا B13)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#first-order">B11</a><b>مدار مرتبه اول</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ثابت زمانی</span><span class="fx">\(\tau=R_{th}C,\quad\tau=L/R_{th}\)</span></div>
+<div class="fm"><span class="fn">ورودی صفر (RC)</span><span class="fx">\(v_C=V_0e^{-t/RC}\)</span></div>
+<div class="fm"><span class="fn">ورودی صفر (RL)</span><span class="fx">\(i_L=I_0e^{-Rt/L}\)</span></div>
+<div class="fm"><span class="fn">فرمول طلایی</span><span class="fx">\(y=y_\infty+[y(0^+)-y_\infty]e^{-(t-t_0)/\tau}\)</span></div>
+<div class="fm"><span class="fn">پله واحد (RC، خروجی \(v_C\))</span><span class="fx">\(s(t)=(1-e^{-t/\tau})u(t)\)</span></div>
+<div class="fm"><span class="fn">ضربه واحد (RC)</span><span class="fx">\(h(t)=\tfrac1\tau e^{-t/\tau}u(t)\)</span></div>
+<div class="fm"><span class="fn">ضربه از پله</span><span class="fx">\(h=\tfrac{ds}{dt},\quad s=\int h\)</span></div>
+<div class="fm"><span class="fn">زمان رسیدن به \(y_1\)</span><span class="fx">\(t=t_0+\tau\ln\tfrac{y(0^+)-y_\infty}{y_1-y_\infty}\)</span></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>مدار \(0^-\) را حل کنید و \(v_C(0^-)\)، \(i_L(0^-)\) را بیابید.</li>
+<li>مدار \(0^+\) را حل کنید و مقدار شروع \(y(0^+)\) متغیر خواسته‌شده را بیابید.</li>
+<li>مدار \(\infty\) را حل کنید و \(y_\infty\) را بیابید.</li>
+<li>\(\tau\): خازن/سلف را بردارید، \(R_{th}\) دیده‌شده را بیابید (مدار <b>بعد</b> از کلیدزنی).</li>
+<li>در فرمول طلایی بگذارید. اگر کلید دوباره بسته شد، مقدار پایان مرحله اول شرط اولیه مرحله دوم است و \(\tau\) تازه می‌گیرد.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>ثابت زمانی را از مدار قبل از کلیدزنی نگیرید؛ فرمول طلایی فقط برای منابع ثابت است.</div></div>
+<p class="cs-note">پالس مستطیلی = دو پله؛ انتگرال‌گیر \(-\frac1{RC}\int v_i\)، مشتق‌گیر \(-RC\,v_i'\).</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#second-order">B12</a><b>مدار مرتبه دوم (RLC)</b></div><div class="cs-b">
+<div class="fm"><span class="fn">مشخصه</span><span class="fx">\(s^2+2\alpha s+\omega_0^2=0\)</span></div>
+<div class="fm"><span class="fn">ریشه‌ها</span><span class="fx">\(s_{1,2}=-\alpha\pm\sqrt{\alpha^2-\omega_0^2}\)</span></div>
+<div class="fm"><span class="fn">سری</span><span class="fx">\(\alpha=\tfrac R{2L}\)</span></div>
+<div class="fm"><span class="fn">موازی</span><span class="fx">\(\alpha=\tfrac1{2RC}\)</span></div>
+<div class="fm"><span class="fn">فرکانس طبیعی</span><span class="fx">\(\omega_0=\tfrac1{\sqrt{LC}}\)</span></div>
+<div class="fm"><span class="fn">فرکانس میرا</span><span class="fx">\(\omega_d=\sqrt{\omega_0^2-\alpha^2}\)</span></div>
+<div class="fm"><span class="fn">ضریب کیفیت</span><span class="fx">\(Q=\tfrac{\omega_0}{2\alpha}\)</span></div>
+<div class="fm"><span class="fn">\(Q\) سری</span><span class="fx">\(\tfrac1R\sqrt{\tfrac LC}\)</span></div>
+<div class="fm"><span class="fn">\(Q\) موازی</span><span class="fx">\(R\sqrt{\tfrac CL}\)</span></div>
+<div class="fm"><span class="fn">فراجهش پله (زیرمیرا)</span><span class="fx">\(e^{-\pi\alpha/\omega_d}\)</span></div>
+<div class="fm"><span class="fn">\(R\) بحرانی (سری)</span><span class="fx">\(2\sqrt{L/C}\)</span></div>
+<div class="fm"><span class="fn">\(R\) بحرانی (موازی)</span><span class="fx">\(\tfrac12\sqrt{L/C}\)</span></div>
+<div class="tbl" style="margin:.5em 0"><table>
+<thead><tr><th>نوع</th><th>شرط</th><th>پاسخ همگن</th></tr></thead>
+<tbody>
+<tr><td>فوق‌میرا</td><td class="n">α &gt; ω₀</td><td class="n">A₁e^(s₁t) + A₂e^(s₂t)</td></tr>
+<tr><td>بحرانی</td><td class="n">α = ω₀</td><td class="n">(A₁ + A₂t)e^(−αt)</td></tr>
+<tr><td>زیرمیرا</td><td class="n">α &lt; ω₀</td><td class="n">e^(−αt)(B₁cos ω_d t + B₂sin ω_d t)</td></tr>
+<tr><td>بی‌اتلاف</td><td class="n">α = 0</td><td class="n">B₁cos ω₀t + B₂sin ω₀t</td></tr>
+</tbody></table></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>متغیر (معمولاً \(v_C\) یا \(i_L\)) را انتخاب و معادله دیفرانسیل \(t&gt;0\) را بنویسید؛ \(\alpha\)، \(\omega_0\) را بیابید.</li>
+<li>جواب خصوصی = مقدار نهایی DC (C باز، L کوتاه) برای ورودی ثابت.</li>
+<li>شکل جواب همگن را از نوع ریشه‌ها بنویسید.</li>
+<li>\(x(0^+)\) و \(x'(0^+)\) را از فصل B9 بیابید؛ دو ثابت را با جواب <b>کامل</b> تطبیق دهید.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>ثابت‌ها را با جواب همگن به‌تنهایی تطبیق ندهید.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-prf)"><div class="cs-h"><a class="cs-c" href="#impulse">B13</a><b>پاسخ ضربه از روی معادله دیفرانسیل</b></div><div class="cs-b">
+<div class="fm"><span class="fn">معادله مرتبه \(n\) با ورودی مرتبه \(m\)</span><span class="fx">\(\sum a_ky^{(k)}=\sum b_kx^{(k)}\)</span></div>
+<div class="fm"><span class="fn">تابع شبکه</span><span class="fx">\(H(s)=\tfrac{b_ms^m+\dots+b_0}{s^n+a_{n-1}s^{n-1}+\dots+a_0}\)</span></div>
+<div class="fm"><span class="fn">مشتق پله</span><span class="fx">\((fu)'=f'u+f(0)\delta\)</span></div>
+<div class="fm"><span class="fn">بهره DC</span><span class="fx">\(s(\infty)=H(0)=b_0/a_0\)</span></div>
+<div class="fm"><span class="fn">مرتبه ۱: \(y'+ay=bx\)</span><span class="fx">\(h=b\,e^{-at}u(t)\)</span></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>ریشه‌های معادله مشخصه را بیابید و جواب همگن را با ثابت‌های مجهول بنویسید.</li>
+<li>\(m&lt;n\): \(h=x_h(t)\,u(t)\) که \(x_h\) جواب همگن است. \(m\ge n\): به آن \(K_0\delta+K_1\delta'+\dots+K_{m-n}\delta^{(m-n)}\) اضافه کنید.</li>
+<li>\(h\) را در معادله بگذارید؛ مشتق‌ها را با \((fu)'=f'u+f(0)\delta\) بگیرید.</li>
+<li>جمله‌های \(u\) خودشان حذف می‌شوند؛ ضرایب \(\delta,\delta',\ldots\) را دو طرف برابر بگذارید.</li>
+<li>بررسی: \(h=\mathcal L^{-1}\{H\}\) یا \(s=\int h\) و \(s(\infty)=H(0)\).</li>
+</ol></div>
+<p class="cs-note">حالت ویژه \(m=0\): شرایط معادل \(y^{(n-1)}(0^+)=b_0\)، بقیه مشتق‌ها صفر.</p>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s7"><span class="sn">Z2.7</span>تبدیل لاپلاس و تحلیل در حوزه s (B14 و B15)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card wide" style="--k:var(--c-phys)"><div class="cs-h"><a class="cs-c" href="#laplace">B14</a><b>جدول تبدیل لاپلاس</b></div><div class="cs-b">
+<div class="fm"><span class="fn">تعریف</span><span class="fx">\(F(s)=\int_{0^-}^{\infty}f(t)e^{-st}dt,\quad s=\sigma+j\omega\)</span></div>
+<div class="cs-two">
+<div class="tbl" style="margin:.4em 0"><table>
+<thead><tr><th>\(f(t),\ t\ge0\)</th><th class="n">\(F(s)\)</th></tr></thead>
+<tbody>
+<tr><td class="n">δ(t)</td><td class="n">1</td></tr>
+<tr><td class="n">u(t)</td><td class="n">1/s</td></tr>
+<tr><td class="n">t</td><td class="n">1/s²</td></tr>
+<tr><td class="n">tⁿ</td><td class="n">n!/sⁿ⁺¹</td></tr>
+<tr><td class="n">e^(−at)</td><td class="n">1/(s + a)</td></tr>
+<tr><td class="n">t·e^(−at)</td><td class="n">1/(s + a)²</td></tr>
+<tr><td class="n">sin ωt</td><td class="n">ω/(s² + ω²)</td></tr>
+<tr><td class="n">cos ωt</td><td class="n">s/(s² + ω²)</td></tr>
+<tr><td class="n">e^(−at) sin ωt</td><td class="n">ω/((s + a)² + ω²)</td></tr>
+<tr><td class="n">e^(−at) cos ωt</td><td class="n">(s + a)/((s + a)² + ω²)</td></tr>
+</tbody></table></div>
+<div class="tbl" style="margin:.4em 0"><table>
+<thead><tr><th>خاصیت</th><th class="n">حوزه s</th></tr></thead>
+<tbody>
+<tr><td>خطی</td><td class="n">aF + bG</td></tr>
+<tr><td>مشتق اول</td><td class="n">sF − f(0⁻)</td></tr>
+<tr><td>مشتق دوم</td><td class="n">s²F − s f(0⁻) − f′(0⁻)</td></tr>
+<tr><td>انتگرال</td><td class="n">F/s</td></tr>
+<tr><td>تأخیر f(t−a)u(t−a)</td><td class="n">e^(−as) F</td></tr>
+<tr><td>جابه‌جایی فرکانس e^(−at) f</td><td class="n">F(s + a)</td></tr>
+<tr><td>ضرب در t</td><td class="n">−dF/ds</td></tr>
+<tr><td>کانولوشن w * h</td><td class="n">W · H</td></tr>
+<tr><td>مقدار اولیه f(0⁺)</td><td class="n">lim s→∞ sF</td></tr>
+<tr><td>مقدار نهایی f(∞)</td><td class="n">lim s→0 sF</td></tr>
+</tbody></table></div>
+</div>
+<div class="cs-bad"><span>دام</span><div>قضیه مقدار نهایی فقط وقتی معتبر است که همه قطب‌های \(sF(s)\) در نیم‌صفحه چپ باشند (قطب روی محور موهومی یا راست ⇐ ممنوع).</div></div>
+<p class="cs-note">پالس ۵ ولتی از ۰ تا ۲: \(5\,\dfrac{1-e^{-2s}}{s}\). کانولوشن: \(y(t)=\int w(\lambda)h(t-\lambda)d\lambda\) — برگردان، بلغزان، ضرب، مساحت.</p>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-phys)"><div class="cs-h"><a class="cs-c" href="#laplace">B14</a><b>کسر جزئی و عکس لاپلاس</b></div><div class="cs-b">
+<div class="fm"><span class="fn">قطب ساده (پوشاندن)</span><span class="fx">\(A_i=\big[(s-p_i)F(s)\big]_{s=p_i}\)</span></div>
+<div class="fm"><span class="fn">قطب مضاعف \((s+a)^2\)</span><span class="fx">\(\tfrac{K_1}{s+a}+\tfrac{K_2}{(s+a)^2}\)</span></div>
+<div class="fm"><span class="fn">ضرایب مضاعف</span><span class="fx">\(K_2=[(s+a)^2F]_{s=-a},\ K_1=\tfrac{d}{ds}[(s+a)^2F]_{s=-a}\)</span></div>
+<div class="cs-stp"><h5>استپ‌ها</h5><ol class="steps">
+<li>اگر درجه صورت ≥ درجه مخرج است، ابتدا تقسیم کنید (بخش خارج‌قسمت ⇐ \(\delta\) و مشتق‌های آن).</li>
+<li>مخرج را تجزیه کنید و قطب‌ها را بیابید.</li>
+<li>قطب ساده: ضریب با پوشاندن. قطب مضاعف: دو جمله با فرمول بالا. قطب مختلط: مربع کامل کنید و به \(\dfrac{s+a}{(s+a)^2+\omega^2}\) و \(\dfrac{\omega}{(s+a)^2+\omega^2}\) برسانید.</li>
+<li>هر جمله را با جدول به زمان برگردانید و در \(u(t)\) ضرب کنید.</li>
+<li>بررسی در \(t=0^+\) با \(\lim sF\).</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-phys)"><div class="cs-h"><a class="cs-c" href="#s-domain">B15</a><b>مدار در حوزه s</b></div><div class="cs-b">
+<div class="fm"><span class="fn">مقاومت</span><span class="fx">\(Z_R=R\)</span></div>
+<div class="fm"><span class="fn">سلف</span><span class="fx">\(Z_L=sL\)</span></div>
+<div class="fm"><span class="fn">خازن</span><span class="fx">\(Z_C=\tfrac1{sC}\)</span></div>
+<div class="fm"><span class="fn">سلف با شرط اولیه (سری)</span><span class="fx">\(V=sLI-Li(0^-)\)</span></div>
+<div class="fm"><span class="fn">سلف با شرط اولیه (موازی)</span><span class="fx">\(I=\tfrac Vs\tfrac1L+\tfrac{i(0^-)}s\)</span></div>
+<div class="fm"><span class="fn">خازن با شرط اولیه (سری)</span><span class="fx">\(V=\tfrac1{sC}I+\tfrac{v(0^-)}s\)</span></div>
+<div class="fm"><span class="fn">خازن با شرط اولیه (موازی)</span><span class="fx">\(I=sCV-Cv(0^-)\)</span></div>
+<div class="fm"><span class="fn">منبع پله \(V_0u(t)\)</span><span class="fx">\(V_0/s\)</span></div>
+<p>جهت‌ها با قرارداد غیرفعال (جریان از + وارد). KCL، KVL، تقسیم، تبدیل منبع، گره، مش، تونن و جمع آثار همه در حوزه s برقرارند.</p>
+<div class="cs-stp"><h5>استپ‌های حل مدار با لاپلاس</h5><ol class="steps">
+<li>\(v_C(0^-)\) و \(i_L(0^-)\) را از مدار قبل از کلیدزنی بیابید.</li>
+<li>مدار \(t&gt;0\) را بکشید: منابع ← تبدیلشان، المان‌ها ← امپدانس، شرط اولیه ← منبع مدل.</li>
+<li>مدار جبری را با هر روش مقاومتی حل کنید تا کمیت خواسته‌شده برحسب \(s\) برسد.</li>
+<li>کسر جزئی و عکس لاپلاس.</li>
+<li>بررسی با قضیه مقدار اولیه و نهایی.</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-phys)"><div class="cs-h"><a class="cs-c" href="#s-domain">B15</a><b>تابع شبکه، قطب و پایداری، حالت دائمی سینوسی</b></div><div class="cs-b">
+<div class="fm"><span class="fn">تابع شبکه</span><span class="fx">\(H(s)=\tfrac{Y(s)}{X(s)},\quad h=\mathcal L^{-1}\{H\}\)</span></div>
+<div class="fm"><span class="fn">خروجی</span><span class="fx">\(Y=H\cdot X\)</span></div>
+<div class="fm"><span class="fn">قطب‌ها = ریشه‌های مخرج = فرکانس‌های طبیعی</span><span class="fx">\(D(s)=0\)</span></div>
+<div class="fm"><span class="fn">پایدار: همه قطب‌ها در نیم‌صفحه چپ</span><span class="fx">\(\text{Re}\,p&lt;0\)</span></div>
+<div class="fm"><span class="fn">سینوسی دائمی</span><span class="fx">\(A\cos(\omega t+\varphi)\to A|H(j\omega)|\cos(\omega t+\varphi+\angle H(j\omega))\)</span></div>
+<div class="fm"><span class="fn">امپدانس فازوری</span><span class="fx">\(Z_L=j\omega L,\quad Z_C=\tfrac1{j\omega C}\)</span></div>
+<div class="fm"><span class="fn">تشدید LC</span><span class="fx">\(\omega_0=\tfrac1{\sqrt{LC}}\)</span></div>
+<p>قطب ساده روی محور موهومی: مرزپایدار. قطب راست یا قطب تکراری روی محور موهومی: ناپایدار. فقط با R و L و C مثبت، ناپایداری ممکن نیست؛ المان فعال لازم است.</p>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s8"><span class="sn">Z2.8</span>دیود و ترانزیستور ماسفت (C1 و C2)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-ex)"><div class="cs-h"><a class="cs-c" href="#diode">C1</a><b>دیود: مشخصه و مدل</b></div><div class="cs-b">
+<div class="fm"><span class="fn">مشخصه نمایی</span><span class="fx">\(i_D=I_S\left(e^{v_D/nV_T}-1\right)\)</span></div>
+<div class="fm"><span class="fn">شیب لگاریتمی</span><span class="fx">\(V_2-V_1=nV_T\ln\tfrac{I_2}{I_1}=2.3\,nV_T\log_{10}\tfrac{I_2}{I_1}\)</span></div>
+<div class="fm"><span class="fn">مقاومت دینامیکی</span><span class="fx">\(r_d=\tfrac{nV_T}{I_D}\)</span></div>
+<div class="fm"><span class="fn">مدل افت ثابت: روشن</span><span class="fx">\(v_D=0.7\,\text{V},\ i_D&gt;0\)</span></div>
+<div class="fm"><span class="fn">مدل افت ثابت: خاموش</span><span class="fx">\(i_D=0,\ v_D&lt;0.7\)</span></div>
+<div class="fm"><span class="fn">مدل ایده‌آل: روشن</span><span class="fx">\(v_D=0,\ i_D&gt;0\)</span></div>
+<div class="fm"><span class="fn">مدل ایده‌آل: خاموش</span><span class="fx">\(i_D=0,\ v_D&lt;0\)</span></div>
+<div class="cs-stp"><h5>فرض و بررسی</h5><ol class="steps">
+<li>برای هر دیود یک حالت (روشن/خاموش) حدس بزنید.</li>
+<li>دیودها را با مدلشان جایگزین و مدار خطی را حل کنید.</li>
+<li>بررسی: دیود «روشن» باید \(i_D&gt;0\) و دیود «خاموش» باید \(v_D&lt;0.7\) داشته باشد.</li>
+<li>تناقض ⇐ فرض را عوض کنید و دوباره حل کنید (حداکثر \(2^n\) حالت).</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-ex)"><div class="cs-h"><a class="cs-c" href="#diode">C1</a><b>یکسوساز، برش‌دهنده و زنر</b></div><div class="cs-b">
+<div class="fm"><span class="fn">نیم‌موج</span><span class="fx">\(V_{o,max}=V_p-0.7\)</span></div>
+<div class="fm"><span class="fn">تمام‌موج پل</span><span class="fx">\(V_{o,max}=V_p-1.4\)</span></div>
+<div class="fm"><span class="fn">ریپل (صافی خازنی) نیم‌موج</span><span class="fx">\(V_r\approx\tfrac{V_p}{fRC}\)</span></div>
+<div class="fm"><span class="fn">ریپل تمام‌موج</span><span class="fx">\(V_r\approx\tfrac{V_p}{2fRC}\)</span></div>
+<div class="fm"><span class="fn">زنر: جریان مقاومت</span><span class="fx">\(I_R=\tfrac{V_s-V_Z}{R}\)</span></div>
+<div class="fm"><span class="fn">زنر: جریان خودش</span><span class="fx">\(I_Z=I_R-I_L\ge I_{Z,\min}\)</span></div>
+<div class="fm"><span class="fn">طراحی R (بدترین حالت روشن ماندن)</span><span class="fx">\(R\le\tfrac{V_{s,\min}-V_Z}{I_{L,\max}+I_{Z,\min}}\)</span></div>
+<div class="fm"><span class="fn">توان زنر (بدترین حالت)</span><span class="fx">\(P_Z=V_Z\,\tfrac{V_{s,\max}-V_Z}{R}\ \ (I_L=0)\)</span></div>
+<div class="cs-stp"><h5>برش‌دهنده</h5><ol class="steps">
+<li>ولتاژ آستانه روشن شدن دیود را از شرط \(v_D=0.7\) بیابید.</li>
+<li>برای ورودی کمتر/بیشتر از آستانه، دیود را خاموش/روشن (کوتاه با افت) بگیرید.</li>
+<li>خروجی هر ناحیه را بنویسید و در آستانه‌ها پیوستگی را بررسی کنید.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>زنر وقتی جریان بار از جریان مقاومت بیشتر شود از ناحیه شکست خارج می‌شود (\(I_Z&lt;0\) غیرممکن) و تنظیم از بین می‌رود.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-ex)"><div class="cs-h"><a class="cs-c" href="#mosfet">C2</a><b>ماسفت افزایشی (NMOS)</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ولتاژ مازاد</span><span class="fx">\(V_{ov}=V_{GS}-V_{th}\)</span></div>
+<div class="fm"><span class="fn">خاموش</span><span class="fx">\(V_{GS}&lt;V_{th}\Rightarrow I_{DS}=0\)</span></div>
+<div class="fm"><span class="fn">خطی (تریود) \(V_{DS}&lt;V_{ov}\)</span><span class="fx">\(I_{DS}=k_n'\tfrac WL\left[V_{ov}V_{DS}-\tfrac{V_{DS}^2}2\right]\)</span></div>
+<div class="fm"><span class="fn">اشباع \(V_{DS}\ge V_{ov}\)</span><span class="fx">\(I_{DS}=\tfrac12k_n'\tfrac WL V_{ov}^2\)</span></div>
+<div class="fm"><span class="fn">مقاومت در \(V_{DS}\) کوچک</span><span class="fx">\(r_{ds}=\tfrac1{k_n'\frac WL V_{ov}}\)</span></div>
+<div class="fm"><span class="fn">پارامتر</span><span class="fx">\(k_n'=\mu_nC_{ox}\)</span></div>
+<div class="fm"><span class="fn">گیت</span><span class="fx">\(i_G=0\)</span></div>
+<p>PMOS: همه‌چیز برعکس؛ با \(V_{SG}\)، \(V_{SD}\) و \(|V_{tp}|\) بنویسید: روشن اگر \(V_{SG}&gt;|V_{tp}|\)، اشباع اگر \(V_{SD}\ge V_{SG}-|V_{tp}|\).</p>
+<div class="cs-stp"><h5>تحلیل DC</h5><ol class="steps">
+<li>\(V_{GS}\) را بیابید (گیت جریان نمی‌کشد: تقسیم ولتاژ یا مستقیم). اگر \(V_{GS}&lt;V_{th}\) خاموش است.</li>
+<li>اشباع فرض کنید؛ \(I_{DS}\) را از رابطه اشباع و \(V_{DS}\) را با KVL حساب کنید.</li>
+<li>بررسی \(V_{DS}\ge V_{ov}\). اگر برقرار نبود ⇐ خطی: دستگاه (معمولاً معادله درجه دوم) را حل کنید.</li>
+<li>از دو ریشه آن را بپذیرید که شرط \(V_{DS}&lt;V_{ov}\) را برقرار کند.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>اشباع را بدون بررسی \(V_{DS}\ge V_{GS}-V_{th}\) نپذیرید.</div></div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s9"><span class="sn">Z2.9</span>وارونساز، دروازه انتقال و منطق CMOS (C3 تا C5)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#inverter">C3</a><b>وارونساز CMOS</b></div><div class="cs-b">
+<div class="fm"><span class="fn">سطح‌ها</span><span class="fx">\(V_{OH}=V_{DD},\quad V_{OL}=0\)</span></div>
+<div class="fm"><span class="fn">توان استاتیک</span><span class="fx">\(P_{static}=0\)</span></div>
+<div class="fm"><span class="fn">آستانه \(V_M\) با \(r=k_n/k_p\)</span><span class="fx">\(V_M=\tfrac{V_{DD}-|V_{tp}|+\sqrt r\,V_{tn}}{1+\sqrt r}\)</span></div>
+<div class="fm"><span class="fn">متقارن (PMOS ۲ تا ۳ برابر عریض‌تر)</span><span class="fx">\(V_M=V_{DD}/2,\ r=1\)</span></div>
+<div class="fm"><span class="fn">نقاط شیب −۱ (متقارن)</span><span class="fx">\(V_{IL}=\tfrac{3V_{DD}+2V_t}8,\quad V_{IH}=\tfrac{5V_{DD}-2V_t}8\)</span></div>
+<div class="fm"><span class="fn">حاشیه نویز</span><span class="fx">\(NM_L=V_{IL}-V_{OL},\quad NM_H=V_{OH}-V_{IH}\)</span></div>
+<div class="fm"><span class="fn">مقاومت روشن</span><span class="fx">\(R_{on}=\tfrac1{k'\frac WL(V_{DD}-V_t)}\)</span></div>
+<div class="fm"><span class="fn">تأخیر</span><span class="fx">\(t_{pHL}=0.69R_{on,n}C,\ t_{pLH}=0.69R_{on,p}C,\ t_p=\tfrac{t_{pHL}+t_{pLH}}2\)</span></div>
+<div class="fm"><span class="fn">زمان صعود</span><span class="fx">\(t_r=2.2\,\tau\)</span></div>
+<div class="fm"><span class="fn">توان پویا</span><span class="fx">\(P_{dyn}=\alpha CV_{DD}^2f\)</span></div>
+<div class="fm"><span class="fn">انرژی منبع در هر دوره (نصف در PMOS، نصف در NMOS تلف می‌شود)</span><span class="fx">\(CV_{DD}^2\)</span></div>
+<p class="cs-note">بار مقاومتی: \(V_{OL}=V_{DD}\tfrac{R_{on}}{R_{on}+R}\) (غیرصفر) و توان استاتیک دارد؛ بار دیودی/ترانزیستوری: \(V_{OH}=V_{DD}-V_{th}\).</p>
+<div class="cs-stp"><h5>مناطق منحنی انتقال (با افزایش \(V_{in}\))</h5><ol class="steps">
+<li>\(V_{in}&lt;V_{tn}\): NMOS خاموش، PMOS خطی ⇐ \(V_{out}=V_{DD}\).</li>
+<li>NMOS اشباع، PMOS خطی ⇐ خروجی افت می‌کند.</li>
+<li>هر دو اشباع ⇐ ناحیه انتقال با بهره بزرگ؛ \(V_{in}=V_M\).</li>
+<li>NMOS خطی، PMOS اشباع.</li>
+<li>\(V_{in}&gt;V_{DD}-|V_{tp}|\): PMOS خاموش ⇐ \(V_{out}=0\).</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#pass-tg">C4</a><b>ترانزیستور گذر و دروازه انتقال</b></div><div class="cs-b">
+<div class="fm"><span class="fn">NMOS: عبور ۰ (کامل)</span><span class="fx">\(0\)</span></div>
+<div class="fm"><span class="fn">NMOS: عبور ۱ (ضعیف)</span><span class="fx">\(V_{DD}-V_{th}\)</span></div>
+<div class="fm"><span class="fn">PMOS: عبور ۱ (کامل)</span><span class="fx">\(V_{DD}\)</span></div>
+<div class="fm"><span class="fn">PMOS: عبور ۰ (ضعیف)</span><span class="fx">\(|V_{tp}|\)</span></div>
+<div class="fm"><span class="fn">دروازه انتقال TG (کنترل \(S\) و \(\bar S\))</span><span class="fx">\(\text{NMOS}\parallel\text{PMOS}\)</span></div>
+<p>TG هر دو سطح را کامل و دوطرفه عبور می‌دهد (جریان هر دو جهت). سری با گیت \(V_{DD}\): افت جمع نمی‌شود؛ خروجی به گیت بعدی: افت‌ها جمع می‌شوند.</p>
+<div class="fm"><span class="fn">MUX دو ورودی (دو TG)</span><span class="fx">\(F=\bar S\,A+S\,B\)</span></div>
+<div class="cs-stp"><h5>طراحی منطق با TG</h5><ol class="steps">
+<li>برای هر سطر جدول درستی مقدار خروجی (۰، ۱، متغیر یا مکملش) را مشخص کنید.</li>
+<li>آن مقدار را از مسیری از TGهای سری عبور دهید که فقط در همان ترکیب ورودی‌ها وصل است.</li>
+<li>همه مسیرها را به گره خروجی وصل کنید؛ در هر لحظه فقط یک مسیر وصل است.</li>
+<li>ساده‌سازی: TGهای متغیرِ بی‌اثر را حذف کنید.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>اگر دو مسیر هم‌زمان وصل شوند، درگیری و جریان زیاد؛ بدون بازسازی سیگنال تأخیر زنجیره با مجذور طول رشد می‌کند.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#cmos-logic">C5</a><b>گیت‌های CMOS ایستا</b></div><div class="cs-b">
+<p>PUN (از PMOS) به \(V_{DD}\) و PDN (از NMOS) به زمین وصل است؛ همیشه دقیقاً یکی از دو شبکه وصل است.</p>
+<div class="fm"><span class="fn">NMOS سری / موازی</span><span class="fx">\(\text{AND}\ /\ \text{OR}\)</span></div>
+<div class="fm"><span class="fn">PDN تابع را می‌سازد (از ورودی‌های غیرمعکوس)</span><span class="fx">\(\overline F\)</span></div>
+<p>PUN = دوگان PDN (هر جا سری است موازی و برعکس)، با همان ورودی‌ها.</p>
+<div class="fm"><span class="fn">تعداد ترانزیستور (گیت \(N\) ورودی)</span><span class="fx">\(2N\)</span></div>
+<div class="fm"><span class="fn">NAND2 / NOR2</span><span class="fx">\(F=\overline{AB}\ /\ F=\overline{A+B}\)</span></div>
+<p>اندازه‌گذاری: \(k\) ترانزیستور سری ⇐ عرض هر کدام \(k\) برابر.</p>
+<div class="cs-stp"><h5>ساخت گیت پیچیده</h5><ol class="steps">
+<li>تابع را به شکل \(F=\overline G\) بنویسید که \(G\) فقط AND/OR از ورودی‌های غیرمعکوس است.</li>
+<li>PDN: برای AND سری، برای OR موازی.</li>
+<li>PUN: دوگان PDN با همان ورودی‌ها.</li>
+<li>اندازه‌گذاری: عرض هر ترانزیستور را به‌اندازه تعداد سری‌های مسیرش بزرگ کنید.</li>
+<li>بررسی: یک سطر با \(F=0\) و یک سطر با \(F=1\) را امتحان کنید (دقیقاً یکی از PUN و PDN وصل است).</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>PUN را مثل PDN نکشید؛ دوگانش را بکشید. NAND بر NOR ترجیح دارد (NOR سری PMOS دارد).</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#cmos-logic">C5</a><b>منطق دینامیک و دومینو</b></div><div class="cs-b">
+<div class="fm"><span class="fn">پیش‌شارژ \(\varphi=0\)</span><span class="fx">\(V_{out}=V_{DD}\)</span></div>
+<p>ارزیابی (\(\varphi=1\)): اگر PDN وصل شود خروجی تخلیه می‌شود.</p>
+<div class="fm"><span class="fn">تعداد ترانزیستور (به‌جای \(2N\))</span><span class="fx">\(N+2\)</span></div>
+<p>مزیت: ترانزیستور و خازن ورودی کمتر. ایراد: خروجی «۱» فقط روی خازن می‌ماند (نشتی و تقسیم بار) ⇐ حداقل فرکانس کلاک لازم است؛ تخلیه برگشت‌ناپذیر است تا پیش‌شارژ بعدی.</p>
+<div class="cs-bad"><span>دام</span><div>آبشار مستقیم دو گیت دینامیک خطاست (خروجی ۱ پیش‌شارژ ورودی بعدی را اشتباه تخلیه می‌کند). راه‌حل: دومینو (معکوس‌کننده ایستا در خروجی هر طبقه).</div></div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s10"><span class="sn">Z2.10</span>لچ، فلیپ‌فلاپ، حافظه و مبدل‌ها (C6 تا C8)</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#latch-ff">C6</a><b>لچ، فلیپ‌فلاپ و شیفت رجیستر</b></div><div class="cs-b">
+<div class="fm"><span class="fn">لچ SR (NOR): ممنوع</span><span class="fx">\(S=R=1\)</span></div>
+<div class="fm"><span class="fn">لچ SR (NOR): نگهداری</span><span class="fx">\(S=R=0\)</span></div>
+<div class="fm"><span class="fn">لچ D: شفاف</span><span class="fx">\(CLK=1\Rightarrow Q=D\)</span></div>
+<div class="fm"><span class="fn">لچ D: نگهداری</span><span class="fx">\(CLK=0\)</span></div>
+<div class="fm"><span class="fn">لچ D با TG: تعداد ترانزیستور</span><span class="fx">\(8\)</span></div>
+<div class="fm"><span class="fn">Master–Slave (حساس به لبه): تعداد ترانزیستور</span><span class="fx">\(16\)</span></div>
+<p>لچ حساس به <b>سطح</b> است؛ فلیپ‌فلاپ = دو لچ با کلاک مخالف و حساس به <b>لبه</b>. نسخه دینامیک (بدون فیدبک) نیاز به refresh دارد. در لچ با معکوس‌کننده‌های ضربدری، NMOSهای نوشتن باید قوی‌تر از PMOS نگه‌دارنده باشند. شیفت رجیستر دینامیک: یک طبقه در هر نیم‌سیکل.</p>
+<div class="cs-bad"><span>دام</span><div>همپوشانی کلاک (\(CLK\) و \(\overline{CLK}\) هم‌زمان ۱ یا دو فاز \(\varphi_1,\varphi_2\) هم‌زمان ۱) داده را از چند طبقه رد می‌کند؛ دوفاز بدون همپوشانی یا C²MOS استفاده کنید.</div></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#memory">C7</a><b>حافظه‌ها: RAM و ROM</b></div><div class="cs-b">
+<div class="fm"><span class="fn">ظرفیت (\(n\) خط آدرس، \(m\) خط داده)</span><span class="fx">\(2^n\times m\ \text{bit}\)</span></div>
+<div class="fm"><span class="fn">رمزگشا ۲ به ۴</span><span class="fx">\(WL_0=\bar A_1\bar A_0,\ \ WL_1=\bar A_1A_0,\ \ldots\)</span></div>
+<div class="fm"><span class="fn">تقسیم بار DRAM</span><span class="fx">\(\Delta V_{BL}=\pm\tfrac{V_{DD}}2\cdot\tfrac{C_s}{C_s+C_{BL}}\)</span></div>
+<p><b>ROM:</b> وجود ترانزیستور = ۰، نبودنش = ۱ (با بالاکش). PROM: فیوز، یک‌بار. EPROM: گیت شناور، پاک‌شدن با UV. E²PROM: تونل‌زنی. Flash: پاک‌شدن بلوکی.</p>
+<p><b>DRAM:</b> یک ترانزیستور + یک خازن؛ خواندن مخرب است (بازنویسی با تقویت‌کننده حس) و نشتی ⇐ refresh هر چند میلی‌ثانیه. <b>SRAM:</b> لچ ضربدری + دو ترانزیستور دسترسی (۶ ترانزیستور)؛ سریع، ایستا، حجیم.</p>
+<div class="cs-stp"><h5>خواندن DRAM</h5><ol class="steps">
+<li>خط بیت را به \(V_{DD}/2\) پیش‌شارژ کنید.</li>
+<li>WL را فعال کنید؛ بار \(C_s\) با \(C_{BL}\) تقسیم می‌شود.</li>
+<li>تقویت‌کننده حس \(\pm\Delta V\) را تشخیص می‌دهد و مقدار را به \(0\) یا \(V_{DD}\) می‌رساند.</li>
+<li>مقدار خوانده‌شده در سلول بازنویسی می‌شود.</li>
+</ol></div>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-sum)"><div class="cs-h"><a class="cs-c" href="#converters">C8</a><b>نوسان‌ساز و مبدل‌های داده</b></div><div class="cs-b">
+<div class="fm"><span class="fn">نوسان‌ساز RC دو معکوس‌کننده</span><span class="fx">\(T=2RC\ln3\approx2.2\,RC\)</span></div>
+<div class="fm"><span class="fn">گام کوانتیزاسیون</span><span class="fx">\(\text{LSB}=V_{FS}/2^n\)</span></div>
+<div class="fm"><span class="fn">خطای کوانتیزاسیون (گرد کردن)</span><span class="fx">\(\pm\tfrac12\text{LSB}\)</span></div>
+<div class="fm"><span class="fn">نایکوئیست</span><span class="fx">\(f_s\ge2f_{max}\)</span></div>
+<div class="fm"><span class="fn">D/A وزن‌دار</span><span class="fx">\(V_{out}=-R_fV_{ref}\sum\tfrac{b_i}{R_i}\)</span></div>
+<div class="fm"><span class="fn">D/A نردبان R-2R</span><span class="fx">\(V_o=-\tfrac{V_{ref}}{2^n}\sum_{i=0}^{n-1}a_i2^i\)</span></div>
+<div class="fm"><span class="fn">کد دودویی ← ولتاژ</span><span class="fx">\(V=\text{code}\times\text{LSB}\)</span></div>
+<div class="tbl" style="margin:.5em 0"><table>
+<thead><tr><th>A/D</th><th>مقایسه‌گر</th><th>زمان تبدیل</th></tr></thead>
+<tbody>
+<tr><td>فلش</td><td class="n">2ⁿ − 1</td><td>یک کلاک (سریع، پرهزینه)</td></tr>
+<tr><td>دومرحله‌ای</td><td class="n">کمتر</td><td>میانه</td></tr>
+<tr><td>شمارنده‌ای/ردیاب</td><td class="n">1</td><td>تا 2ⁿ کلاک (کند)</td></tr>
+<tr><td>SAR</td><td class="n">1</td><td>n کلاک</td></tr>
+</tbody></table></div>
+<div class="cs-stp"><h5>SAR (جست‌وجوی دودویی)</h5><ol class="steps">
+<li>بیت MSB را ۱ بگذارید و خروجی D/A را با \(V_{in}\) مقایسه کنید.</li>
+<li>اگر \(V_{DAC}\le V_{in}\) بیت را نگه دارید، وگرنه ۰ کنید.</li>
+<li>به بیت بعدی بروید؛ بعد از \(n\) کلاک کد نهایی آماده است.</li>
+</ol></div>
+<div class="cs-bad"><span>دام</span><div>در D/A وزن‌دار نسبت بزرگ‌ترین به کوچک‌ترین مقاومت \(2^{n-1}\) است و ساختنش دشوار؛ R-2R این مشکل را ندارد.</div></div>
+</div></section>
+
+</div>
+
+<h2 id="cheatsheet-s11"><span class="sn">Z2.11</span>دام‌های رایج و چک‌لیست پایانی</h2>
+
+<div class="cs-grid">
+
+<section class="cs-card" style="--k:var(--c-trap)"><div class="cs-h"><a class="cs-c" href="#summary">Z1</a><b>۱۴ اشتباه پرتکرار امتحان</b></div><div class="cs-b">
+<ol>
+<li>علامت توان وقتی جریان از سر − وارد المان می‌شود (<a href="#elements">B1</a>).</li>
+<li>جهت حرکت KVL را وسط حلقه عوض کردن (<a href="#kirchhoff">B2</a>).</li>
+<li>تقسیم ولتاژ روی مقاومت‌هایی که چون باری به گره وسط وصل است دیگر سری نیستند (<a href="#kirchhoff">B2</a>).</li>
+<li>KCL جداگانه برای گره‌های ابرگره و فراموش کردن معادله قید (<a href="#nodal-mesh">B3</a>).</li>
+<li>خاموش کردن منبع وابسته در جمع آثار یا در \(R_{th}\)؛ جمع کردن توان‌ها (<a href="#thevenin">B4</a>).</li>
+<li>پیوسته فرض کردن جریان خازن، ولتاژ سلف یا جریان مقاومت‌ها در \(0^+\) (<a href="#switching">B9</a>).</li>
+<li>گرفتن \(\tau\) از مدار قبل از کلیدزنی (<a href="#first-order">B11</a>).</li>
+<li>تطبیق ثابت‌ها با جواب همگن به‌جای جواب کامل در مرتبه دوم (<a href="#second-order">B12</a>).</li>
+<li>قضیه مقدار نهایی با قطب روی محور موهومی یا راست (<a href="#laplace">B14</a>).</li>
+<li>جهت (قطبیت) منبع مدل شرط اولیه سلف در حوزه s (<a href="#s-domain">B15</a>).</li>
+<li>دیود «روشن» با جریان منفی یا «خاموش» با ولتاژ بیشتر از ۰٫۷ (<a href="#diode">C1</a>).</li>
+<li>اشباع بدون بررسی \(V_{DS}\ge V_{GS}-V_{th}\)؛ ریشه اشتباه در ناحیه خطی (<a href="#mosfet">C2</a>).</li>
+<li>کشیدن PUN مثل PDN به‌جای دوگانش (<a href="#cmos-logic">C5</a>).</li>
+<li>همپوشانی کلاک در لچ و شیفت رجیستر (<a href="#latch-ff">C6</a>).</li>
+</ol>
+</div></section>
+
+<section class="cs-card" style="--k:var(--c-ex)"><div class="cs-h"><a class="cs-c" href="#summary">Z1</a><b>چک‌لیست ۱۰ ثانیه‌ای قبل از تحویل</b></div><div class="cs-b">
+<ul class="cs-chk">
+<li><b>یکا:</b> \(\text{k}\Omega\times\text{mA}=\text{V}\)، \(\text{k}\Omega\times\mu\text{F}=\text{ms}\)، \(\text{H}/\Omega=\text{s}\).</li>
+<li><b>توان:</b> جمع توان‌های جذب‌شده صفر شد؟</li>
+<li><b>KCL/KVL:</b> یک گره یا حلقه آزاد را با جواب امتحان کردید؟</li>
+<li><b>حدها:</b> \(y(0^+)\) و \(y(\infty)\) را در جواب نهایی جایگذاری کردید؟</li>
+<li><b>پیوستگی:</b> فقط \(v_C\) و \(i_L\) را منتقل کردید؟</li>
+<li><b>مرتبه دوم:</b> علامت \(\alpha\)، نوع ریشه‌ها و شرط اولیه \(x'(0^+)\)؟</li>
+<li><b>لاپلاس:</b> قطب‌ها در نیم‌صفحه چپ؟ \(f(0^+)=\lim sF\) با جواب سازگار است؟</li>
+<li><b>دیود/ماسفت:</b> فرض ناحیه را بررسی کردید؟</li>
+<li><b>گیت:</b> دو سطر از جدول درستی را روی PUN و PDN امتحان کردید؟</li>
+<li><b>محدوده:</b> خروجی op-amp در حد اشباع؟ مقدار منطقی بین \(0\) و \(V_{DD}\)؟</li>
+</ul>
+</div></section>
+
+</div>
+
+<div class="box sum"><div class="box-h"><span class="tag">جمع‌بندی</span></div><div class="box-b">
+<p>اگر وقت ندارید: <b>(۱)</b> مدار را به معادل ساده کنید یا معادله گره/مش بنویسید؛ <b>(۲)</b> برای هر چیزی که تغییر می‌کند سه عدد بگیرید: \(y(0^+)\)، \(y(\infty)\)، \(\tau\)؛ <b>(۳)</b> برای هر مدار غیرخطی (دیود، ماسفت) «فرض کن، حل کن، بررسی کن»؛ <b>(۴)</b> جواب را با یک قانون پایستگی (توان، بار، KCL) بسنجید.</p>
+</div></div>
+</div><nav class="pn" aria-label="فصل قبلی و بعدی"><a class="prev" href="#summary"><span class="k">→ فصل قبل</span><span class="t">Z1 · نقشه مفهومی و جمع‌بندی روابط</span></a></nav></article></main></div></div>
 <script>
 (function () {
   'use strict';
