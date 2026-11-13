@@ -6,8 +6,8 @@
 
 <p>
 <a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><img alt="Website" src="https://img.shields.io/badge/Website-read%20online-12634f?style=for-the-badge"></a>
-<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-368%20pages-b04f1b?style=for-the-badge"></a>
-<img alt="Chapters" src="https://img.shields.io/badge/chapters-33-1c5ea5?style=for-the-badge">
+<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-397%20pages-b04f1b?style=for-the-badge"></a>
+<img alt="Chapters" src="https://img.shields.io/badge/chapters-34-1c5ea5?style=for-the-badge">
 <img alt="Examples" src="https://img.shields.io/badge/solved%20examples-228-21734a?style=for-the-badge">
 </p>
 
@@ -18,7 +18,7 @@
 <table>
 <tr>
 <td align="center"><a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><b>📖 خواندن آنلاین</b></a><br><sub>سایت با جستجو، حالت تیره و ابزار تعاملی</sub></td>
-<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۳۶۸ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
+<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۳۹۷ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
 </tr>
 </table>
 
@@ -30,8 +30,9 @@
 - **اثبات بدون پرش.** هر رابطه کلیدی در یک جعبه «اثبات قدم‌به‌قدم» استخراج شده است: یک قدم در هر خط و بدون جمله «به‌راحتی دیده می‌شود».
 - **پایه‌ها از صفر.** بخش A ریاضی (تابع، مختلط، مشتق، انتگرال، دستگاه معادلات، معادله دیفرانسیل) و فیزیک (الکتریسیته، مغناطیس) لازم را دقیقاً به اندازه‌ای که درس می‌خواهد می‌سازد.
 - **۲۲۸ مثال حل‌شده** با چهار سطح پایه، متوسط، سخت و چالشی، و **۱۵۱ تمرین با جواب و راهنمایی**.
-- **۱۲۳ شکل مدار** برداری، ده‌ها نمودار و **۷ ابزار تعاملی** در سایت: شیب و مماس، مساحت زیر نمودار، بردار چرخان، شارژ RC، چهار حالت RLC، منحنی انتقال CMOS و مبدل SAR.
+- **۱۳۴ شکل مدار** برداری، ده‌ها نمودار و **۷ ابزار تعاملی** در سایت: شیب و مماس، مساحت زیر نمودار، بردار چرخان، شارژ RC، چهار حالت RLC، منحنی انتقال CMOS و مبدل SAR.
 - **منطبق با برنامه ترم.** جلسه‌ها، کوییزها و پوشش میان‌ترم و پایان‌ترم به فصل‌های جزوه نگاشت شده‌اند.
+- **حل تمرین‌ها.** بخش جدای «حل تمرین‌ها» که هر تمرین درس را با مرور کامل ابزارهای لازم، حل قدم‌به‌قدم، نمودار پاسخ، آزمون درستی و نکته‌ها و دام‌های هر سؤال می‌آورد.
 - **پیوست مرور.** نقشه مفهومی همه روابط (هر کدام با یک جمله «چرا»)، دام‌های رایج و نقشه مرور هر کوییز.
 - **چیت‌شیت کامل.** صفحه‌ای فشرده با فرمول‌ها و «استپ‌های حل» همه فصل‌ها (بخش A تا C)، نقشه تصمیم برای انتخاب روش حل، جدول لاپلاس و چک‌لیست ۱۰ ثانیه‌ای قبل از تحویل برگه.
 
@@ -98,6 +99,12 @@
 | C7 | [حافظه‌های RAM و ROM](https://ahy8507.github.io/EEC-Sheet-Fall1405/#memory) | آرایه، رمزگشا، PROM، EPROM، Flash، DRAM و SRAM | فصل ۶ · کوییز VI |
 | C8 | [نوسان‌ساز و مبدل‌های داده](https://ahy8507.github.io/EEC-Sheet-Fall1405/#converters) | نوسان‌ساز RC، مبدل D/A وزن‌دار و R-2R، مبدل‌های A/D | از جزوه کلاس |
 
+### H · حل تمرین‌ها
+
+| کد | تمرین | چه چیزی در آن هست | جایگاه در درس |
+|:-:|---|---|---|
+| H2 | [تمرین دوم: مدارهای مرتبه اول و دوم](https://ahy8507.github.io/EEC-Sheet-Fall1405/#hw2) | مرور کامل ابزارها (پیوستگی و پرش، 0⁻ و 0⁺ و ∞، پاسخ پله و ضربه، مرتبه مدار، چهار نوع پاسخ مرتبه دوم) و حل قدم‌به‌قدم ۵ سؤال تحویلی و ۵ سؤال غیرتحویلی | تمرین ۲ · مهلت ۲۰ آبان |
+
 ### Z · پیوست
 
 | کد | فصل | چه چیزی یاد می‌گیریم | جایگاه در درس |
@@ -140,6 +147,7 @@
 فایل [`docs/EEC-Notes-Fall1405.pdf`](docs/EEC-Notes-Fall1405.pdf) همان محتوای سایت است که برای کاغذ A4 صفحه‌آرایی شده است:
 
 - جلد، صفحه راهنما و برنامه ترم، و **فهرست مطالب با شماره صفحه** که روی هر سطرش می‌شود کلیک کرد
+- همه فصل‌ها، به‌علاوه بخش «حل تمرین‌ها»
 - یک صفحه جدا برای شروع هر بخش، و **سرصفحه‌ای با نام فصل** در همه صفحه‌ها
 - **نشانک (bookmark) برای هر فصل و هر بخش** در کنار صفحه نمایشگر PDF
 - لینک‌های داخلی (پیش‌نیازها و فهرست هر فصل) در خود PDF هم کار می‌کنند
@@ -198,7 +206,7 @@ python3 build.py --pdf
 
 ```
 build.py                 builds docs/index.html and the PDF edition
-src/chapters/*.html      chapter text (shorthand tags: <def>, <prf>, <ex>, <hw>, <eq>, <fig>, <plot> ...)
+src/chapters/*.html      chapter text (shorthand tags: <def>, <prf>, <ex>, <hw>, <eq>, <fig>, <plot> ...); hw*.html = homework solutions
 src/circuits/*.py        circuit drawings (schemdraw), registered by name
 src/style.css            site design (light and dark themes)
 src/print.css            extra layout for the A4 PDF edition
