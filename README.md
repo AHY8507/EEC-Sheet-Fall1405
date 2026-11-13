@@ -6,9 +6,9 @@
 
 <p>
 <a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><img alt="Website" src="https://img.shields.io/badge/Website-read%20online-12634f?style=for-the-badge"></a>
-<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-410%20pages-b04f1b?style=for-the-badge"></a>
+<a href="docs/EEC-Notes-Fall1405.pdf"><img alt="PDF" src="https://img.shields.io/badge/PDF-414%20pages-b04f1b?style=for-the-badge"></a>
 <img alt="Chapters" src="https://img.shields.io/badge/chapters-34-1c5ea5?style=for-the-badge">
-<img alt="Examples" src="https://img.shields.io/badge/solved%20examples-235-21734a?style=for-the-badge">
+<img alt="Examples" src="https://img.shields.io/badge/solved%20examples-239-21734a?style=for-the-badge">
 </p>
 
 ![چند صفحه از نسخه PDF: جلد، فهرست، شروع یک فصل، ابزار شارژ خازن و لچ D](docs/img/preview.png)
@@ -18,7 +18,7 @@
 <table>
 <tr>
 <td align="center"><a href="https://ahy8507.github.io/EEC-Sheet-Fall1405/"><b>📖 خواندن آنلاین</b></a><br><sub>سایت با جستجو، حالت تیره و ابزار تعاملی</sub></td>
-<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۴۱۰ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
+<td align="center"><a href="docs/EEC-Notes-Fall1405.pdf"><b>📄 دانلود PDF</b></a><br><sub>A4، ۴۱۴ صفحه، برای چاپ و مطالعه آفلاین</sub></td>
 </tr>
 </table>
 
@@ -29,7 +29,7 @@
 - **شهود قبل از فرمول.** هر مفهوم اول با یک تصویر ذهنی توضیح داده می‌شود و بعد به معادله می‌رسد. هدف فهمیدن است، نه حفظ کردن.
 - **اثبات بدون پرش.** هر رابطه کلیدی در یک جعبه «اثبات قدم‌به‌قدم» استخراج شده است: یک قدم در هر خط و بدون جمله «به‌راحتی دیده می‌شود».
 - **پایه‌ها از صفر.** بخش A ریاضی (تابع، مختلط، مشتق، انتگرال، دستگاه معادلات، معادله دیفرانسیل) و فیزیک (الکتریسیته، مغناطیس) لازم را دقیقاً به اندازه‌ای که درس می‌خواهد می‌سازد.
-- **۲۳۵ مثال حل‌شده** با چهار سطح پایه، متوسط، سخت و چالشی، و **۱۵۱ تمرین با جواب و راهنمایی**.
+- **۲۳۹ مثال حل‌شده** با چهار سطح پایه، متوسط، سخت و چالشی، و **۱۵۱ تمرین با جواب و راهنمایی**.
 - **۱۴۰ شکل مدار** برداری، ده‌ها نمودار و **۷ ابزار تعاملی** در سایت: شیب و مماس، مساحت زیر نمودار، بردار چرخان، شارژ RC، چهار حالت RLC، منحنی انتقال CMOS و مبدل SAR.
 - **منطبق با برنامه ترم.** جلسه‌ها، کوییزها و پوشش میان‌ترم و پایان‌ترم به فصل‌های جزوه نگاشت شده‌اند.
 - **حل تمرین‌ها.** بخش جدای «حل تمرین‌ها» که هر تمرین درس را با مرور کامل ابزارهای لازم، حل قدم‌به‌قدم، نمودار پاسخ، آزمون درستی و نکته‌ها و دام‌های هر سؤال می‌آورد.
@@ -80,7 +80,7 @@
 | B8 | [شکل موج‌ها](https://ahy8507.github.io/EEC-Sheet-Fall1405/#waveforms) | پله، شیب، ضربه، پالس، نمایی و سینوسی؛ ساختن موج از قطعه‌ها | فصل ۲ · کوییز III |
 | B9 | [حالت دائمی DC و لحظه کلیدزنی](https://ahy8507.github.io/EEC-Sheet-Fall1405/#switching) | مقادیر 0⁻ و 0⁺ و ∞ و مشتق‌های اولیه | فصل ۲ · کوییز III |
 | B10 | [مرتبه مدار](https://ahy8507.github.io/EEC-Sheet-Fall1405/#order) | حلقه خازنی، کات‌ست سلفی و روش سریع شمارش | فصل ۲ · کوییز III |
-| B11 | [مدارهای مرتبه اول](https://ahy8507.github.io/EEC-Sheet-Fall1405/#first-order) | ورودی صفر، حالت صفر، فرمول طلایی، پاسخ پله و ضربه، انتگرال‌گیر | فصل ۲ · کوییز III |
+| B11 | [مدارهای مرتبه اول](https://ahy8507.github.io/EEC-Sheet-Fall1405/#first-order) | ورودی صفر، حالت صفر، فرمول طلایی، پاسخ پله و ضربه، انتگرال‌گیر، الگوریتم احمد (عامل انتگرال‌ساز) | فصل ۲ · کوییز III |
 | B12 | [مدارهای مرتبه دوم (RLC)](https://ahy8507.github.io/EEC-Sheet-Fall1405/#second-order) | معادله مشخصه، چهار نوع پاسخ، جواب خصوصی، ضربه، الگوریتم پنج‌گامی حل سریع، پرش ولتاژ خازن و جریان سلف در حالت‌های تباهیده | فصل ۲ · کوییز III |
 | B13 | [پاسخ ضربه از روی معادله دیفرانسیل](https://ahy8507.github.io/EEC-Sheet-Fall1405/#impulse) | تطبیق ضرایب ضربه، رابطه پاسخ پله و ضربه | فصل ۲ |
 | B14 | [کانولوشن و تبدیل لاپلاس](https://ahy8507.github.io/EEC-Sheet-Fall1405/#laplace) | پاسخ به ورودی دلخواه، جدول تبدیل‌ها، قضایا، کسرهای جزئی | فصل ۳ · کوییز IV |
